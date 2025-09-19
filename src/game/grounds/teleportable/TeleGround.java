@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TeleportAction;
 import game.actions.Teleportable;
+import game.grounds.Fire;
 
 import java.util.List;
 
@@ -45,8 +46,9 @@ public abstract class TeleGround extends Ground implements Teleportable
      * Use to burn its surrounding (use by method
      * {@link Teleportable#teleportTo(Actor actor, Location destination)})
      * @param destination the place to burn its surrounding
+     * @param fire ground type {@link Fire} to burn
      */
-    protected abstract void burnSurrounding (Location destination);
+    protected abstract void burnSurrounding (Location destination, Fire fire);
 
     /**
      * Get all the destination that this can teleport to.
@@ -91,5 +93,18 @@ public abstract class TeleGround extends Ground implements Teleportable
     public String getMenuDescription(Actor actor, Location location)
     {
         return actor + " will teleport to " + location + ".";
+    }
+
+    /**
+     * Define behaviour for teleport to a certain place.
+     * (act as an injector to let its child override so reduce dependency to Fire)
+     * @param actor       the actor who interact with this teleportable object.
+     * @param destination the location teleport to.
+     */
+    @Override
+    public String teleportTo(Actor actor, Location destination)
+    {
+        burnSurrounding(destination, new Fire());
+        return "";
     }
 }
