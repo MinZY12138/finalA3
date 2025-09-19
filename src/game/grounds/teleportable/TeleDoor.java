@@ -12,7 +12,8 @@ import java.util.List;
  *
  * <p>
  *     Represent a teleport door name TeleDoor in the system.
- *     It can teleport to certain places but will burn all its surrounding.
+ *     It can use by {@link Actor} teleport to certain places
+ *     but will burn all its surrounding.
  * </p>
  *
  * Extends {@link TeleGround}
@@ -38,12 +39,12 @@ public class TeleDoor extends TeleGround
      * @param destination the place to burn its surrounding
      */
     @Override
-    protected void burnSurrounding(Location destination)
+    protected void burnSurrounding(Location destination, Fire fire)
     {
         List<Exit> surrounding = destination.getExits();
         for (Exit location : surrounding)
         {
-            location.getDestination().setGround(new Fire());
+            location.getDestination().setGround(fire);
         }
     }
 
@@ -55,8 +56,8 @@ public class TeleDoor extends TeleGround
     @Override
     public String teleportTo(Actor actor, Location destination)
     {
-        //Burn its surrounding
-        burnSurrounding(destination);
+        //Use it parents method to burn its surrounding.
+        super.teleportTo(actor, destination);
         return actor + " has teleport to " + destination;
     }
 }
