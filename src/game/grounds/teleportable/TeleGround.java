@@ -6,7 +6,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TeleportAction;
 import game.actions.Teleportable;
+import game.grounds.Fire;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -54,7 +56,7 @@ public abstract class TeleGround extends Ground implements Teleportable
      */
     protected List<Location> getDestination()
     {
-        return this.DESTINATION;
+        return Collections.unmodifiableList(this.DESTINATION);
     }
 
     /**
@@ -74,22 +76,46 @@ public abstract class TeleGround extends Ground implements Teleportable
         //Loop through all its destination
         for (Location destination : this.getDestination())
         {
-            actionList.add(new TeleportAction(this, actor, destination));
+            //Check if the destination doesn't have actor and can enter by actor.
+            if ((!destination.containsAnActor()) && destination.canActorEnter(actor))
+            {
+                actionList.add(new TeleportAction(this, actor,
+                        destination, 100));
+            }
         }
         return actionList;
     }
 
     /**
-     * Describe what action will be performed if this Action is chosen in the
-     * menu.
-     * @param actor the actor who interact with this object.
-     * @param location the location to teleport to (may not be use for all
-     *                 teleportable type).
-     * @return the action description to be displayed on the menu
+     * Get a simple name represent this object.
+     * @return {@code String} Name of this object
      */
     @Override
-    public String getMenuDescription(Actor actor, Location location)
+    public String getSimpleName()
     {
-        return actor + " will teleport to " + location + ".";
+        return this.toString();
+    }
+
+    /**
+     * Use to summon a fire ground type use only in method
+     * {@link TeleGround#burnSurrounding(Location)}
+     * @return {@link Fire} ground type.
+     */
+    protected Fire summonFire()
+    {
+        return new Fire();
+    }
+
+    /**
+     * Define behaviour for teleport to a certain place.
+     *
+     * @param actor       the actor who interact with this teleportable object.
+     * @param destination the location teleport to.
+     */
+    @Override
+    public String teleportTo(Actor actor, Location destination)
+    {
+        burnSurrounding(destination);
+        return actor + " has teleport to " + destination + " using " + this;
     }
 }

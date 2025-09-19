@@ -3,8 +3,6 @@ package game.grounds.teleportable;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.Teleportable;
-import game.grounds.Fire;
 
 import java.util.List;
 
@@ -13,13 +11,14 @@ import java.util.List;
  *
  * <p>
  *     Represent a teleport door name TeleDoor in the system.
- *     It can teleport to certain places but will burn all its surrounding.
+ *     It can use by {@link Actor} teleport to certain places
+ *     but will burn all its surrounding.
  * </p>
  *
  * Extends {@link TeleGround}
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 2.0
  */
 public class TeleDoor extends TeleGround
 {
@@ -35,30 +34,17 @@ public class TeleDoor extends TeleGround
     }
 
     /**
-     * Use to burn its surrounding (use by method
-     * {@link Teleportable#teleportTo(Actor actor, Location destination)})
+     * Use to burn its surrounding
      * @param destination the place to burn its surrounding
      */
     @Override
     protected void burnSurrounding(Location destination)
     {
+        //Burn all its surrounding
         List<Exit> surrounding = destination.getExits();
         for (Exit location : surrounding)
         {
-            location.getDestination().setGround(new Fire());
+            location.getDestination().setGround(this.summonFire());
         }
-    }
-
-    /**
-     * Define behaviour for teleport to a certain place.
-     * @param actor the actor who interact with this teleportable door.
-     * @param destination the location teleport to.
-     */
-    @Override
-    public String teleportTo(Actor actor, Location destination)
-    {
-        //Burn its surrounding
-        burnSurrounding(destination);
-        return actor + " has teleport to " + destination;
     }
 }

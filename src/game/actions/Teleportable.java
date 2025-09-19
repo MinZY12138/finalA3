@@ -14,7 +14,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * </p>
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 2.0
  */
 public interface Teleportable
 {
@@ -26,12 +26,8 @@ public interface Teleportable
     String teleportTo(Actor actor, Location destination);
 
     /**
-     * Describe what action will be performed if this Action is chosen in the
-     * menu.
-     * @param actor the actor who interact with this object.
-     * @param location the location to teleport to (may not be use for all
-     *                 teleportable type).
-     * @return the action description to be displayed on the menu
+     * Get a simple representation name of the current object.
+     * @return {@code String} name representation of this object.
      */
-    String getMenuDescription(Actor actor, Location location);
+    String getSimpleName();
 }
