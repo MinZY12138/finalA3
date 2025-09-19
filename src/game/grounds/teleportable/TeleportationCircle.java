@@ -2,7 +2,6 @@ package game.grounds.teleportable;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Fire;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +18,7 @@ import java.util.Random;
  * Extends {@link TeleGround}
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 2.0
  */
 public class TeleportationCircle extends TeleGround
 {
@@ -45,29 +44,16 @@ public class TeleportationCircle extends TeleGround
      * @param destination the place to burn its surrounding
      */
     @Override
-    protected void burnSurrounding(Location destination, Fire fire)
+    protected void burnSurrounding(Location destination)
     {
         //Get its surrounding
         List<Location> surrounding = destination.getNearbyLocations(1);
 
         //Randomly choose one of its surrounding
-        Location placeToBurn = surrounding.get(RANDOM.nextInt(0, surrounding.size()));
+        Location placeToBurn = surrounding.get(RANDOM.nextInt(0,
+                surrounding.size()));
 
         //Burn it
-        placeToBurn.setGround(fire);
-    }
-
-    /**
-     * Define behaviour for teleport to a certain place.
-     *
-     * @param actor       the actor who interact with this teleportable object.
-     * @param destination the location teleport to.
-     */
-    @Override
-    public String teleportTo(Actor actor, Location destination)
-    {
-        //Use it parents method to burn its surrounding.
-        super.teleportTo(actor, destination);
-        return actor + " has teleport to " + destination;
+        placeToBurn.setGround(this.summonFire());
     }
 }
