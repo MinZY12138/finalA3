@@ -30,8 +30,29 @@ public class Earth extends World {
                 "........................................"
         );
 
+        List<String> map2 = Arrays.asList(
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................",
+                "........................................"
+        );
+
         GameMap gameMap = new GameMap("Forest", groundCreator, map);
         this.addGameMap(gameMap);
+
+        GameMap gameMap1 = new GameMap("Minecraft", groundCreator, map2);
+        this.addGameMap(gameMap1);
+
+        TeleDoor teleDoor1 = new TeleDoor(List.of(gameMap.at(10,4), gameMap1.at(4,4)));
+        gameMap.at(4,4).setGround(teleDoor1);
+
+        gameMap1.at(10,4).setGround(teleDoor1);
 
         Player player = new Player("Explorer", 'ඞ', 100);
         this.addPlayer(player, gameMap.at(1, 1));
