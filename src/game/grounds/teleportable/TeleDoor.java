@@ -1,8 +1,10 @@
-package game;
+package game.grounds.teleportable;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.Teleportable;
+import game.grounds.Fire;
 
 import java.util.List;
 

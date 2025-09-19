@@ -1,8 +1,9 @@
-package game;
+package game.actors.statuses;
 
 import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.Flammable;
 
 /**
  * <h1>Class representing Burning</h1>

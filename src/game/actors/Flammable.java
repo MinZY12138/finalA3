@@ -1,4 +1,4 @@
-package game;
+package game.actors;
 
 /**
  * <h1>Interface Flammable</h1>
