@@ -24,7 +24,8 @@ import java.util.List;
  * Extends {@link Item}
  * Implements {@link Teleportable}
  *
- *
+ * @author Shee Seng Cheng
+ * @version 1.0
  */
 public class TeleportCube extends Item implements Teleportable
 {
