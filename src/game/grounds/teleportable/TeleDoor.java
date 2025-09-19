@@ -3,7 +3,6 @@ package game.grounds.teleportable;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.Teleportable;
 import game.grounds.Fire;
 
 import java.util.List;
@@ -35,8 +34,7 @@ public class TeleDoor extends TeleGround
     }
 
     /**
-     * Use to burn its surrounding (use by method
-     * {@link Teleportable#teleportTo(Actor actor, Location destination)})
+     * Use to burn its surrounding
      * @param destination the place to burn its surrounding
      */
     @Override
