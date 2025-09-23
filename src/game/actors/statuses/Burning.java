@@ -79,6 +79,10 @@ public class Burning implements Status
         return duration != END;
     }
 
+    /**
+     * String represent this status.
+     * @return {@code String} details of this status.
+     */
     @Override
     public String toString()
     {
