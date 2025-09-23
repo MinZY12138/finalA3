@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
-import game.capabilities.Flammable;
 
 /**
  * <h1>Class represent Fire</h1>
@@ -65,7 +64,7 @@ public class Fire extends Ground
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            actor.addStatus(new Burning((Flammable) actor, DAMAGE, duration));
+            actor.addStatus(new Burning(actor, DAMAGE, duration));
         }
     }
 }

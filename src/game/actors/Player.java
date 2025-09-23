@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.capabilities.Flammable;
 import game.weapons.BareFist;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  * Class representing the Player.
  * @author Adrian Kristanto
  */
-public class Player extends Actor implements Flammable
+public class Player extends Actor
 {
     /**
      * Constructor.
@@ -50,17 +49,6 @@ public class Player extends Actor implements Flammable
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
-    }
-
-    /**
-     * Define behaviour when this is being burned.
-     *
-     * @param damage the amount of damage cause by this burn.
-     */
-    @Override
-    public void burn(int damage)
-    {
-        this.hurt(damage);
     }
 
     /**
