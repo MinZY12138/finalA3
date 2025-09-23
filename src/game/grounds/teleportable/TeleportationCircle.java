@@ -47,11 +47,15 @@ public class TeleportationCircle extends TeleGround
     protected void burnSurrounding(Location destination)
     {
         //Get its surrounding
-        List<Location> surrounding = destination.getNearbyLocations(1);
+        int radius = 1;
+        List<Location> surrounding = destination.getNearbyLocations(
+                radius
+        );
 
         //Randomly choose one of its surrounding
-        Location placeToBurn = surrounding.get(RANDOM.nextInt(0,
-                surrounding.size()));
+        Location placeToBurn = surrounding.get(
+                RANDOM.nextInt(surrounding.size())
+        );
 
         //Burn it
         placeToBurn.setGround(this.summonFire());

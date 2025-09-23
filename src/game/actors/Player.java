@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.capabilities.Flammable;
 import game.weapons.BareFist;
 
 import java.util.List;

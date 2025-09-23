@@ -79,8 +79,11 @@ public abstract class TeleGround extends Ground implements Teleportable
             //Check if the destination doesn't have actor and can enter by actor.
             if ((!destination.containsAnActor()) && destination.canActorEnter(actor))
             {
+                //Indicate the successfull rate that it can function properly.
+                int SUCCESSFULL_RATE = 100;
+
                 actionList.add(new TeleportAction(this, actor,
-                        destination, 100));
+                        destination, SUCCESSFULL_RATE));
             }
         }
         return actionList;
