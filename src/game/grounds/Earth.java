@@ -98,8 +98,6 @@ public class Earth extends World {
         gameMap.at(6,7).setGround(new HazelnutTree());
         gameMap1.at(6,7).setGround(new HazelnutTree());
         gameMap.at(9,9).setGround(new YewBerryTree());
-        gameMap.at(0,1).setGround(new YewBerryTree());
-
         gameMap1.at(9,9).setGround(new YewBerryTree());
 
 

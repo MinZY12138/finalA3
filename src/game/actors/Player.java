@@ -39,8 +39,6 @@ public class Player extends Actor implements Flammable, Warmable
         this.warmthLevel -= 1;
     }
 
-
-
     public boolean isWarm() {
         return warmthLevel > 0;
     }
