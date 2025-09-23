@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
-import game.actors.Flammable;
+import game.capabilities.Flammable;
 
 /**
  * <h1>Class represent Fire</h1>
@@ -18,7 +18,7 @@ import game.actors.Flammable;
  * Extends {@link Ground}
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 2.0
  */
 public class Fire extends Ground
 {
@@ -26,6 +26,11 @@ public class Fire extends Ground
      * Indicate the fire on the ground for how many turn
      */
     private int duration = 5;
+
+    /**
+     * Indicate the amount can hurt the actor standing on it.
+     */
+    private static final int DAMAGE = 5;
 
     /**
      * Constructor for Fire.
@@ -60,7 +65,7 @@ public class Fire extends Ground
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            actor.addStatus(new Burning((Flammable) actor, 5));
+            actor.addStatus(new Burning((Flammable) actor, DAMAGE, duration));
         }
     }
 }
