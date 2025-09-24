@@ -17,7 +17,10 @@ import java.util.List;
  * Class representing the Player.
  * @author Adrian Kristanto
  */
+<<<<<<< src/game/actors/Player.java
 public class Player extends Actor implements Flammable, Warmable
+=======
+
 {
     private int warmthLevel;
     /**
@@ -71,17 +74,6 @@ public class Player extends Actor implements Flammable, Warmable
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
-    }
-
-    /**
-     * Define behaviour when this is being burned.
-     *
-     * @param damage the amount of damage cause by this burn.
-     */
-    @Override
-    public void burn(int damage)
-    {
-        this.hurt(damage);
     }
 
     /**

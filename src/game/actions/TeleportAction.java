@@ -113,7 +113,7 @@ public class TeleportAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return actor + " will teleport to " + this.DESTINATION + " using " +
-                this.OBJECT.getSimpleName() + ".";
+        return actor + " teleports to " + this.DESTINATION + " using " +
+                this.OBJECT.getSimpleName();
     }
 }
