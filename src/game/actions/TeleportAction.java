@@ -40,9 +40,9 @@ public class TeleportAction extends Action
 
     /**
      * Indicate this execution with the current teleportable
-     * object successful rate.
+     * object successfull rate.
      */
-    private final double SUCCESSFULRATE;
+    private final double SUCCESSFULL_RATE;
 
     /**
      * Use to get a random number between 0-99 to compare with the
@@ -64,7 +64,7 @@ public class TeleportAction extends Action
         this.OBJECT = object;
         this.ACTOR = actor;
         this.DESTINATION = destination;
-        this.SUCCESSFULRATE = successfulRate;
+        this.SUCCESSFULL_RATE = successfulRate;
     }
 
     /**
@@ -85,7 +85,7 @@ public class TeleportAction extends Action
         Location chosenDestination = this.DESTINATION;
 
         //If this execution success modify the default message
-        if ((RANDOM.nextInt(100) <= this.SUCCESSFULRATE))
+        if ((RANDOM.nextInt(100) <= this.SUCCESSFULL_RATE))
         {
             defaultMessage = OBJECT.teleportTo(this.ACTOR, this.DESTINATION);
         }
