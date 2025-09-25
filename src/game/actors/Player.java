@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.actors.animals.Warmable;
 import game.weapons.BareFist;
 
 import java.util.List;
@@ -16,8 +17,12 @@ import java.util.List;
  * Class representing the Player.
  * @author Adrian Kristanto
  */
-public class Player extends Actor
+<<<<<<< src/game/actors/Player.java
+public class Player extends Actor implements Flammable, Warmable
+=======
+
 {
+    private int warmthLevel;
     /**
      * Constructor.
      *
@@ -25,13 +30,33 @@ public class Player extends Actor
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Player(String name, char displayChar, int hitPoints) {
+    public Player(String name, char displayChar, int hitPoints, int warmthLevel) {
         super(name, displayChar, hitPoints);
+        this.warmthLevel = warmthLevel;
         this.setIntrinsicWeapon(new BareFist());
+
+    }
+
+    @Override
+    public void decreaseWarmthLevel() {
+        this.warmthLevel -= 1;
+    }
+
+    public boolean isWarm() {
+        return warmthLevel > 0;
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        decreaseWarmthLevel();
+
+        if (!isWarm()){
+            display.println(this + " is unconscious");
+            map.removeActor(this);
+
+        }
+
+
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
@@ -59,12 +84,14 @@ public class Player extends Actor
     {
         return String.
                 format("""
-                                Player: %s,
+                                Player: %s
                                 Health: (%s/%s)
+                                Warmth Level : %s
                                 """,
                         name,
                         getAttribute(BaseAttributes.HEALTH),
-                        getMaximumAttribute(BaseAttributes.HEALTH)
+                        getMaximumAttribute(BaseAttributes.HEALTH),
+                        warmthLevel
                 );
     }
 }
