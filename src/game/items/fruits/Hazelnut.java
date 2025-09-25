@@ -19,7 +19,7 @@ public class Hazelnut extends game.items.fruits.Fruit implements Consumable
     public Hazelnut()
     {
         super("hazelnut", 'n', true);
-        this.enableAbility(game.Items.Abilities.RISE_HEALTH);
+
     }
 
     /**
@@ -28,6 +28,7 @@ public class Hazelnut extends game.items.fruits.Fruit implements Consumable
      * @param map the place where the actor at
      * @return description of the effect
      */
+    @Override
     public String consume (Actor consumer, GameMap map)
     {
 

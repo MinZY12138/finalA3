@@ -19,7 +19,7 @@ public class Apple extends game.items.fruits.Fruit implements Consumable
     public Apple()
     {
         super("apple", 'a', true);
-        this.enableAbility(game.Items.Abilities.HEAL);
+
     }
 
     /**
@@ -30,11 +30,10 @@ public class Apple extends game.items.fruits.Fruit implements Consumable
      * @return a string describing the effect
      */
     @Override
-    public String consume(Actor consumer, GameMap map) {
-
+    public String consume(Actor consumer, GameMap map)
+    {
         consumer.heal(3);
-        return " and heal with 3 points ";
-
+        return " and heal with 3 hit points ";
     }
 
 

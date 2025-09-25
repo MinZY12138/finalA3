@@ -19,7 +19,7 @@ public class YewBerry extends game.items.fruits.Fruit implements Consumable
     public YewBerry()
     {
         super("yewBerry", 'x', true);
-        this.enableAbility(game.Items.Abilities.POISON);
+
     }
 
     /**
@@ -28,6 +28,7 @@ public class YewBerry extends game.items.fruits.Fruit implements Consumable
      * @param map the place where the actor at
      * @return description of the effect
      */
+    @Override
     public String consume (Actor actor, GameMap map)
     {
 
