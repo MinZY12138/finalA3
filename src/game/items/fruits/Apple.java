@@ -4,13 +4,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 
-
 /**
  * An apple class
  * @author Ng Jun Jie
  * @version 1.0
  */
-public class Apple extends game.items.fruits.Fruit implements Consumable
+public class Apple extends Fruit implements Consumable
 {
 
     /**

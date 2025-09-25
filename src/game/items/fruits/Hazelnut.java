@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Ng Jun Jie
  * @version 1.0
  */
-public class Hazelnut extends game.items.fruits.Fruit implements Consumable
+public class Hazelnut extends Fruit implements Consumable
 {
 
     /**
