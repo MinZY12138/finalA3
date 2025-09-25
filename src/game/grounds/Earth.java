@@ -58,33 +58,62 @@ public class Earth extends World {
                 "........................................"
         );
 
-<<<<<<< src/game/grounds/Earth.java
-=======
+
         GameMap gameMap1 = new GameMap("Forest", groundCreator, map);
         this.addGameMap(gameMap1);
 
+        Player player = new Player("Explorer", 'ඞ', 100, 30);
+        this.addPlayer(player, gameMap1.at(1, 1));
+
+        // req 1
         GameMap gameMap2 = new GameMap("Plains", groundCreator, map2);
->>>>>>> src/game/grounds/Earth.java
         this.addGameMap(gameMap2);
 
-        TeleDoor teleDoor1 = new TeleDoor(List.of(gameMap1.at(10,4),
-                gameMap2.at(4,4)));
-        gameMap1.at(4,4).setGround(teleDoor1);
-        gameMap2.at(10,4).setGround(teleDoor1);
+        TeleDoor teleDoor1 = new TeleDoor(
+                List.of(
+                        gameMap1.at(10, 4), gameMap2.at(4, 4)
+                )
+        );
+        gameMap1.at(4, 4).setGround(teleDoor1);
+        gameMap2.at(10, 4).setGround(teleDoor1);
 
-        TeleportationCircle teleCircle1 = new TeleportationCircle(List.of(
-                gameMap1.at(12,7),gameMap2.at(6,7)));
-        gameMap1.at(6,7).setGround(teleCircle1);
-        gameMap2.at(12,7).setGround(teleCircle1);
+        TeleportationCircle teleCircle1 = new TeleportationCircle(
+                List.of(
+                        gameMap1.at(12, 7), gameMap2.at(6, 7)
+                )
+        );
+        gameMap1.at(6, 7).setGround(teleCircle1);
+        gameMap2.at(12, 7).setGround(teleCircle1);
 
-        TeleportCube cube1 = new TeleportCube(List.of(
-                gameMap1.at(1,1), gameMap2.at(1,1)));
+        TeleportCube cube1 = new TeleportCube(
+                List.of(
+                        gameMap1.at(1, 1), gameMap2.at(1, 1)
+                )
+        );
 
-<<<<<<< src/game/grounds/Earth.java
-        Player player = new Player("Explorer", 'ඞ', 100);
-        this.addPlayer(player, gameMap1.at(1, 1));
         player.addItemToInventory(cube1);
 
+        // req 2
+        Spawnable bear = Bear::new;
+        Spawnable deer = Deer::new;
+        Spawnable wolf = Wolf::new;
+
+        gameMap1.at(8, 9).setGround(new Tundra(bear));
+
+        gameMap1.at(0, 0).setGround(new Tundra(wolf));
+        gameMap2.at(0, 5).setGround(new Cave(bear, wolf, deer));
+        gameMap1.at(0, 5).setGround(new Cave(bear, wolf));
+        gameMap2.at(0, 9).setGround(new Meadow(deer));
+        gameMap1.at(0, 9).setGround(new Meadow(deer, wolf));
+
+        gameMap2.at(2, 2).setGround(new AppleTree());
+        gameMap1.at(2, 2).setGround(new AppleTree());
+        gameMap2.at(6, 7).setGround(new HazelnutTree());
+        gameMap1.at(6, 7).setGround(new HazelnutTree());
+        gameMap2.at(9, 9).setGround(new YewBerryTree());
+        gameMap1.at(9, 9).setGround(new YewBerryTree());
+
+        // req 3
         Location gameMapA = RandomLocation.randomChooseLocation(gameMap1);
         Location gameMapB = RandomLocation.randomChooseLocation(gameMap1);
 
@@ -96,47 +125,5 @@ public class Earth extends World {
 
         Bow bow = new Bow();
         gameMapB.addItem(bow);
-=======
-        Player player = new Player("Explorer", 'ඞ', 100, 30);
-        this.addPlayer(player, gameMap.at(1, 1));
-        player.addItemToInventory(cube1);
-
-        Spawnable bear = Bear::new;
-        Spawnable deer = Deer::new;
-        Spawnable wolf = Wolf::new;
-
-
-        gameMap.at(8,9).setGround(new Tundra(bear));
-
-        gameMap1.at(0,0).setGround(new Tundra(wolf));
-        gameMap2.at(0,5).setGround(new Cave(bear, wolf, deer));
-        gameMap1.at(0,5).setGround(new Cave(bear, wolf));
-        gameMap2.at(0,9).setGround(new Meadow(deer));
-        gameMap1.at(0,9).setGround(new Meadow(deer,wolf));
-
-        gameMap2.at(2,2).setGround(new AppleTree());
-        gameMap1.at(2,2).setGround(new AppleTree());
-        gameMap2.at(6,7).setGround(new HazelnutTree());
-        gameMap1.at(6,7).setGround(new HazelnutTree());
-        gameMap2.at(9,9).setGround(new YewBerryTree());
-        gameMap1.at(9,9).setGround(new YewBerryTree());
-
-        Location gameMapA = RandomLocation.randomChooseLocation(gameMap1);
-        Location gameMapB = RandomLocation.randomChooseLocation(gameMap2);
-
-        Axe axe = new Axe();
-        gameMapA.addItem(axe);
-
-        Torch torch = new Torch();
-        gameMapA.addItem(torch);
-
-        Bow bow = new Bow();
-        gameMapB.addItem(bow);
-
-
-
-
-
->>>>>>> src/game/grounds/Earth.java
     }
 }
