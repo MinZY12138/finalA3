@@ -1,6 +1,6 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.actors.Actor;
+
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
@@ -17,10 +17,11 @@ import game.items.TeleportCube;
 import game.items.equipments.Axe;
 import game.items.equipments.Torch;
 import game.items.equipments.Bow;
+import game.grounds.trees.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+
 
 public class Earth extends World {
 
