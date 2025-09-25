@@ -19,8 +19,9 @@ import java.util.Random;
  *
  * Extends from {@link Ground}
  *
- * @author Shee Seng Cheng
- * @version 1.0
+ * @author  Shee Seng Cheng
+ * {@code @modifiedBy}  Ng Jun Jie
+ * @version 2.0
  */
 public abstract class Tree extends Ground
 {

@@ -12,8 +12,9 @@ import game.items.fruits.YewBerry;
  *
  * Extends from {@link Tree}
  *
- * @author Shee Seng Cheng
- * @version 1.0
+ * @author  Shee Seng Cheng
+ * {@code @modifiedBy}  Ng Jun Jie
+ * @version 2.0
  */
 public class YewBerryTree extends Tree
 {
