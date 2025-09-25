@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.positions.NumberRange;
+import game.grounds.RandomLocation;
 
 import java.util.Random;
 
@@ -92,11 +92,7 @@ public class TeleportAction extends Action
         else
         {
             //Get a random position within this current map
-            NumberRange x = map.getXRange();
-            NumberRange y = map.getYRange();
-            int randomX = RANDOM.nextInt(x.min(), x.max() + 1);
-            int randomY = RANDOM.nextInt(y.min(),y.max() + 1);
-            chosenDestination = map.at(randomX, randomY);
+            chosenDestination = RandomLocation.randomChooseLocation(map);
         }
 
         //Teleport the actor and return the message after execution.
