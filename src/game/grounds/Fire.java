@@ -29,7 +29,7 @@ public class Fire extends Ground
     /**
      * Indicate the amount can hurt the actor standing on it.
      */
-    private static final int DAMAGE = 5;
+    private static final int BURNING_DMG = 5;
 
     /**
      * Constructor for Fire.
@@ -64,7 +64,7 @@ public class Fire extends Ground
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            actor.addStatus(new Burning(actor, DAMAGE, duration));
+            actor.addStatus(new Burning(actor, BURNING_DMG, duration));
         }
     }
 }

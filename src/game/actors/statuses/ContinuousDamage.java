@@ -20,7 +20,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public class ContinuousDamage implements Status
+public abstract class ContinuousDamage implements Status
 {
     /**
      * Indicate this status will run for how many turns
