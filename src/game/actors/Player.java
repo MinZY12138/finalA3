@@ -15,14 +15,12 @@ import java.util.List;
 
 /**
  * Class representing the Player.
+ *
  * @author Adrian Kristanto
  */
-<<<<<<< src/game/actors/Player.java
-public class Player extends Actor implements Flammable, Warmable
-=======
-
-{
+public class Player extends Actor implements Warmable {
     private int warmthLevel;
+
     /**
      * Constructor.
      *
@@ -50,7 +48,7 @@ public class Player extends Actor implements Flammable, Warmable
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         decreaseWarmthLevel();
 
-        if (!isWarm()){
+        if (!isWarm()) {
             display.println(this + " is unconscious");
             map.removeActor(this);
 
@@ -64,8 +62,7 @@ public class Player extends Actor implements Flammable, Warmable
         display.println("Currently at " + map);
 
         List<Status> statuses = this.statuses();
-        for (Status status : statuses)
-        {
+        for (Status status : statuses) {
             display.println(status.toString());
         }
 
@@ -78,10 +75,10 @@ public class Player extends Actor implements Flammable, Warmable
 
     /**
      * Method to get a String of details of the current player status.
+     *
      * @return {@code String} details of this player.
      */
-    public String showStatus()
-    {
+    public String showStatus() {
         return String.
                 format("""
                                 Player: %s
