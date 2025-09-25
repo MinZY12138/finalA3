@@ -25,14 +25,23 @@ import java.util.List;
  * Implements {@link Teleportable}
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 2.0
  */
 public class TeleportCube extends Item implements Teleportable
 {
+    /**
+     * A collections of destination that it can teleport to.
+     */
     private final List<Location> DESTINATION;
+
+    /**
+     * The successfull rate that it can function properly.
+     */
+    private static final int SUCCESSFULL_RATE = 50;
 
     /***
      * Constructor for TeleportCube.
+     * @param destination collections of destination that it can teleport to.
      */
     public TeleportCube(List<Location> destination)
     {
@@ -40,10 +49,16 @@ public class TeleportCube extends Item implements Teleportable
         this.DESTINATION = destination;
     }
 
+    /**
+     * Get the collections of destination that it can teleport to.
+     * @return {@code List<Location>} collections of destination that
+     * it can teleport to
+     */
     public List<Location> getDestination()
     {
         return Collections.unmodifiableList(this.DESTINATION);
     }
+
     /**
      * Define behaviour for teleport to a certain place.
      *
@@ -89,7 +104,7 @@ public class TeleportCube extends Item implements Teleportable
             if ((! destination.containsAnActor()) && destination.canActorEnter(owner))
             {
                 actionList.add(new TeleportAction(this, owner,
-                        destination, 50));
+                        destination, SUCCESSFULL_RATE));
             }
         }
         return actionList;
