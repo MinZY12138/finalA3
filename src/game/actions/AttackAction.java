@@ -27,15 +27,23 @@ public class AttackAction extends Action {
      */
     private final String DIRECTION;
 
+    /**
+     * The cue word for actor attack.
+     */
     private final String VERB;
 
+    /**
+     * The actor attack weapon.
+     */
     private final Weapon WEAPON;
 
     /**
      * The constructor of the AttackAction class.
      *
-     * @param targetActor the actor is being attacked.
-     * @param direction   the actor's direction being attacked.
+     * @param targetActor the actor is being attacked
+     * @param direction   the actor's direction being attacked
+     * @param verb        the cue word for actor attack
+     * @param weapon      the actor attack weapon
      */
     public AttackAction(Actor targetActor, String direction, String verb, Weapon weapon) {
         this.TARGET_ACTOR = targetActor;
