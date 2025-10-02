@@ -13,11 +13,13 @@ import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Tundra;
 import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
+import game.grounds.trees.AppleTree;
+import game.grounds.trees.HazelnutTree;
+import game.grounds.trees.YewBerryTree;
 import game.items.TeleportCube;
 import game.items.equipments.Axe;
 import game.items.equipments.Torch;
 import game.items.equipments.Bow;
-import game.grounds.trees.*;
 
 import java.util.Arrays;
 import java.util.List;
