@@ -86,7 +86,8 @@ public class TeleportAction extends Action {
         Location chosenDestination = this.DESTINATION;
 
         //If this execution success modify the default message
-        if ((RANDOM.nextInt(100) <= this.SUCCESSFUL_RATE)) {
+        int MAXIMUM_BOUND = 100;
+        if ((RANDOM.nextInt(MAXIMUM_BOUND) <= this.SUCCESSFUL_RATE)) {
             defaultMessage = OBJECT.teleportTo(this.ACTOR, this.DESTINATION);
         } else {
             //Get a random position within this current map
