@@ -17,14 +17,14 @@ import game.actors.statuses.Burning;
  * Extends {@link Ground}
  *
  * @author Shee Seng Cheng
- * @version 2.0
+ * @version 3.0
  */
 public class Fire extends Ground
 {
     /**
      * Indicate the fire on the ground for how many turn
      */
-    private int duration = 5;
+    private int duration = 3;
 
     /**
      * Indicate the amount can hurt the actor standing on it.
@@ -64,7 +64,9 @@ public class Fire extends Ground
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            actor.addStatus(new Burning(actor, BURNING_DMG, duration));
+            int BURNING_STATUS_DURATION = 5;
+            actor.addStatus(new Burning(actor, BURNING_DMG,
+                    BURNING_STATUS_DURATION));
         }
     }
 }
