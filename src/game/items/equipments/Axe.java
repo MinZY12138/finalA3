@@ -12,41 +12,30 @@ import game.actors.statuses.Bleeding;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.1
+ * @version 2.0.1
  * @since 2025-09-24
  */
 public class Axe extends LootWeapon {
 
     /**
-     * Weapon damage.
+     * Defining status attributes.
      */
-    private static final int HIT_DMG = 15;
-
-    /**
-     * Rate of hitting target actors.
-     */
-    private static final int HIT_RATE = 75;
-
-    /**
-     * Bleeding damage
-     */
-    private static final int BLEEDING_DMG = 10;
+    private final StatusType STATUS;
 
     /**
      * Chance to make the target bleed.
      */
-    private static final int BLEEDING_RATE = 50;
-
-    /**
-     * Total turns of the continuous damage.
-     */
-    private static final int DURATION = 2;
+    private static final int CHANCE = 50;
 
     /**
      * The constructor of the Axe class.
+     *
+     * @param type   defining damage, hit rate, and verb
+     * @param status defining bleeding damage and duration
      */
-    public Axe() {
-        super("axe", 'p', true, HIT_DMG, HIT_RATE, "hacks");
+    public Axe(WeaponType type, StatusType status) {
+        super("Axe", 'p', true, type);
+        this.STATUS = status;
     }
 
     /**
@@ -58,8 +47,8 @@ public class Axe extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        if (RAND.nextInt(100) <= BLEEDING_RATE) {
-            target.addStatus(new Bleeding(target, BLEEDING_DMG, DURATION));
+        if (RAND.nextInt(100) <= CHANCE) {
+            target.addStatus(new Bleeding(target, STATUS.getDAMAGE(), STATUS.getDURATION()));
         }
     }
 }
