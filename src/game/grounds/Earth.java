@@ -117,16 +117,17 @@ public class Earth extends World {
         gameMap1.at(9, 9).setGround(new YewBerryTree());
 
         // req 3
-        Location gameMapA = RandomLocation.randomChooseLocation(gameMap1);
-        Location gameMapB = RandomLocation.randomChooseLocation(gameMap1);
+        Location location1 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location2 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location3 = RandomLocation.randomChooseLocation(gameMap2);
 
         Axe axe = new Axe();
-        gameMapA.addItem(axe);
+        location1.addItem(axe);
 
         Torch torch = new Torch();
-        gameMapA.addItem(torch);
+        location2.addItem(torch);
 
         Bow bow = new Bow();
-        gameMapB.addItem(bow);
+        location3.addItem(bow);
     }
 }
