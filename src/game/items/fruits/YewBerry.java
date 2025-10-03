@@ -1,8 +1,13 @@
 package game.items.fruits;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.CoatWeaponAction;
+import game.items.equipments.coat.Coatable;
+import game.items.equipments.coat.YewberryCoating;
 
 
 /**
@@ -37,6 +42,18 @@ public class YewBerry extends Fruit implements Consumable
         return ", died ";
     }
 
+    @Override
+    public ActionList allowableActions(Actor owner, GameMap map) {
+        ActionList actions = super.allowableActions(owner, map);
+
+        // Add a coat action for each coatable weapon in the inventory
+        for (Item it : owner.getItemInventory()) {
+            it.asCapability(Coatable.class).ifPresent(weapon -> {
+                actions.add(new CoatWeaponAction(weapon, new YewberryCoating(), this));
+            });
+        }
+        return actions;
+    }
 
 
 
