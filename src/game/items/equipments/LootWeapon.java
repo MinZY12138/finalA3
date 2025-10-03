@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
+import game.items.equipments.coat.Coatable;
+import game.items.equipments.coat.Coating;
 
 import java.util.Random;
 
@@ -20,7 +22,7 @@ import java.util.Random;
  * @version 1.0.0
  * @since 2025-09-24
  */
-public abstract class LootWeapon extends Item implements Weapon {
+public abstract class LootWeapon extends Item implements Weapon, Coatable{
 
     /**
      * Weapon damage.
@@ -41,6 +43,11 @@ public abstract class LootWeapon extends Item implements Weapon {
      * A random object.
      */
     public static final Random RAND = new Random();
+
+    /**
+     * Current coating applied to this weapon (if any).
+     */
+    private Coating coating;
 
     /**
      * The constructor of LoopWeapon class.
@@ -86,6 +93,12 @@ public abstract class LootWeapon extends Item implements Weapon {
 
         target.hurt(this.DAMAGE);
         this.hit(attacker, target, map);
+
+        // coating effect if present
+        if (coating != null) {
+            coating.applyOnHit(attacker, target, map);
+        }
+
         return String.format("%s %s %s for %d damage", attacker, this.VERB, target, this.DAMAGE);
     }
 
@@ -102,4 +115,30 @@ public abstract class LootWeapon extends Item implements Weapon {
         actions.add(new AttackAction(otherActor, location.toString(), this.VERB, this));
         return actions;
     }
+
+    // ===== Implementation of Coatable =====
+
+    @Override
+    public Coating getCoating() {
+        return coating;
+    }
+
+    @Override
+    public void setCoating(Coating coating) {
+        this.coating = coating;
+    }
+
+    @Override
+    public void clearCoating() {
+        this.coating = null;
+    }
+
+    @Override
+    public String coatedName() {
+        if (coating != null) {
+            return this.toString() + " [" + coating.name() + "]";
+        }
+        return this.toString();
+    }
+
 }
