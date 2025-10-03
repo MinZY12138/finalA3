@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
 import game.grounds.Fire;
+import game.items.equipments.coat.Coating;
 
 import java.util.List;
 
@@ -79,4 +80,15 @@ public class Torch extends LootWeapon {
             place.getDestination().setGround(new Fire());
         }
     }
+
+    @Override
+    public void setCoating(Coating coating) {
+        // Torch cannot be coated, do nothing
+    }
+
+    @Override
+    public Coating getCoating() {
+        return null; // Torch never has coating
+    }
+
 }
