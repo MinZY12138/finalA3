@@ -22,6 +22,10 @@ public class Snow extends Ground {
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = super.allowableActions(actor, location, direction);
 
+        // Only allow coating if actor is standing on this tile (not adjacent ones)
+        if (!"here".equals(direction)) {
+            return actions;
+        }
         // Add a coat action for each coatable weapon in the inventory
         for (Item it : actor.getItemInventory()) {
             it.asCapability(Coatable.class).ifPresent(weapon -> {
