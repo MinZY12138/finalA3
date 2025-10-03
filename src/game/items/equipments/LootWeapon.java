@@ -17,30 +17,20 @@ import java.util.Random;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 2.0.1
  * @since 2025-09-24
  */
 public abstract class LootWeapon extends Item implements Weapon {
 
     /**
-     * Weapon damage.
+     * Defining weapon attributes.
      */
-    protected final int DAMAGE;
-
-    /**
-     * The rate of hitting a target actor.
-     */
-    protected final int HIT_RATE;
-
-    /**
-     * The cue word for actor attack.
-     */
-    protected final String VERB;
+    protected final WeaponType TYPE;
 
     /**
      * A random object.
      */
-    public static final Random RAND = new Random();
+    protected static final Random RAND = new Random();
 
     /**
      * The constructor of LoopWeapon class.
@@ -48,16 +38,11 @@ public abstract class LootWeapon extends Item implements Weapon {
      * @param name        the weapon name
      * @param displayChar the symbol represents a weapon on the game map
      * @param portable    weapon portability
-     * @param damage      the weapon damage
-     * @param hitRate     the rate of hitting a target actor
-     * @param verb        the cue word for actor attack
+     * @param type        the configuration of weapons
      */
-    public LootWeapon(String name, char displayChar, boolean portable, int damage, int hitRate,
-                      String verb) {
+    public LootWeapon(String name, char displayChar, boolean portable, WeaponType type) {
         super(name, displayChar, portable);
-        this.DAMAGE = damage;
-        this.HIT_RATE = hitRate;
-        this.VERB = verb;
+        this.TYPE = type;
     }
 
     /**
@@ -80,13 +65,14 @@ public abstract class LootWeapon extends Item implements Weapon {
      */
     @Override
     public final String attack(Actor attacker, Actor target, GameMap map) {
-        if (!(RAND.nextInt(100) <= this.HIT_RATE)) {
+        if (!(RAND.nextInt(100) <= this.getHitRate())) {
             return attacker + " misses " + target + ".";
         }
 
-        target.hurt(this.DAMAGE);
+        target.hurt(this.getDamage());
         this.hit(attacker, target, map);
-        return String.format("%s %s %s for %d damage", attacker, this.VERB, target, this.DAMAGE);
+        return String.format("%s %s %s for %d damage",
+                attacker, this.getVerb(), target, this.getDamage());
     }
 
     /**
@@ -99,7 +85,34 @@ public abstract class LootWeapon extends Item implements Weapon {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = super.allowableActions(otherActor, location);
-        actions.add(new AttackAction(otherActor, location.toString(), this.VERB, this));
+        actions.add(new AttackAction(otherActor, location.toString(), this.getVerb(), this));
         return actions;
+    }
+
+    /**
+     * The accessor of the weapon damage.
+     *
+     * @return this weapon damage
+     */
+    public int getDamage() {
+        return TYPE.getDAMAGE();
+    }
+
+    /**
+     * The accessor of the chance of hitting target.
+     *
+     * @return this weapon hit rate
+     */
+    public int getHitRate() {
+        return TYPE.getHIT_RATE();
+    }
+
+    /**
+     * The accessor of the word to describe the weapon when hitting the target.
+     *
+     * @return this weapon hitting description
+     */
+    public String getVerb() {
+        return TYPE.getVERB();
     }
 }

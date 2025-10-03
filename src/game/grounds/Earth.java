@@ -17,9 +17,7 @@ import game.grounds.trees.AppleTree;
 import game.grounds.trees.HazelnutTree;
 import game.grounds.trees.YewBerryTree;
 import game.items.TeleportCube;
-import game.items.equipments.Axe;
-import game.items.equipments.Torch;
-import game.items.equipments.Bow;
+import game.items.equipments.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -117,16 +115,17 @@ public class Earth extends World {
         gameMap1.at(9, 9).setGround(new YewBerryTree());
 
         // req 3
-        Location gameMapA = RandomLocation.randomChooseLocation(gameMap1);
-        Location gameMapB = RandomLocation.randomChooseLocation(gameMap1);
+        Location location1 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location2 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location3 = RandomLocation.randomChooseLocation(gameMap2);
 
-        Axe axe = new Axe();
-        gameMapA.addItem(axe);
+        Axe axe = new Axe(WeaponType.AXE, StatusType.BLEEDING);
+        location1.addItem(axe);
 
-        Torch torch = new Torch();
-        gameMapA.addItem(torch);
+        Torch torch = new Torch(WeaponType.TORCH, StatusType.BURNING);
+        location2.addItem(torch);
 
-        Bow bow = new Bow();
-        gameMapB.addItem(bow);
+        Bow bow = new Bow(WeaponType.BOW);
+        location3.addItem(bow);
     }
 }

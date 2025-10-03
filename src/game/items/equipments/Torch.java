@@ -18,36 +18,25 @@ import java.util.List;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 2.0.1
  * @since 2025-09-24
  */
 public class Torch extends LootWeapon {
 
     /**
-     * Weapon damage.
+     * Defining status attributes.
      */
-    private static final int HIT_DMG = 10;
-
-    /**
-     * Rate of hitting target actors.
-     */
-    private static final int HIT_RATE = 50;
-
-    /**
-     * Burning damage.
-     */
-    private static final int BURNING_DMG = 3;
-
-    /**
-     * Total turns of the continuous damage.
-     */
-    private static final int DURATION = 7;
+    private final StatusType STATUS;
 
     /**
      * The constructor of the Torch class.
+     *
+     * @param type   defining damage, hit rate, and verb
+     * @param status defining burning damage and duration
      */
-    public Torch() {
-        super("torch", 'y', true, HIT_DMG, HIT_RATE, "strikes");
+    public Torch(WeaponType type, StatusType status) {
+        super("Torch", 'y', true, type);
+        this.STATUS = status;
     }
 
     /**
@@ -59,12 +48,8 @@ public class Torch extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        int chance = 50;
-
-        if (RAND.nextInt(100) <= chance) {
-            target.addStatus(new Burning(target, BURNING_DMG, DURATION));
-            burnSurrounding(map.locationOf(target));
-        }
+        target.addStatus(new Burning(target, STATUS.getDAMAGE(), STATUS.getDURATION()));
+        burnSurrounding(map.locationOf(target));
     }
 
     /**

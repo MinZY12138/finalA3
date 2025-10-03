@@ -22,25 +22,17 @@ import java.util.List;
 public class Bow extends LootWeapon {
 
     /**
-     * Weapon damage.
-     */
-    private static final int HIT_DMG = 5;
-
-    /**
-     * Rate of hitting target actors.
-     */
-    private static final int HIT_RATE = 25;
-
-    /**
      * Attack distance.
      */
     private static final int RADIUS = 3;
 
     /**
      * The constructor of the Bow class.
+     *
+     * @param type defining damage, hit rate, and verb
      */
-    public Bow() {
-        super("bow", 'c', true, HIT_DMG, HIT_RATE, "shoots");
+    public Bow(WeaponType type) {
+        super("Bow", 'c', true, type);
     }
 
     /**
@@ -58,7 +50,7 @@ public class Bow extends LootWeapon {
         for (Location location : locations) {
             if (location.containsAnActor()) {
                 actions.add(new AttackAction(location.getActor(), location.toString(),
-                        this.VERB, this));
+                        this.getVerb(), this));
                 return actions;
             }
         }
