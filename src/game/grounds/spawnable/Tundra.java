@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperation;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.Abilities;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 
@@ -37,6 +38,10 @@ public class Tundra extends Ground {
         if (random.nextInt(100) < 5 && !location.containsAnActor()) {
             Animal animal = spawnable.create();
             animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
+
+            // mark tundra-spawned animals as cold resistant
+            animal.enableAbility(Abilities.COLD_RESISTANT);
+
 
             animal.resistanceToWarm = true;
             try {
