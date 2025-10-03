@@ -18,7 +18,7 @@ import java.util.List;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2025-09-24
  */
 public class Torch extends LootWeapon {
@@ -59,12 +59,8 @@ public class Torch extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        int chance = 50;
-
-        if (RAND.nextInt(100) <= chance) {
-            target.addStatus(new Burning(target, BURNING_DMG, DURATION));
-            burnSurrounding(map.locationOf(target));
-        }
+        target.addStatus(new Burning(target, BURNING_DMG, DURATION));
+        burnSurrounding(map.locationOf(target));
     }
 
     /**

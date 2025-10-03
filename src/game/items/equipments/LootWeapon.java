@@ -17,7 +17,7 @@ import java.util.Random;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2025-09-24
  */
 public abstract class LootWeapon extends Item implements Weapon {
@@ -40,7 +40,7 @@ public abstract class LootWeapon extends Item implements Weapon {
     /**
      * A random object.
      */
-    public static final Random RAND = new Random();
+    protected static final Random RAND = new Random();
 
     /**
      * The constructor of LoopWeapon class.

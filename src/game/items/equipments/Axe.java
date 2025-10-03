@@ -12,7 +12,7 @@ import game.actors.statuses.Bleeding;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2025-09-24
  */
 public class Axe extends LootWeapon {
@@ -30,7 +30,12 @@ public class Axe extends LootWeapon {
     /**
      * Bleeding damage
      */
-    private static final int BLEED_DMG = 10;
+    private static final int BLEEDING_DMG = 10;
+
+    /**
+     * Chance to make the target bleed.
+     */
+    private static final int BLEEDING_RATE = 50;
 
     /**
      * Total turns of the continuous damage.
@@ -53,10 +58,8 @@ public class Axe extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        int chance = 50;
-
-        if (RAND.nextInt(100) <= chance) {
-            target.addStatus(new Bleeding(target, BLEED_DMG, DURATION));
+        if (RAND.nextInt(100) <= BLEEDING_RATE) {
+            target.addStatus(new Bleeding(target, BLEEDING_DMG, DURATION));
         }
     }
 }
