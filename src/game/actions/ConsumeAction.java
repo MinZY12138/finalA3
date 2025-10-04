@@ -7,20 +7,24 @@ import edu.monash.fit2099.engine.positions.*;
 import game.items.fruits.*;
 
 /**
- * Consume action
+ * Consume action to consume a consumable item
+ * <p>
+ * When executed, removes the item from the actor's inventory or the ground
+ * and applies the effects defined in the item's {@link Consumable#consume} method.
+ * </p>
  * @author Ng Jun Jie
  * @version 1.0
  */
 public class ConsumeAction extends Action
 {
 
-    public final Item item;
+    public final Consumable item;
 
     /**
      * Constructor for consume action
      * @param item consumable item
      */
-    public ConsumeAction(Item item)
+    public ConsumeAction(Consumable item)
     {
 
         this.item = item;
@@ -28,33 +32,36 @@ public class ConsumeAction extends Action
     }
 
 
+    /**
+     * Executes the consume action.
+     * Removes the item from inventory or ground and triggers its consume behavior.
+     *
+     * @param actor the actor performing the action
+     * @param map the game map where the action takes place
+     * @return a description of what happened
+     */
+
     @Override
     public String execute(Actor actor, GameMap map)
     {
         Location place = map.locationOf(actor);
 
-        if (place == null){
-            return "";
-        }
-
-
-        String result = actor + " consumes " + item;
-
-        if (item instanceof Consumable consumable)
-        {
-            result +=  consumable.consume(actor, map);
-        }
-
-        if (actor.getItemInventory().contains(item)){
-            actor.removeItemFromInventory(item);
+        if (actor.getItemInventory().contains((Item)item)){
+            actor.removeItemFromInventory((Item)item);
         }
         else {
-            place.removeItem(item);
+            place.removeItem((Item)item);
         }
 
-        return result;
+        return actor + " consumes " + item + item.consume(actor, map);
     }
 
+    /**
+     * Menu description for the action.
+     *
+     * @param actor the actor performing the action
+     * @return a string describing this action for the menu
+     */
     @Override
     public String menuDescription(Actor actor)
     {
