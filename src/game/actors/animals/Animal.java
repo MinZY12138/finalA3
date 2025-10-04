@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.behaviours.*;
 
-
 /**
  * Abstract class representing an animal in the game.
  * Animals have hitpoints and warmth level, which affect their consciousness.
@@ -55,13 +54,10 @@ public abstract class Animal extends Actor implements Warmable {
      *
      * @return true if warmthLevel > 0, false otherwise
      */
-
+    @Override
     public boolean isWarm(){
         return warmthLevel > 0;
     }
-
-
-
 
     /**
      * Determines the action for the current turn.
@@ -101,7 +97,7 @@ public abstract class Animal extends Actor implements Warmable {
         Action consumeAction = consumeBehaviour.generateAction(this, map);
         if (consumeAction != null)
         {
-                return consumeAction;
+            return consumeAction;
         }
         return wanderBehaviour.generateAction(this, map);
 
