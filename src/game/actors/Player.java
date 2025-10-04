@@ -17,6 +17,8 @@ import java.util.List;
  * Class representing the Player.
  *
  * @author Adrian Kristanto
+ * {@code @modifiedBy}  Ng Jun Jie
+ * @version 2.0
  */
 public class Player extends Actor implements Warmable {
     private int warmthLevel;
@@ -35,20 +37,30 @@ public class Player extends Actor implements Warmable {
 
     }
 
+    /**
+     * Decreases the warmth level by 1.
+     */
     @Override
-    public void decreaseWarmthLevel() {
+    public void decreaseWarmthLevel()
+    {
         this.warmthLevel -= 1;
     }
 
-    public boolean isWarm() {
-        return warmthLevel > 0;
+    /**
+     * Checks if the actor has positive warmth.
+     *
+     * @return true if warmthLevel <= 0, false otherwise
+     */
+    @Override
+    public boolean isCold(){
+        return warmthLevel <= 0;
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         decreaseWarmthLevel();
 
-        if (!isWarm()) {
+        if (isCold()) {
             display.println(this + " is unconscious");
             map.removeActor(this);
 
