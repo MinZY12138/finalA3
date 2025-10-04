@@ -55,8 +55,8 @@ public abstract class Animal extends Actor implements Warmable {
      * @return true if warmthLevel > 0, false otherwise
      */
     @Override
-    public boolean isWarm(){
-        return warmthLevel > 0;
+    public boolean isCold(){
+        return warmthLevel <= 0;
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class Animal extends Actor implements Warmable {
 
         if (!isConscious())
         {
-            if (!isWarm())
+            if (!isCold())
             {
                 display.println(this + " is unconscious due to warmth level");
             }

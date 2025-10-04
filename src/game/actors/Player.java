@@ -40,15 +40,16 @@ public class Player extends Actor implements Warmable {
         this.warmthLevel -= 1;
     }
 
-    public boolean isWarm() {
-        return warmthLevel > 0;
+    @Override
+    public boolean isCold() {
+        return warmthLevel <= 0;
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         decreaseWarmthLevel();
 
-        if (!isWarm()) {
+        if (isCold()) {
             display.println(this + " is unconscious");
             map.removeActor(this);
 
