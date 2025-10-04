@@ -19,11 +19,12 @@ public class ConsumeBehaviour implements Behaviour {
         Location place = map.locationOf(actor);
 
         for (Item item : place.getItems()){
+            if(Consumable.class.isInstance(item)){
 
-            if (item instanceof Consumable){
-
-                return new ConsumeAction(item);
+                return new ConsumeAction((Consumable) item);
             }
+
+
         }
         return null;
     }
