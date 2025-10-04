@@ -1,5 +1,14 @@
 package game.actors.animals;
 
+/**
+ * A concrete Wolf type
+ * <p>
+ * Initialized with fixed hitpoints and warmth level.
+ * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
+ */
 public class Wolf extends Animal{
 
     public Wolf(){
