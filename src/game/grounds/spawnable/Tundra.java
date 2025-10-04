@@ -36,6 +36,7 @@ public class Tundra extends Ground {
 
         if (random.nextInt(100) < 5 && !location.containsAnActor()) {
             Animal animal = spawnable.create();
+
             animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
 
             animal.resistanceToWarm = true;
@@ -51,6 +52,6 @@ public class Tundra extends Ground {
 
 
 
-        }
+    }
 
 }

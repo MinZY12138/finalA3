@@ -11,14 +11,15 @@ import java.util.Random;
 public class Cave extends Ground {
 
     private int turns = 0;
-    private final int animalSpawnTurn = 5;
+    final int animalSpawnTurn = 5;
     private final List<Spawnable> spawnable;
     private final Random random = new Random();
 
 
-    public Cave(Spawnable... spawnable){
+    public Cave(List<Spawnable> spawnable)
+    {
         super('C', "Cave");
-        this.spawnable = List.of(spawnable);
+        this.spawnable = spawnable;
 
     }
 

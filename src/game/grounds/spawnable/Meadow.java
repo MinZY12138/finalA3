@@ -11,13 +11,13 @@ import java.util.Random;
 public class Meadow extends Ground {
 
     private int turns = 0;
-    private final int animalSpawnTurn = 7;
+    final int animalSpawnTurn = 7;
     private final List<Spawnable> spawnable;
     private final Random random = new Random();
 
-    public Meadow(Spawnable... spawnable){
+    public Meadow(List<Spawnable> spawnable){
         super('w', "Meadow");
-        this.spawnable = List.of(spawnable);
+        this.spawnable = spawnable;
     }
 
 
@@ -32,9 +32,13 @@ public class Meadow extends Ground {
             Spawnable pickedAnimal = spawnable.get(random.nextInt(spawnable.size()));
             Animal animal = pickedAnimal.create();
 
-            try{
+            try
+            {
                 location.addActor(animal);
-            } catch (GameEngineException e) {
+            }
+
+            catch (GameEngineException e)
+            {
                 throw new RuntimeException(e);
             }
 
