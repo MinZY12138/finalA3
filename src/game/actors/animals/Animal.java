@@ -7,21 +7,36 @@ import edu.monash.fit2099.engine.positions.*;
 import game.behaviours.*;
 
 /**
- * Abstract class representing an animal in the game.
- * Animals have hitpoints and warmth level, which affect their consciousness.
- * They can move randomly (wander) or consume items if available.
- * Implements {@link Warmable} for warmth-related behavior.
+ * <h1>Abstract Class represent Animal</h1>
  *
- * <p>Subclasses should define specific animal types.</p>
+ * <p>
+ *     Subclasses should define specific animal types.
+ *     Animals have hitpoints and warmth level, which affect their consciousness.
+ *     They can move randomly (wander) or consume items if available.
+ *     Implements {@link Warmable} for warmth-related behavior.
+ * </p>
  *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public abstract class Animal extends Actor implements Warmable {
 
+    /**
+     * The map where the animal currently located.
+     */
     private GameMap currentMap;
+
+    /**
+     * The warmth level of the animal
+     */
     private int warmthLevel;
+
+    /**
+     * Check whether the animal resistance to warm
+     */
     public boolean resistanceToWarm;
+
+
     private final WanderBehaviour wanderBehaviour = new WanderBehaviour();
     private final ConsumeBehaviour consumeBehaviour = new ConsumeBehaviour();
 
@@ -52,7 +67,7 @@ public abstract class Animal extends Actor implements Warmable {
     /**
      * Checks if the animal has positive warmth.
      *
-     * @return true if warmthLevel > 0, false otherwise
+     * @return true if warmthLevel <= 0, false otherwise
      */
     @Override
     public boolean isCold(){
@@ -61,11 +76,6 @@ public abstract class Animal extends Actor implements Warmable {
 
     /**
      * Determines the action for the current turn.
-     * <p>
-     * The animal first tries to consume a nearby item.
-     * If no consumable is available, it wanders to a random valid location.
-     * If the animal is dead or too cold, it is removed from the map and does nothing.
-     * </p>
      *
      * @param actions available actions for this turn
      * @param lastAction the previous action taken

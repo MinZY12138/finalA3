@@ -6,9 +6,16 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 
 /**
- * A yew berry class
+ * <h1>Class represent YewBerry</h1>
+ *
+ * <p>
+ *     Represent a YewBerry in this system.
+ * </p>
+ *
+ * Extends from {@link Fruit}
+ *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public class YewBerry extends Fruit implements Consumable
 {

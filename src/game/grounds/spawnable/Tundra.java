@@ -8,9 +8,18 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
-
 import java.util.Random;
 
+/**
+ * <h1>Class represent Tundra </h1>
+ *
+ * <p>
+ *     A type of {@link Ground} that represents a cold Tundra.
+ *     The Tundra can occasionally spawn a specific {@link Animal} with extra resilience
+ *     against warm conditions. Spawn chance is fixed at 5% per tick if the tile
+ *     is unoccupied.
+ * </p>
+ */
 public class Tundra extends Ground {
 
 
@@ -18,6 +27,11 @@ public class Tundra extends Ground {
     private final Random random = new Random();
 
 
+    /**
+     * Constructs a Tundra ground tile with a single {@link Spawnable} animal type.
+     *
+     * @param spawnable the {@link Spawnable} that can appear in this Tundra
+     */
     public Tundra(Spawnable spawnable){
         super('_', "Tundra");
         this.spawnable = spawnable;
@@ -25,8 +39,9 @@ public class Tundra extends Ground {
     }
 
     /**
-     * spawn fruit in random adjacent locations
-     * @param location The location of the Ground
+     * Called once per turn to update the state of this Tundra.
+     *
+     * @param location the location of this Tundra on the map
      */
     @Override
     public void tick(Location location)

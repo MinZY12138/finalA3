@@ -7,17 +7,21 @@ import edu.monash.fit2099.engine.positions.*;
 import game.items.fruits.*;
 
 /**
- * Consume action to consume a consumable item
+ * <h1>Class represent ConsumeAction</h1>
+ *
  * <p>
  * When executed, removes the item from the actor's inventory or the ground
- * and applies the effects defined in the item's {@link Consumable#consume} method.
+ * and applies the effects defined in the item's {@link Consumable consume} method.
  * </p>
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public class ConsumeAction extends Action
 {
 
+    /**
+     * The item used to consume actor
+     */
     public final Consumable item;
 
     /**
@@ -40,13 +44,13 @@ public class ConsumeAction extends Action
      * @param map the game map where the action takes place
      * @return a description of what happened
      */
-
     @Override
     public String execute(Actor actor, GameMap map)
     {
         Location place = map.locationOf(actor);
 
-        if (actor.getItemInventory().contains((Item)item)){
+        if (actor.getItemInventory().contains((Item)item))
+        {
             actor.removeItemFromInventory((Item)item);
         }
         else {

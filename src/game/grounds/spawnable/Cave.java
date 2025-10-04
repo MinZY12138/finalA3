@@ -8,6 +8,20 @@ import game.actors.animals.Spawnable;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * <h1>Class represent Cave</h1>
+ *
+ * <p>
+ *     A type of {@link Ground} that represents a Cave.
+ *     Cave are capable of spawning different {@link Animal}s at random intervals.
+ *     Every {@code animalSpawnTurn} ticks, there is an equal chance that
+ *     a random animal from the {@code spawnable} list will be spawned in this location,
+ *     provided the location does not already contain an actor.
+ * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
+ */
 public class Cave extends Ground {
 
     private int turns = 0;
@@ -16,6 +30,11 @@ public class Cave extends Ground {
     private final Random random = new Random();
 
 
+    /**
+     * Constructs a Cave ground tile with a list of spawnable animals.
+     *
+     * @param spawnable a list of {@link Spawnable} animals that can be spawned
+     */
     public Cave(List<Spawnable> spawnable)
     {
         super('C', "Cave");
@@ -24,7 +43,7 @@ public class Cave extends Ground {
     }
 
     /**
-     * spawn fruit in random adjacent locations
+     * spawn animal in random adjacent locations
      * @param location The location of the Ground
      */
     @Override
