@@ -1,12 +1,18 @@
 package game.actors.animals;
 
-import edu.monash.fit2099.engine.actors.*;
-
+/**
+ * A concrete Bear type
+ * <p>
+ * Initialized with fixed hitpoints and warmth level.
+ * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
+ */
 public class Bear extends Animal {
 
     public Bear(){
         super("Bear", 'b', 100, 50);
-
 
     }
 

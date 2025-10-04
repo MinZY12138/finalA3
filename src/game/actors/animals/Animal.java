@@ -4,9 +4,7 @@ import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
-import edu.monash.fit2099.engine.items.*;
 import game.behaviours.*;
-import java.util.ArrayList;
 
 /**
  * Abstract class representing an animal in the game.
@@ -60,9 +58,6 @@ public abstract class Animal extends Actor implements Warmable {
     public boolean isWarm(){
         return warmthLevel > 0;
     }
-
-
-
 
     /**
      * Determines the action for the current turn.
