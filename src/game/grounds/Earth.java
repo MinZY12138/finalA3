@@ -106,6 +106,7 @@ public class Earth extends World {
         gameMap1.at(0, 9).setGround(new Meadow(List.of(deer)));
         gameMap2.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
 
+
         gameMap2.at(2, 2).setGround(new AppleTree());
         gameMap1.at(2, 2).setGround(new AppleTree());
         gameMap2.at(6, 7).setGround(new HazelnutTree());

@@ -36,7 +36,8 @@ public class Meadow extends SpawnGround {
      * @return 7 ticks
      */
     @Override
-    protected int getAnimalSpawnTurn() {
+    protected int getAnimalSpawnTurn()
+    {
         return 7;
     }
 

@@ -39,7 +39,8 @@ public class Cave extends SpawnGround {
      * @return 5 ticks
      */
     @Override
-    protected int getAnimalSpawnTurn() {
+    protected int getAnimalSpawnTurn()
+    {
         return 5;
     }
 
