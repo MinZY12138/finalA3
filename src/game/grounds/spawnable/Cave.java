@@ -4,7 +4,6 @@ import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 import java.util.List;
 
-
 /**
  * <h1>Class represent Cave</h1>
  *
@@ -21,6 +20,9 @@ import java.util.List;
  */
 public class Cave extends SpawnGround {
 
+    private static final int SPAWN_TURN = 5;
+
+    private static final int SPAWN_CHANCE = 100;
 
     /**
      * Constructs a Cave ground tile with a list of spawnable animals.
@@ -41,7 +43,7 @@ public class Cave extends SpawnGround {
     @Override
     protected int getAnimalSpawnTurn()
     {
-        return 5;
+        return SPAWN_TURN;
     }
 
     /**
@@ -51,7 +53,7 @@ public class Cave extends SpawnGround {
      */
     @Override
     protected int getAnimalSpawnChance() {
-        return 100;
+        return SPAWN_CHANCE;
     }
 
 }

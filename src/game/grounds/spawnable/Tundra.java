@@ -21,6 +21,11 @@ import java.util.List;
  */
 public class Tundra extends SpawnGround {
 
+    private static final int SPAWN_TURN = 1;
+
+    private static final int SPAWN_CHANCE = 5;
+
+    private static final int EXTRA_HEALTH = 10;
 
     /**
      * Constructs a Tundra ground tile with a list of spawnable animals.
@@ -40,7 +45,7 @@ public class Tundra extends SpawnGround {
     @Override
     protected int getAnimalSpawnTurn()
     {
-        return 1;
+        return SPAWN_TURN;
     }
 
     /**
@@ -50,7 +55,7 @@ public class Tundra extends SpawnGround {
      */
     @Override
     protected int getAnimalSpawnChance() {
-        return 5;
+        return SPAWN_CHANCE;
     }
 
     /**
@@ -61,7 +66,7 @@ public class Tundra extends SpawnGround {
     @Override
     protected void setAnimalAction (Animal animal)
     {
-        animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
+        animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
 
         animal.resistanceToWarm = true;
     }
