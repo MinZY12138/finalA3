@@ -19,6 +19,8 @@ import java.util.Random;
  *
  * @author Shee Seng Cheng
  * @version 2.0
+ *
+ * Modified by: Tay Chee Hsian
  */
 public class TeleportationCircle extends TeleGround
 {
@@ -58,6 +60,6 @@ public class TeleportationCircle extends TeleGround
         );
 
         //Burn it
-        placeToBurn.setGround(this.summonFire());
+        burnLocation(placeToBurn);
     }
 }

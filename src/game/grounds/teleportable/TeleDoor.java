@@ -19,6 +19,8 @@ import java.util.List;
  *
  * @author Shee Seng Cheng
  * @version 2.0
+ *
+ * Modified by: Tay Chee Hsian
  */
 public class TeleDoor extends TeleGround
 {
@@ -44,7 +46,7 @@ public class TeleDoor extends TeleGround
         List<Exit> surrounding = destination.getExits();
         for (Exit location : surrounding)
         {
-            location.getDestination().setGround(this.summonFire());
+            burnLocation(location.getDestination());
         }
     }
 }
