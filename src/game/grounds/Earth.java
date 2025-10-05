@@ -80,11 +80,11 @@ public class Earth extends World {
 
         TeleportationCircle teleCircle1 = new TeleportationCircle(
                 List.of(
-                        gameMap1.at(12, 7), gameMap2.at(6, 7)
+                        gameMap1.at(12, 7), gameMap2.at(18, 7)
                 )
         );
-        gameMap1.at(6, 7).setGround(teleCircle1);
-        gameMap2.at(12, 7).setGround(teleCircle1);
+        gameMap1.at(12, 7).setGround(teleCircle1);
+        gameMap2.at(18, 7).setGround(teleCircle1);
 
         TeleportCube cube1 = new TeleportCube(
                 List.of(
