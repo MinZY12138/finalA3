@@ -125,10 +125,13 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public String toString()
     {
+        if (currentMap == null){
+            return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+        }
 
         Location location = currentMap.locationOf(this);
 
-        return "At "+ location + ", " + super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+        return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location ;
     }
 
     /**
