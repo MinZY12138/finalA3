@@ -102,10 +102,10 @@ public class Earth extends World {
         gameMap1.at(8, 9).setGround(new Tundra(bear));
 
         gameMap1.at(0, 0).setGround(new Tundra(wolf));
-        gameMap2.at(0, 5).setGround(new Cave(bear, wolf, deer));
-        gameMap1.at(0, 5).setGround(new Cave(bear, wolf));
-        gameMap2.at(0, 9).setGround(new Meadow(deer));
-        gameMap1.at(0, 9).setGround(new Meadow(deer, wolf));
+        gameMap2.at(0, 5).setGround(new Cave(List.of(bear, wolf, deer)));
+        gameMap1.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
+        gameMap2.at(0, 9).setGround(new Meadow(List.of(deer)));
+        gameMap1.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
 
         gameMap2.at(2, 2).setGround(new AppleTree());
         gameMap1.at(2, 2).setGround(new AppleTree());

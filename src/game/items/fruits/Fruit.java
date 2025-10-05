@@ -7,11 +7,17 @@ import edu.monash.fit2099.engine.actions.*;
 import game.actions.*;
 
 /**
- * An abstract fruit class
+ *
+ * <p>
+ *     Abstract class representing a fruit.
+ *     Fruits are consumable items that can be eaten by actors.
+ *     Provides default {@link #allowableActions} for actors carrying the fruit.
+ * </p>
+ *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
-public abstract class Fruit extends Item
+public abstract class Fruit extends Item implements Consumable
 {
 
     /**
@@ -26,7 +32,16 @@ public abstract class Fruit extends Item
 
     }
 
-
+    /**
+     * Defines the effect of consuming the fruit.
+     *
+     * @param actor actor consuming this fruit
+     * @param map the game map
+     * @return result description of consumption
+     */
+    public String consume(Actor actor, GameMap map) {
+        return "";
+    }
 
     /**
      * provide allowable actions for the fruits
