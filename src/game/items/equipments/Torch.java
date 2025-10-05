@@ -4,10 +4,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.statuses.Burning;
 import game.actors.statuses.ContinuousDamage;
 import game.capabilities.SummonFire;
-import game.grounds.Fire;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ import java.util.List;
  * <p>
  * The {@code Torch} is a {@link LootWeapon}.
  * When actors use it to attack others, it has a chance to cause target actors to
- * {@link Burning} and spawns the {@link Fire} surrounding the target actor.
+ * burning and spawns the fire surrounding the target actor.
  * </p>
  *
  * @author Tay Chee Hsian

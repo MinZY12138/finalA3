@@ -65,7 +65,9 @@ public abstract class LootWeapon extends Item implements Weapon {
      */
     @Override
     public final String attack(Actor attacker, Actor target, GameMap map) {
-        if (!(RAND.nextInt(100) <= this.getHitRate())) {
+        int maximumBound = 100;
+
+        if (!(RAND.nextInt(maximumBound) <= this.getHitRate())) {
             return attacker + " misses " + target + ".";
         }
 
