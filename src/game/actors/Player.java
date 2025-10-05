@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.actors.abilities.Abilities;
 import game.actors.animals.Warmable;
 import game.weapons.BareFist;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * Class representing the Player.
  *
  * @author Adrian Kristanto
- * {@code @modifiedBy}  Ng Jun Jie
+ * {@code @modifiedBy}  Ng Jun Jie, Shee Seng Cheng
  * @version 2.0
  */
 public class Player extends Actor implements Warmable {
@@ -34,7 +35,7 @@ public class Player extends Actor implements Warmable {
         super(name, displayChar, hitPoints);
         this.warmthLevel = warmthLevel;
         this.setIntrinsicWeapon(new BareFist());
-
+        this.enableAbility(Abilities.ATTACK);
     }
 
     /**

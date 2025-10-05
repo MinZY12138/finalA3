@@ -4,7 +4,10 @@ import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
+import game.actions.AttackAction;
+import game.actors.abilities.Abilities;
 import game.behaviours.*;
+
 
 /**
  * <h1>Abstract Class represent Animal</h1>
@@ -18,6 +21,8 @@ import game.behaviours.*;
  *
  * @author Ng Jun Jie
  * @version 2.0
+ *
+ * Modify by: Shee Seng Cheng
  */
 public abstract class Animal extends Actor implements Warmable {
 
@@ -124,7 +129,28 @@ public abstract class Animal extends Actor implements Warmable {
         Location location = currentMap.locationOf(this);
 
         return "At "+ location + ", " + super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+    }
 
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to the
+     * current Actor.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map)
+    {
+        ActionList actionList = super.allowableActions(otherActor, direction, map);
 
+        if (otherActor.hasAbility(Abilities.ATTACK))
+        {
+            //Game rule actor can be attack by other actor using weapon.
+            actionList.add(new AttackAction(this, direction,
+                    "will hit", otherActor.getIntrinsicWeapon()));
+        }
+        return actionList;
     }
 }
