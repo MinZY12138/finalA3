@@ -1,72 +1,68 @@
 package game.grounds.spawnable;
 
-
-import edu.monash.fit2099.engine.GameEngineException;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperation;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
-import java.util.Random;
+import java.util.List;
 
 /**
  * <h1>Class represent Tundra </h1>
  *
  * <p>
- *     A type of {@link Ground} that represents a cold Tundra.
+ *     A type of {@link SpawnGround} that represents a Tundra.
  *     The Tundra can occasionally spawn a specific {@link Animal} with extra resilience
  *     against warm conditions. Spawn chance is fixed at 5% per tick if the tile
  *     is unoccupied.
  * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
  */
-public class Tundra extends Ground {
-
-
-    private final Spawnable spawnable;
-    private final Random random = new Random();
+public class Tundra extends SpawnGround {
 
 
     /**
-     * Constructs a Tundra ground tile with a single {@link Spawnable} animal type.
+     * Constructs a Tundra ground tile with a list of spawnable animals.
      *
-     * @param spawnable the {@link Spawnable} that can appear in this Tundra
+     * @param spawnable a list of {@link Spawnable} animals that can be spawned
      */
-    public Tundra(Spawnable spawnable){
-        super('_', "Tundra");
-        this.spawnable = spawnable;
+    public Tundra(List<Spawnable> spawnable){
+        super('_', "Tundra", spawnable);
 
     }
 
     /**
-     * Called once per turn to update the state of this Tundra.
+     * Specifies the number of ticks between spawn attempts.
      *
-     * @param location the location of this Tundra on the map
+     * @return 1 tick
      */
     @Override
-    public void tick(Location location)
+    protected int getAnimalSpawnTurn() {
+        return 1;
+    }
+
+    /**
+     * Specifies the spawn success chance.
+     *
+     * @return 5
+     */
+    @Override
+    protected int getAnimalSpawnChance() {
+        return 5;
+    }
+
+    /**
+     * Applies modifications to spawned animals.
+     *
+     * @param animal the {@link Animal} to modify
+     */
+    @Override
+    protected void setAnimalAction (Animal animal)
     {
+        animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
 
-        super.tick(location);
-
-        if (random.nextInt(100) < 5 && !location.containsAnActor()) {
-            Animal animal = spawnable.create();
-
-            animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
-
-            animal.resistanceToWarm = true;
-            try {
-                location.addActor(animal);
-            } catch (GameEngineException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-
-
-
-
-
+        animal.resistanceToWarm = true;
     }
 
 }

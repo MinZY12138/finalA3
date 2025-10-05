@@ -4,10 +4,9 @@ package game.actors.animals;
  * <h1>Interface Spawnable</h1>
  *
  * <p>
- *     Represents a contract for objects that can spawn {@link Animal} instances.
+ *     Represents a contract for objects that can spawn {@link Animal}.
  *     Classes implementing this interface act as factories, providing a way
- *     to create new {@link Animal} objects (e.g., for spawning animals in
- *     specific environments such as {@code Meadow} or {@code Tundra}).
+ *     to create new {@link Animal} objects
  * </p>
  *
  * @author Ng Jun Jie

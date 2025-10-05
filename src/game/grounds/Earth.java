@@ -99,13 +99,12 @@ public class Earth extends World {
         Spawnable deer = Deer::new;
         Spawnable wolf = Wolf::new;
 
-        gameMap1.at(8, 9).setGround(new Tundra(bear));
-
-        gameMap1.at(0, 0).setGround(new Tundra(wolf));
-        gameMap2.at(0, 5).setGround(new Cave(List.of(bear, wolf, deer)));
-        gameMap1.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
-        gameMap2.at(0, 9).setGround(new Meadow(List.of(deer)));
-        gameMap1.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
+        gameMap1.at(8, 9).setGround(new Tundra(List.of(bear)));
+        gameMap2.at(0, 0).setGround(new Tundra(List.of(wolf)));
+        gameMap1.at(0, 5).setGround(new Cave(List.of(bear, wolf, deer)));
+        gameMap2.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
+        gameMap1.at(0, 9).setGround(new Meadow(List.of(deer)));
+        gameMap2.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
 
         gameMap2.at(2, 2).setGround(new AppleTree());
         gameMap1.at(2, 2).setGround(new AppleTree());
