@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
+import game.actors.statuses.ContinuousDamage;
+import game.capabilities.SummonFire;
 import game.grounds.Fire;
 
 import java.util.List;
@@ -20,23 +22,25 @@ import java.util.List;
  * @author Tay Chee Hsian
  * @version 2.0.1
  * @since 2025-09-24
+ *
+ * Modified by: Shee Seng Cheng
  */
-public class Torch extends LootWeapon {
+public class Torch extends LootWeapon implements SummonFire {
 
     /**
      * Defining status attributes.
      */
-    private final StatusType STATUS;
+    private final StatusType EFFECT;
 
     /**
      * The constructor of the Torch class.
      *
      * @param type   defining damage, hit rate, and verb
-     * @param status defining burning damage and duration
+     * @param effect defining burning damage and duration
      */
-    public Torch(WeaponType type, StatusType status) {
+    public Torch(WeaponType type, StatusType effect) {
         super("Torch", 'y', true, type);
-        this.STATUS = status;
+        this.EFFECT = effect;
     }
 
     /**
@@ -48,7 +52,12 @@ public class Torch extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        target.addStatus(new Burning(target, STATUS.getDAMAGE(), STATUS.getDURATION()));
+        ContinuousDamage status = EFFECT.createStatus(target);
+
+        if (status != null) {
+            target.addStatus(status);
+        }
+
         burnSurrounding(map.locationOf(target));
     }
 
@@ -61,7 +70,7 @@ public class Torch extends LootWeapon {
         List<Exit> surrounding = location.getExits();
 
         for (Exit place : surrounding) {
-            place.getDestination().setGround(new Fire());
+            burnLocation(place.getDestination());
         }
     }
 }

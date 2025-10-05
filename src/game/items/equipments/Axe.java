@@ -3,6 +3,7 @@ package game.items.equipments;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.statuses.Bleeding;
+import game.actors.statuses.ContinuousDamage;
 
 /**
  * <h1>Axe class</h1>
@@ -20,7 +21,7 @@ public class Axe extends LootWeapon {
     /**
      * Defining status attributes.
      */
-    private final StatusType STATUS;
+    private final StatusType EFFECT;
 
     /**
      * Chance to make the target bleed.
@@ -31,11 +32,11 @@ public class Axe extends LootWeapon {
      * The constructor of the Axe class.
      *
      * @param type   defining damage, hit rate, and verb
-     * @param status defining bleeding damage and duration
+     * @param effect defining bleeding damage and duration
      */
-    public Axe(WeaponType type, StatusType status) {
+    public Axe(WeaponType type, StatusType effect) {
         super("Axe", 'p', true, type);
-        this.STATUS = status;
+        this.EFFECT = effect;
     }
 
     /**
@@ -48,7 +49,10 @@ public class Axe extends LootWeapon {
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
         if (RAND.nextInt(100) <= CHANCE) {
-            target.addStatus(new Bleeding(target, STATUS.getDAMAGE(), STATUS.getDURATION()));
+            ContinuousDamage status = EFFECT.createStatus(target);
+            if (status != null) {
+                target.addStatus(status);
+            }
         }
     }
 }
