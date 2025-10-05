@@ -22,9 +22,7 @@ import java.util.List;
 public class Tundra extends SpawnGround {
 
     private static final int SPAWN_TURN = 1;
-
     private static final int SPAWN_CHANCE = 5;
-
     private static final int EXTRA_HEALTH = 10;
 
     /**

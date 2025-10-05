@@ -21,7 +21,6 @@ import java.util.List;
 public class Cave extends SpawnGround {
 
     private static final int SPAWN_TURN = 5;
-
     private static final int SPAWN_CHANCE = 100;
 
     /**

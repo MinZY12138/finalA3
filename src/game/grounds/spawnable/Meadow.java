@@ -21,7 +21,6 @@ import java.util.List;
 public class Meadow extends SpawnGround {
 
     private static final int SPAWN_TURN = 7;
-
     private static final int SPAWN_CHANCE = 10;
 
     /**
