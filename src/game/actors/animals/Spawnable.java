@@ -12,7 +12,8 @@ package game.actors.animals;
  * @author Ng Jun Jie
  * @version 1.0
  */
-public interface Spawnable {
+public interface Spawnable
+{
     /**
      * Creates a new animal instance.
      *

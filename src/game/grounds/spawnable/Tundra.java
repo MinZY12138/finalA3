@@ -38,7 +38,8 @@ public class Tundra extends SpawnGround {
      * @return 1 tick
      */
     @Override
-    protected int getAnimalSpawnTurn() {
+    protected int getAnimalSpawnTurn()
+    {
         return 1;
     }
 

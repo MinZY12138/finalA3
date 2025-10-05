@@ -12,24 +12,9 @@ import java.util.Random;
  * <h1>Abstract Class SpawnGround</h1>
  *
  * <p>
- * Represents a type of {@link Ground} capable of spawning {@link Animal}s.
- * Subclasses such as {@link Cave}, {@code Meadow}, or {@code Tundra} define
- * the spawn rate and conditions by implementing the abstract methods
+ * Represents a type of {@link Ground} capable of spawning {@link Animal}.
+ * Subclasses define the spawn rate and conditions by implementing the abstract methods
  * {@link #getAnimalSpawnTurn()} and {@link #getAnimalSpawnChance()}.
- * </p>
- *
- * <p>
- * Every fixed number of ticks (based on {@code getAnimalSpawnTurn()}),
- * the ground attempts to spawn a random {@link Animal} from the provided
- * {@link Spawnable} list with a probability determined by
- * {@code getAnimalSpawnChance()}. If successful, the {@link Animal} is
- * created and added to the {@link Location}.
- * </p>
- *
- * <p>
- * This class provides a hook method {@link #setAnimalAction(Animal)}
- * for subclasses to customise animal attributes or behaviours before
- * being added to the map.
  * </p>
  *
  * @author Ng Jun Jie
