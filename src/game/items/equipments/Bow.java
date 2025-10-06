@@ -31,8 +31,8 @@ public class Bow extends LootWeapon {
      *
      * @param type defining damage, hit rate, and verb
      */
-    public Bow(WeaponType type) {
-        super("Bow", 'c', true, type);
+    public Bow(WeaponType type, StatusType effect) {
+        super("Bow", 'c', true, type, effect);
     }
 
     /**
@@ -51,10 +51,23 @@ public class Bow extends LootWeapon {
             if (location.containsAnActor()) {
                 actions.add(new AttackAction(location.getActor(), location.toString(),
                         this.getVerb(), this));
-                return actions;
             }
         }
 
+        return actions;
+    }
+
+    /**
+     * Clear all actions that inherit from the superclass.
+     *
+     * @param otherActor the other actor
+     * @param location   the location of the other actor
+     * @return a list of actions
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actions = super.allowableActions(otherActor, location);
+        actions.clear();
         return actions;
     }
 }

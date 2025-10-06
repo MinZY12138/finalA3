@@ -18,11 +18,6 @@ import game.actors.statuses.ContinuousDamage;
 public class Axe extends LootWeapon {
 
     /**
-     * Defining status attributes.
-     */
-    private final StatusType EFFECT;
-
-    /**
      * Chance to make the target bleed.
      */
     private static final int CHANCE = 50;
@@ -34,8 +29,7 @@ public class Axe extends LootWeapon {
      * @param effect defining bleeding damage and duration
      */
     public Axe(WeaponType type, StatusType effect) {
-        super("Axe", 'p', true, type);
-        this.EFFECT = effect;
+        super("Axe", 'p', true, type, effect);
     }
 
     /**

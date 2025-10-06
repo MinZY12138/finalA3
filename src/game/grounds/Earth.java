@@ -125,7 +125,9 @@ public class Earth extends World {
         Torch torch = new Torch(WeaponType.TORCH, StatusType.BURNING);
         location2.addItem(torch);
 
-        Bow bow = new Bow(WeaponType.BOW);
+        Bow bow = new Bow(WeaponType.BOW, null);
         location3.addItem(bow);
+
+        player.addItemToInventory(bow);
     }
 }
