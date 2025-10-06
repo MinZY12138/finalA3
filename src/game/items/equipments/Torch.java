@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
 import game.grounds.Fire;
-import game.items.equipments.coat.Coating;
+import game.items.coat.Coating;
 
 import java.util.List;
 

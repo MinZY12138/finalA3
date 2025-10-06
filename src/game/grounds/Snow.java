@@ -6,8 +6,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.CoatWeaponAction;
-import game.items.equipments.coat.Coatable;
-import game.items.equipments.coat.SnowCoating;
+import game.items.coat.Coatable;
+import game.items.coat.SnowCoating;
 
 /**
  * A class representing snow on the ground.

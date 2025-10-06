@@ -1,4 +1,4 @@
-package game.items.equipments.coat;
+package game.items.coat;
 
 /**
  * <h1>Interface represents Coatable</h1>

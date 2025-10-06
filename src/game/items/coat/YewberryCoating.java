@@ -1,4 +1,4 @@
-package game.items.equipments.coat;
+package game.items.coat;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;

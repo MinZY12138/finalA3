@@ -1,4 +1,4 @@
-package game.items.equipments.coat;
+package game.items.coat;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * <h1>Interface represents Coating</h1>
  *
  * <p>
- * Represents an effect that can be applied to a {@link game.items.equipments.coat.Coatable} weapon.
+ * Represents an effect that can be applied to a {@link game.items.coat.Coatable} weapon.
  * When the coated weapon successfully hits a target, the {@link #applyOnHit(Actor, Actor, GameMap)}
  * method defines what happens (e.g., apply poison or frostbite effects).
  * </p>

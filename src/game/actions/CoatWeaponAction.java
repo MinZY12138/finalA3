@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.equipments.coat.Coatable;
-import game.items.equipments.coat.Coating;
+import game.items.coat.Coatable;
+import game.items.coat.Coating;
 
 /**
  * <h1>Class represents CoatWeaponAction</h1>

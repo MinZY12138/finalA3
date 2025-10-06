@@ -6,8 +6,8 @@ import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.CoatWeaponAction;
-import game.items.equipments.coat.Coatable;
-import game.items.equipments.coat.YewberryCoating;
+import game.items.coat.Coatable;
+import game.items.coat.YewberryCoating;
 
 
 /**
