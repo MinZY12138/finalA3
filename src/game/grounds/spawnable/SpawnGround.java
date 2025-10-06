@@ -35,7 +35,8 @@ public abstract class SpawnGround extends Ground {
      * @param name the name of this ground
      * @param spawnable a list of {@link Spawnable} animals that may be spawned
      */
-    public SpawnGround(char displayChar, String name, List<Spawnable> spawnable) {
+    public SpawnGround(char displayChar, String name, List<Spawnable> spawnable)
+    {
         super(displayChar, name);
         this.spawnable = spawnable;
     }
