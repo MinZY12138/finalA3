@@ -127,5 +127,7 @@ public class Earth extends World {
 
         Bow bow = new Bow(WeaponType.BOW, null);
         location3.addItem(bow);
+
+        player.addItemToInventory(bow);
     }
 }
