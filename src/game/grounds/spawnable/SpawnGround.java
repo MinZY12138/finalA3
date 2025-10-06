@@ -25,6 +25,8 @@ public abstract class SpawnGround extends Ground {
     private final List<Spawnable> spawnable;
     private int turns = 0;
     private final Random random = new Random();
+    private static final int RANDOM_RANGE = 100;
+    private static final int FACTOR_NUMBER = 0;
 
     /**
      * Constructor for SpawnGround.
@@ -71,8 +73,8 @@ public abstract class SpawnGround extends Ground {
         turns++;
         super.tick(location);
 
-        if (turns % getAnimalSpawnTurn() == 0 && !location.containsAnActor()
-        && random.nextInt(100) < getAnimalSpawnChance())
+        if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
+        && random.nextInt(RANDOM_RANGE) < getAnimalSpawnChance())
         {
             Spawnable pickedAnimal = spawnable.get(random.nextInt(spawnable.size()));
             Animal animal = pickedAnimal.create();
