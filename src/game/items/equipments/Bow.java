@@ -31,8 +31,8 @@ public class Bow extends LootWeapon {
      *
      * @param type defining damage, hit rate, and verb
      */
-    public Bow(WeaponType type) {
-        super("Bow", 'c', true, type);
+    public Bow(WeaponType type, StatusType effect) {
+        super("Bow", 'c', true, type, effect);
     }
 
     /**

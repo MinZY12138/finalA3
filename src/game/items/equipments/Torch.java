@@ -26,19 +26,13 @@ import java.util.List;
 public class Torch extends LootWeapon implements SummonFire {
 
     /**
-     * Defining status attributes.
-     */
-    private final StatusType EFFECT;
-
-    /**
      * The constructor of the Torch class.
      *
      * @param type   defining damage, hit rate, and verb
      * @param effect defining burning damage and duration
      */
     public Torch(WeaponType type, StatusType effect) {
-        super("Torch", 'y', true, type);
-        this.EFFECT = effect;
+        super("Torch", 'y', true, type, effect);
     }
 
     /**

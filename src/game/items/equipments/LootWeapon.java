@@ -28,21 +28,29 @@ public abstract class LootWeapon extends Item implements Weapon {
     protected final WeaponType TYPE;
 
     /**
+     * Defining weapon status.
+     */
+    protected final StatusType EFFECT;
+
+    /**
      * A random object.
      */
     protected static final Random RAND = new Random();
 
     /**
-     * The constructor of LoopWeapon class.
+     * The constructor of the LootWeapon class.
      *
-     * @param name        the weapon name
-     * @param displayChar the symbol represents a weapon on the game map
-     * @param portable    weapon portability
-     * @param type        the configuration of weapons
+     * @param name        the name of a weapon
+     * @param displayChar the symbol of the weapon
+     * @param portable    determine if a weapon is portable
+     * @param type        the basic attributes of a weapon
+     * @param effect      the status of a weapon
      */
-    public LootWeapon(String name, char displayChar, boolean portable, WeaponType type) {
+    public LootWeapon(String name, char displayChar, boolean portable, WeaponType type,
+                      StatusType effect) {
         super(name, displayChar, portable);
         this.TYPE = type;
+        this.EFFECT = effect;
     }
 
     /**
