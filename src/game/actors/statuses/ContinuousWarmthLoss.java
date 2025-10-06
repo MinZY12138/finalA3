@@ -6,26 +6,49 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Warmable;
 
 /**
- * Represents a continuous status that reduces the warmth level of an actor
- * for a fixed duration. Mirrors ContinuousDamage but targets warmth instead of HP.
+ * <h1>Class represents ContinuousWarmthLoss</h1>
+ *
+ * <p>
+ * Represents a continuous status effect that decreases the warmth level
+ * of a {@link Warmable} actor each turn for a fixed duration.
+ * This is similar to continuous damage but affects warmth instead of HP.
+ * </p>
+ *
+ * <p>
+ * Implements {@link Status}.
+ * </p>
+ *
+ * @author Min Zhengyuan
+ * @version 1.0
  */
 public abstract class ContinuousWarmthLoss implements Status {
 
-    /** Number of turns this status will remain active. */
+    /**
+     * Number of turns this status remains active.
+     */
     private int duration;
 
-    /** The Warmable target affected by this status. */
+    /**
+     * The Warmable target affected by this status.
+     */
     private final Warmable TARGET;
 
+    /**
+     * Indicates when the effect ends.
+     */
     private static final int END = 0;
 
-    /** Message verb for logging (e.g., "is frostbitten"). */
+    /**
+     * Message verb used for displaying log messages (e.g., "is frostbitten").
+     */
     private final String VERB;
 
     /**
-     * @param target    the Warmable target affected
-     * @param duration  number of turns this status lasts
-     * @param verb      message verb to describe the status
+     * Constructor for ContinuousWarmthLoss.
+     *
+     * @param target   The Warmable target affected.
+     * @param duration The number of turns this status lasts.
+     * @param verb     The descriptive verb to show when status is active.
      */
     public ContinuousWarmthLoss(Warmable target, int duration, String verb) {
         this.TARGET = target;
@@ -34,22 +57,35 @@ public abstract class ContinuousWarmthLoss implements Status {
     }
 
     /**
-     * Called once per tick to update the status.
-     * Reduces warmth and decrements duration.
+     * Perform warmth reduction each turn and decrease the remaining duration.
+     *
+     * @param currEntity The entity currently holding this status.
+     * @param location   The location of the entity.
      */
     @Override
     public void tickStatus(GameEntity currEntity, Location location) {
-        TARGET.decreaseWarmthLevel();  // always decrease by 1
+        TARGET.decreaseWarmthLevel();
         duration--;
     }
 
+    /**
+     * Check whether the status effect is still active.
+     *
+     * @return True if the duration is greater than 0, false otherwise.
+     */
     @Override
     public boolean isStatusActive() {
         return duration != END;
     }
 
+    /**
+     * Return a readable representation of the status.
+     *
+     * @return A string describing the current status effect.
+     */
     @Override
     public String toString() {
         return TARGET + " " + VERB + ".";
     }
 }
+
