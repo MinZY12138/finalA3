@@ -8,26 +8,48 @@ import game.items.equipments.coat.Coatable;
 import game.items.equipments.coat.Coating;
 
 /**
- * Action to coat a weapon with a specific coating.
+ * <h1>Class represents CoatWeaponAction</h1>
+ *
  * <p>
- * Design:
- * - The caller supplies the exact {@link Coating} to apply.
- * - If a consumable item is provided, it will be removed from the actor's inventory.
- * - This avoids any instanceof checks and keeps mapping "item -> coating" outside this class.
+ * Represents an action that allows an {@link Actor} to apply a {@link Coating}
+ * to a {@link Coatable} weapon. The coating can come from either a consumable item
+ * (e.g., Yewberry) or an environmental source (e.g., Snow).
+ * </p>
+ *
+ * <p>
+ * Extends {@link Action}
+ * </p>
+ *
+ * @author Zhengyuan Min
+ * @version 1.0
  */
 public class CoatWeaponAction extends Action {
 
-    private final Coatable weapon;     // weapon to be coated (e.g., Axe, Bow)
-    private final Coating coating;     // the coating to apply (e.g., YewberryCoating, SnowCoating)
-    private final Item consumedItem;   // optional: item to consume (e.g., Yewberry). null means no consumption.
+    /**
+     * The weapon to be coated.
+     */
+    private final Coatable weapon;
 
     /**
-     * Create an action to coat a weapon using a consumable item (e.g., Yewberry).
-     * The item will be removed from the actor's inventory if the action succeeds.
+     * The coating to be applied on the weapon.
+     */
+    private final Coating coating;
+
+    /**
+     * The consumable item that provides the coating.
+     * If null, this action does not consume any item.
+     */
+    private final Item consumedItem;
+
+    /**
+     * Constructor for CoatWeaponAction.
+     * <p>
+     * Used when the coating is applied using a consumable item.
+     * </p>
      *
-     * @param weapon       the weapon to coat
-     * @param coating      the coating to apply
-     * @param consumedItem the item to consume (removed from inventory)
+     * @param weapon       The weapon to be coated.
+     * @param coating      The coating to apply.
+     * @param consumedItem The consumable item used for coating.
      */
     public CoatWeaponAction(Coatable weapon, Coating coating, Item consumedItem) {
         this.weapon = weapon;
@@ -36,35 +58,50 @@ public class CoatWeaponAction extends Action {
     }
 
     /**
-     * Create an action to coat a weapon from a ground source (e.g., Snow).
+     * Constructor for CoatWeaponAction.
+     * <p>
+     * Used when the coating is applied from a ground source (e.g., Snow).
      * No item will be consumed.
+     * </p>
      *
-     * @param weapon  the weapon to coat
-     * @param coating the coating to apply
+     * @param weapon  The weapon to be coated.
+     * @param coating The coating to apply.
      */
     public CoatWeaponAction(Coatable weapon, Coating coating) {
         this(weapon, coating, null);
     }
 
+    /**
+     * Perform the coating action.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a description of the coating action.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Apply/replace coating
+        // Apply or replace the coating on the weapon
         weapon.setCoating(coating);
 
-        // Consume inventory item if provided
+        // Remove the consumable item from inventory if provided
         if (consumedItem != null) {
             actor.removeItemFromInventory(consumedItem);
         }
 
-        // Build a readable message.
-        // All your coatable weapons extend Item (LootWeapon), so this cast is valid in your project.
         String weaponName = ((Item) weapon).toString();
         return actor + " coats " + weaponName + " with " + coating.name();
     }
 
+    /**
+     * Describe what action will be performed if this Action is chosen in the menu.
+     *
+     * @param actor The actor performing the action.
+     * @return The description to be displayed on the menu.
+     */
     @Override
     public String menuDescription(Actor actor) {
         String weaponName = ((Item) weapon).toString();
         return "Coat " + weaponName + " with " + coating.name();
     }
 }
+
