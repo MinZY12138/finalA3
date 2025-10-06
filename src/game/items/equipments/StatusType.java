@@ -12,7 +12,7 @@ import game.actors.statuses.ContinuousDamage;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 2.0.0
  * @since 2025-10-03
  */
 public enum StatusType {
@@ -20,12 +20,12 @@ public enum StatusType {
     /**
      * Burning status effect.
      */
-    BURNING(Burning.class,3, 7),
+    BURNING(Burning.class, 3, 7),
 
     /**
      * Bleeding status effect.
      */
-    BLEEDING(Bleeding.class,10, 2);
+    BLEEDING(Bleeding.class, 10, 2);
 
     /**
      * The damage caused by the status effect.
@@ -37,12 +37,15 @@ public enum StatusType {
      */
     private final int DURATION;
 
+    /**
+     * The status applies to the target actor.
+     */
     private final Class<? extends ContinuousDamage> STATUS;
 
     /**
      * The constructor of the StatusType enum.
      *
-     * @param damage the damage caused by the status effect
+     * @param damage   the damage caused by the status effect
      * @param duration the duration of the status effect
      */
     StatusType(Class<? extends ContinuousDamage> status, int damage, int duration) {
@@ -69,6 +72,13 @@ public enum StatusType {
         return DURATION;
     }
 
+    /**
+     * Create a new status effect based on different weapon.
+     *
+     * @param target the actor that the status effect will be applied to
+     * @return a new status object representing the status effect for the given target or null
+     * if the instantiation fails
+     */
     public ContinuousDamage createStatus(Actor target) {
         try {
             return STATUS.getConstructor(Actor.class, int.class, int.class)
