@@ -42,11 +42,17 @@ public class YewBerry extends Fruit implements Consumable
         return ", died ";
     }
 
+    /**
+     * Return all allowable actions for this item.
+     * <p>
+     * Adds a {@link CoatWeaponAction} for each coatable weapon
+     * in the owner's inventory using {@link YewberryCoating}.
+     * </p>
+     */
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
         ActionList actions = super.allowableActions(owner, map);
 
-        // Add a coat action for each coatable weapon in the inventory
         for (Item it : owner.getItemInventory()) {
             it.asCapability(Coatable.class).ifPresent(weapon -> {
                 actions.add(new CoatWeaponAction(weapon, new YewberryCoating(), this));
@@ -54,6 +60,7 @@ public class YewBerry extends Fruit implements Consumable
         }
         return actions;
     }
+
 
 
 

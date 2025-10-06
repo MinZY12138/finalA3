@@ -81,14 +81,28 @@ public class Torch extends LootWeapon {
         }
     }
 
+    /**
+     * Set coating on the torch.
+     * <p>
+     * Torch cannot be coated, so this method does nothing.
+     * </p>
+     *
+     * @param coating The coating to be applied (ignored).
+     */
     @Override
     public void setCoating(Coating coating) {
-        // Torch cannot be coated, do nothing
     }
 
+    /**
+     * Get the current coating of the torch.
+     * <p>
+     * Torch never has a coating, always returns {@code null}.
+     * </p>
+     *
+     * @return {@code null}, since torch cannot be coated.
+     */
     @Override
     public Coating getCoating() {
-        return null; // Torch never has coating
+        return null;
     }
-
 }

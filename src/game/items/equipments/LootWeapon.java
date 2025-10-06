@@ -116,23 +116,39 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable{
         return actions;
     }
 
-    // ===== Implementation of Coatable =====
-
+    /**
+     * Get the current coating applied to this weapon.
+     *
+     * @return The current {@link Coating}, or {@code null} if none.
+     */
     @Override
     public Coating getCoating() {
         return coating;
     }
 
+    /**
+     * Apply (or replace) the coating on this weapon.
+     *
+     * @param coating The {@link Coating} to set; may overwrite an existing one.
+     */
     @Override
     public void setCoating(Coating coating) {
         this.coating = coating;
     }
 
+    /**
+     * Remove the current coating from this weapon.
+     */
     @Override
     public void clearCoating() {
         this.coating = null;
     }
 
+    /**
+     * Get the display name including coating info if present.
+     *
+     * @return {@code "<baseName> [<coating>]" } when coated; otherwise {@code toString()}.
+     */
     @Override
     public String coatedName() {
         if (coating != null) {
