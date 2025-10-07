@@ -56,7 +56,7 @@ public class SnowCoating implements Coating {
             return;
         }
 
-        // Apply frostbite if target exposes Warmable capability (no instanceof used)
+        // Apply frostbite if target exposes Warmable capability
         target.asCapability(Warmable.class).ifPresent(warmable -> {
             target.addStatus(new Frosting(warmable, 3));
         });
