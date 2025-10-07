@@ -11,5 +11,6 @@ package game.actors.abilities;
  */
 public enum Abilities
 {
-    ATTACK
+    ATTACK,
+    COLD_RESISTANT
 }

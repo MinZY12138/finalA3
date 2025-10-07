@@ -65,4 +65,17 @@ public class Torch extends LootWeapon implements SummonFire {
             burnLocation(place.getDestination());
         }
     }
+    /**
+     * Torch cannot be coated.
+     * <p>
+     * Overrides the default coating behavior to disable coating capability.
+     * </p>
+     *
+     * @return {@code false}, since Torch does not support coatings.
+     */
+    @Override
+    public boolean isCoatable() {
+        return false;
+    }
+
 }

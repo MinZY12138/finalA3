@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
+import game.items.coat.Coatable;
+import game.items.coat.Coating;
 
 import java.util.Random;
 
@@ -20,7 +22,7 @@ import java.util.Random;
  * @version 2.0.1
  * @since 2025-09-24
  */
-public abstract class LootWeapon extends Item implements Weapon {
+public abstract class LootWeapon extends Item implements Weapon, Coatable {
 
     /**
      * Defining weapon attributes.
@@ -36,6 +38,11 @@ public abstract class LootWeapon extends Item implements Weapon {
      * A random object.
      */
     protected static final Random RAND = new Random();
+
+    /**
+     * Current coating applied to this weapon (if any).
+     */
+    private Coating coating;
 
     /**
      * The constructor of the LootWeapon class.
@@ -81,6 +88,11 @@ public abstract class LootWeapon extends Item implements Weapon {
 
         target.hurt(this.getDamage());
         this.hit(attacker, target, map);
+
+        if (this.isCoatable() && this.getCoating() != null) {
+            this.getCoating().applyOnHit(attacker, target, map);
+        }
+
         return String.format("%s %s %s for %d damage",
                 attacker, this.getVerb(), target, this.getDamage());
     }
@@ -125,4 +137,38 @@ public abstract class LootWeapon extends Item implements Weapon {
     public String getVerb() {
         return TYPE.getVERB();
     }
+
+    /* ========================
+       REQ4: Coatable methods
+       ======================== */
+
+    @Override
+    public Coating getCoating() {
+        return coating;
+    }
+
+    @Override
+    public void setCoating(Coating coating) {
+        this.coating = coating; // replace existing coating if any
+    }
+
+    @Override
+    public void clearCoating() {
+        this.coating = null;
+    }
+
+    @Override
+    public String coatedName() {
+        return (coating == null) ? this.toString() : (this + " [" + coating.name() + "]");
+    }
+
+    /**
+     * Whether this weapon supports coating.
+     * Torch should override this to return {@code false}.
+     */
+    @Override
+    public boolean isCoatable() {
+        return true;
+    }
 }
+
