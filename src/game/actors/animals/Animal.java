@@ -17,15 +17,15 @@ import java.util.TreeMap;
  * <h1>Abstract Class represent Animal</h1>
  *
  * <p>
- *     Subclasses should define specific animal types.
- *     Animals have hitpoints and warmth level, which affect their consciousness.
- *     They can move randomly (wander) or consume items if available.
- *     Implements {@link Warmable} for warmth-related behavior.
+ * Subclasses should define specific animal types.
+ * Animals have hitpoints and warmth level, which affect their consciousness.
+ * They can move randomly (wander) or consume items if available.
+ * Implements {@link Warmable} for warmth-related behavior.
  * </p>
  *
  * @author Ng Jun Jie
  * @version 2.0
- *
+ * <p>
  * Modify by: Shee Seng Cheng
  */
 public abstract class Animal extends Actor implements Warmable {
@@ -50,13 +50,12 @@ public abstract class Animal extends Actor implements Warmable {
     /**
      * Constructor for an animal.
      *
-     * @param name the animal's name
+     * @param name        the animal's name
      * @param displayChar character representing the animal
-     * @param hitpoints initial hit points
+     * @param hitpoints   initial hit points
      * @param warmthLevel initial warmth level
      */
-    public Animal(String name, char displayChar, int hitpoints, int warmthLevel)
-    {
+    public Animal(String name, char displayChar, int hitpoints, int warmthLevel) {
         super(name, displayChar, hitpoints);
         this.warmthLevel = warmthLevel;
         this.resistanceToWarm = false;
@@ -71,9 +70,10 @@ public abstract class Animal extends Actor implements Warmable {
      * Decreases the warmth level by 1.
      */
     @Override
-    public void decreaseWarmthLevel()
-    {
-        this.warmthLevel --;
+    public void decreaseWarmthLevel() {
+        if (!resistanceToWarm) {
+            this.warmthLevel--;
+        }
     }
 
     /**
@@ -82,27 +82,24 @@ public abstract class Animal extends Actor implements Warmable {
      * @return true if warmthLevel <= 0, false otherwise
      */
     @Override
-    public boolean isCold(){
+    public boolean isCold() {
         return warmthLevel <= 0;
     }
 
     /**
      * Determines the action for the current turn.
      *
-     * @param actions available actions for this turn
+     * @param actions    available actions for this turn
      * @param lastAction the previous action taken
-     * @param map current game map
-     * @param display the display object
+     * @param map        current game map
+     * @param display    the display object
      * @return the selected action
      */
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
-    {
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         this.currentMap = map;
 
-        if (!isConscious())
-        {
-            if (!isCold())
-            {
+        if (!isConscious()) {
+            if (!isCold()) {
                 display.println(this + " is unconscious due to warmth level");
             }
 
@@ -110,21 +107,15 @@ public abstract class Animal extends Actor implements Warmable {
             return new DoNothingAction();
 
         }
-
-        if (!resistanceToWarm)
-        {
-            decreaseWarmthLevel();
-        }
+        decreaseWarmthLevel();
 
         //Loop through all the behaviour in the collections.
-        for (Behaviour behaviour: this.behaviourMap.values())
-        {
+        for (Behaviour behaviour : this.behaviourMap.values()) {
             //Generate the action based on the behaviour.
             Action action = behaviour.generateAction(this, map);
 
             //If contain an actions return it else continue the loop
-            if (action != null)
-            {
+            if (action != null) {
                 return action;
             }
         }
@@ -138,15 +129,14 @@ public abstract class Animal extends Actor implements Warmable {
      *
      * @return descriptive string for this animal
      */
-    public String toString()
-    {
-        if (currentMap == null){
+    public String toString() {
+        if (currentMap == null) {
             return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
         }
 
         Location location = currentMap.locationOf(this);
 
-        return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location ;
+        return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location;
     }
 
     /**
@@ -159,12 +149,10 @@ public abstract class Animal extends Actor implements Warmable {
      * @return A collection of Actions.
      */
     @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map)
-    {
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionList = super.allowableActions(otherActor, direction, map);
 
-        if (otherActor.hasAbility(Abilities.ATTACK))
-        {
+        if (otherActor.hasAbility(Abilities.ATTACK)) {
             //Game rule actor can be attack by other actor using weapon.
             actionList.add(new AttackAction(this, direction,
                     "will hit", otherActor.getIntrinsicWeapon()));
