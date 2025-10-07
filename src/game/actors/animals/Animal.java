@@ -125,13 +125,18 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public String toString()
     {
-        if (currentMap == null){
-            return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+        String string = super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+
+        // ensure currentMap is not null (currentMap is set after the turn of animal spawn)
+        if (currentMap != null){
+            Location location = currentMap.locationOf(this);
+
+            return string + " at " + location ;
         }
 
-        Location location = currentMap.locationOf(this);
+        return string;
 
-        return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location ;
+
     }
 
     /**
