@@ -72,7 +72,6 @@ public abstract class SpawnGround extends Ground {
     public void tick(Location location)
     {
         turns++;
-        super.tick(location);
 
         if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
         && random.nextInt(RANDOM_RANGE) < getAnimalSpawnChance())
