@@ -2,11 +2,15 @@ package game.actors.animals;
 
 import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actions.AttackAction;
 import game.actors.abilities.Abilities;
 import game.behaviours.*;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -41,9 +45,7 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public boolean resistanceToWarm;
 
-
-    private final WanderBehaviour wanderBehaviour = new WanderBehaviour();
-    private final ConsumeBehaviour consumeBehaviour = new ConsumeBehaviour();
+    protected Map<Integer, Behaviour> behaviourMap = new TreeMap<>();
 
     /**
      * Constructor for an animal.
@@ -58,6 +60,8 @@ public abstract class Animal extends Actor implements Warmable {
         super(name, displayChar, hitpoints);
         this.warmthLevel = warmthLevel;
         this.resistanceToWarm = false;
+        behaviourMap.put(5, new ConsumeBehaviour());
+        behaviourMap.put(10, new WanderBehaviour());
     }
 
     /**
@@ -66,7 +70,7 @@ public abstract class Animal extends Actor implements Warmable {
     @Override
     public void decreaseWarmthLevel()
     {
-        this.warmthLevel -= 1;
+        this.warmthLevel --;
     }
 
     /**
@@ -109,12 +113,20 @@ public abstract class Animal extends Actor implements Warmable {
             decreaseWarmthLevel();
         }
 
-        Action consumeAction = consumeBehaviour.generateAction(this, map);
-        if (consumeAction != null)
+        //Loop through all the behaviour in the collections.
+        for (Behaviour behaviour: this.behaviourMap.values())
         {
-            return consumeAction;
+            //Generate the action based on the behaviour.
+            Action action = behaviour.generateAction(this, map);
+
+            //If contain an actions return it else continue the loop
+            if (action != null)
+            {
+                return action;
+            }
         }
-        return wanderBehaviour.generateAction(this, map);
+        //When all behaviour has been checked no action then return do nothing action.
+        return new DoNothingAction();
 
     }
 
