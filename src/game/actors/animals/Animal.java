@@ -41,6 +41,10 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public boolean resistanceToWarm;
 
+    /**
+     * Check whether the animal can consume or not
+     */
+    public boolean canConsume;
 
     private final WanderBehaviour wanderBehaviour = new WanderBehaviour();
     private final ConsumeBehaviour consumeBehaviour = new ConsumeBehaviour();
@@ -58,6 +62,7 @@ public abstract class Animal extends Actor implements Warmable {
         super(name, displayChar, hitpoints);
         this.warmthLevel = warmthLevel;
         this.resistanceToWarm = false;
+        this.canConsume = false;
     }
 
     /**
@@ -77,6 +82,10 @@ public abstract class Animal extends Actor implements Warmable {
     @Override
     public boolean isCold(){
         return warmthLevel <= 0;
+    }
+
+    public void toConsume(boolean canConsume){
+        this.canConsume = canConsume;
     }
 
     /**
@@ -109,11 +118,14 @@ public abstract class Animal extends Actor implements Warmable {
             decreaseWarmthLevel();
         }
 
-        Action consumeAction = consumeBehaviour.generateAction(this, map);
-        if (consumeAction != null)
-        {
-            return consumeAction;
+        if(canConsume){
+            Action consumeAction = consumeBehaviour.generateAction(this, map);
+            if (consumeAction != null)
+            {
+                return consumeAction;
+            }
         }
+
         return wanderBehaviour.generateAction(this, map);
 
     }

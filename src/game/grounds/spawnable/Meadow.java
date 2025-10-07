@@ -21,7 +21,7 @@ import java.util.List;
 public class Meadow extends SpawnGround {
 
     private static final int SPAWN_TURN = 7;
-    private static final int SPAWN_CHANCE = 10;
+    private static final int SPAWN_CHANCE = 50;
 
     /**
      * Constructs a Meadow ground tile with a list of spawnable animals.
@@ -52,6 +52,17 @@ public class Meadow extends SpawnGround {
     @Override
     protected int getAnimalSpawnChance() {
         return SPAWN_CHANCE;
+    }
+
+    /**
+     * Applies modifications to spawned animals.
+     *
+     * @param animal the {@link Animal} to modify
+     */
+    @Override
+    protected void setAnimalAction (Animal animal)
+    {
+        animal.toConsume(true);
     }
 
 
