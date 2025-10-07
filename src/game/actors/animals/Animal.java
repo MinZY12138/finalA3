@@ -4,25 +4,44 @@ import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
+import game.actions.AttackAction;
+import game.actors.abilities.Abilities;
 import game.behaviours.*;
 
 
 /**
- * Abstract class representing an animal in the game.
- * Animals have hitpoints and warmth level, which affect their consciousness.
- * They can move randomly (wander) or consume items if available.
- * Implements {@link Warmable} for warmth-related behavior.
+ * <h1>Abstract Class represent Animal</h1>
  *
- * <p>Subclasses should define specific animal types.</p>
+ * <p>
+ *     Subclasses should define specific animal types.
+ *     Animals have hitpoints and warmth level, which affect their consciousness.
+ *     They can move randomly (wander) or consume items if available.
+ *     Implements {@link Warmable} for warmth-related behavior.
+ * </p>
  *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
+ *
+ * Modify by: Shee Seng Cheng
  */
 public abstract class Animal extends Actor implements Warmable {
 
+    /**
+     * The map where the animal currently located.
+     */
     private GameMap currentMap;
+
+    /**
+     * The warmth level of the animal
+     */
     private int warmthLevel;
+
+    /**
+     * Check whether the animal resistance to warm
+     */
     public boolean resistanceToWarm;
+
+
     private final WanderBehaviour wanderBehaviour = new WanderBehaviour();
     private final ConsumeBehaviour consumeBehaviour = new ConsumeBehaviour();
 
@@ -53,23 +72,15 @@ public abstract class Animal extends Actor implements Warmable {
     /**
      * Checks if the animal has positive warmth.
      *
-     * @return true if warmthLevel > 0, false otherwise
+     * @return true if warmthLevel <= 0, false otherwise
      */
-
-    public boolean isWarm(){
-        return warmthLevel > 0;
+    @Override
+    public boolean isCold(){
+        return warmthLevel <= 0;
     }
-
-
-
 
     /**
      * Determines the action for the current turn.
-     * <p>
-     * The animal first tries to consume a nearby item.
-     * If no consumable is available, it wanders to a random valid location.
-     * If the animal is dead or too cold, it is removed from the map and does nothing.
-     * </p>
      *
      * @param actions available actions for this turn
      * @param lastAction the previous action taken
@@ -83,7 +94,7 @@ public abstract class Animal extends Actor implements Warmable {
 
         if (!isConscious())
         {
-            if (!isWarm())
+            if (!isCold())
             {
                 display.println(this + " is unconscious due to warmth level");
             }
@@ -101,7 +112,7 @@ public abstract class Animal extends Actor implements Warmable {
         Action consumeAction = consumeBehaviour.generateAction(this, map);
         if (consumeAction != null)
         {
-                return consumeAction;
+            return consumeAction;
         }
         return wanderBehaviour.generateAction(this, map);
 
@@ -114,11 +125,35 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public String toString()
     {
+        if (currentMap == null){
+            return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+        }
 
         Location location = currentMap.locationOf(this);
 
-        return "At "+ location + ", " + super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+        return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location ;
+    }
 
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to the
+     * current Actor.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map)
+    {
+        ActionList actionList = super.allowableActions(otherActor, direction, map);
 
+        if (otherActor.hasAbility(Abilities.ATTACK))
+        {
+            //Game rule actor can be attack by other actor using weapon.
+            actionList.add(new AttackAction(this, direction,
+                    "will hit", otherActor.getIntrinsicWeapon()));
+        }
+        return actionList;
     }
 }

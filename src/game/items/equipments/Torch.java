@@ -4,9 +4,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.statuses.Burning;
-import game.grounds.Fire;
-import game.items.coat.Coating;
+import game.actors.statuses.ContinuousDamage;
+import game.capabilities.SummonFire;
 
 import java.util.List;
 
@@ -15,40 +14,25 @@ import java.util.List;
  * <p>
  * The {@code Torch} is a {@link LootWeapon}.
  * When actors use it to attack others, it has a chance to cause target actors to
- * {@link Burning} and spawns the {@link Fire} surrounding the target actor.
+ * burning and spawns the fire surrounding the target actor.
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 2.0.1
  * @since 2025-09-24
+ *
+ * Modified by: Shee Seng Cheng
  */
-public class Torch extends LootWeapon {
-
-    /**
-     * Weapon damage.
-     */
-    private static final int HIT_DMG = 10;
-
-    /**
-     * Rate of hitting target actors.
-     */
-    private static final int HIT_RATE = 50;
-
-    /**
-     * Burning damage.
-     */
-    private static final int BURNING_DMG = 3;
-
-    /**
-     * Total turns of the continuous damage.
-     */
-    private static final int DURATION = 7;
+public class Torch extends LootWeapon implements SummonFire {
 
     /**
      * The constructor of the Torch class.
+     *
+     * @param type   defining damage, hit rate, and verb
+     * @param effect defining burning damage and duration
      */
-    public Torch() {
-        super("torch", 'y', true, HIT_DMG, HIT_RATE, "strikes");
+    public Torch(WeaponType type, StatusType effect) {
+        super("Torch", 'y', true, type, effect);
     }
 
     /**
@@ -60,12 +44,13 @@ public class Torch extends LootWeapon {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        int chance = 50;
+        ContinuousDamage status = EFFECT.createStatus(target);
 
-        if (RAND.nextInt(100) <= chance) {
-            target.addStatus(new Burning(target, BURNING_DMG, DURATION));
-            burnSurrounding(map.locationOf(target));
+        if (status != null) {
+            target.addStatus(status);
         }
+
+        burnSurrounding(map.locationOf(target));
     }
 
     /**
@@ -77,32 +62,20 @@ public class Torch extends LootWeapon {
         List<Exit> surrounding = location.getExits();
 
         for (Exit place : surrounding) {
-            place.getDestination().setGround(new Fire());
+            burnLocation(place.getDestination());
         }
     }
-
     /**
-     * Set coating on the torch.
+     * Torch cannot be coated.
      * <p>
-     * Torch cannot be coated, so this method does nothing.
+     * Overrides the default coating behavior to disable coating capability.
      * </p>
      *
-     * @param coating The coating to be applied (ignored).
+     * @return {@code false}, since Torch does not support coatings.
      */
     @Override
-    public void setCoating(Coating coating) {
+    public boolean isCoatable() {
+        return false;
     }
 
-    /**
-     * Get the current coating of the torch.
-     * <p>
-     * Torch never has a coating, always returns {@code null}.
-     * </p>
-     *
-     * @return {@code null}, since torch cannot be coated.
-     */
-    @Override
-    public Coating getCoating() {
-        return null;
-    }
 }

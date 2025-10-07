@@ -1,44 +1,58 @@
 package game.grounds.spawnable;
 
-import edu.monash.fit2099.engine.GameEngineException;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 import java.util.List;
-import java.util.Random;
 
-public class Meadow extends Ground {
+/**
+ * <h1>Class represent Meadow</h1>
+ *
+ * <p>
+ *     A type of {@link SpawnGround} that represents a Meadow.
+ *     Meadows are capable of spawning different {@link Animal}s at random intervals.
+ *     Every {@code animalSpawnTurn} ticks, there is a chance (50%) that
+ *     a random animal from the {@code spawnable} list will be spawned in this location,
+ *     provided the location does not already contain an actor.
+ * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
+ */
+public class Meadow extends SpawnGround {
 
-    private int turns = 0;
-    private final int animalSpawnTurn = 7;
-    private final List<Spawnable> spawnable;
-    private final Random random = new Random();
+    private static final int SPAWN_TURN = 7;
+    private static final int SPAWN_CHANCE = 10;
 
-    public Meadow(Spawnable... spawnable){
-        super('w', "Meadow");
-        this.spawnable = List.of(spawnable);
+    /**
+     * Constructs a Meadow ground tile with a list of spawnable animals.
+     *
+     * @param spawnable a list of {@link Spawnable} animals that can be spawned
+     */
+    public Meadow(List<Spawnable> spawnable){
+        super('w', "Meadow", spawnable);
+
     }
 
-
+    /**
+     * Specifies the number of ticks between spawn attempts.
+     *
+     * @return 7 ticks
+     */
     @Override
-    public void tick(Location location)
+    protected int getAnimalSpawnTurn()
     {
-        turns++;
-        super.tick(location);
-
-        if (random.nextInt(100) < 50 && turns % animalSpawnTurn == 0 && !location.containsAnActor())
-        {
-            Spawnable pickedAnimal = spawnable.get(random.nextInt(spawnable.size()));
-            Animal animal = pickedAnimal.create();
-
-            try{
-                location.addActor(animal);
-            } catch (GameEngineException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-
+        return SPAWN_TURN;
     }
+
+    /**
+     * Specifies the spawn success chance.
+     *
+     * @return 50
+     */
+    @Override
+    protected int getAnimalSpawnChance() {
+        return SPAWN_CHANCE;
+    }
+
+
 }

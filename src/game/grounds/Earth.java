@@ -17,9 +17,7 @@ import game.grounds.trees.AppleTree;
 import game.grounds.trees.HazelnutTree;
 import game.grounds.trees.YewBerryTree;
 import game.items.TeleportCube;
-import game.items.equipments.Axe;
-import game.items.equipments.Torch;
-import game.items.equipments.Bow;
+import game.items.equipments.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -82,11 +80,11 @@ public class Earth extends World {
 
         TeleportationCircle teleCircle1 = new TeleportationCircle(
                 List.of(
-                        gameMap1.at(12, 7), gameMap2.at(6, 7)
+                        gameMap1.at(12, 7), gameMap2.at(18, 7)
                 )
         );
-        gameMap1.at(6, 7).setGround(teleCircle1);
-        gameMap2.at(12, 7).setGround(teleCircle1);
+        gameMap1.at(12, 7).setGround(teleCircle1);
+        gameMap2.at(18, 7).setGround(teleCircle1);
 
         TeleportCube cube1 = new TeleportCube(
                 List.of(
@@ -101,13 +99,13 @@ public class Earth extends World {
         Spawnable deer = Deer::new;
         Spawnable wolf = Wolf::new;
 
-        gameMap1.at(8, 9).setGround(new Tundra(bear));
+        gameMap1.at(8, 9).setGround(new Tundra(List.of(bear)));
+        gameMap2.at(0, 0).setGround(new Tundra(List.of(wolf)));
+        gameMap1.at(0, 5).setGround(new Cave(List.of(bear, wolf, deer)));
+        gameMap2.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
+        gameMap1.at(0, 9).setGround(new Meadow(List.of(deer)));
+        gameMap2.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
 
-        gameMap1.at(0, 0).setGround(new Tundra(wolf));
-        gameMap2.at(0, 5).setGround(new Cave(bear, wolf, deer));
-        gameMap1.at(0, 5).setGround(new Cave(bear, wolf));
-        gameMap2.at(0, 9).setGround(new Meadow(deer));
-        gameMap1.at(0, 9).setGround(new Meadow(deer, wolf));
 
         gameMap2.at(2, 2).setGround(new AppleTree());
         gameMap1.at(2, 2).setGround(new AppleTree());
@@ -117,16 +115,19 @@ public class Earth extends World {
         gameMap1.at(9, 9).setGround(new YewBerryTree());
 
         // req 3
-        Location gameMapA = RandomLocation.randomChooseLocation(gameMap1);
-        Location gameMapB = RandomLocation.randomChooseLocation(gameMap1);
+        Location location1 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location2 = RandomLocation.randomChooseLocation(gameMap1);
+        Location location3 = RandomLocation.randomChooseLocation(gameMap2);
 
-        Axe axe = new Axe();
-        gameMapA.addItem(axe);
+        Axe axe = new Axe(WeaponType.AXE, StatusType.BLEEDING);
+        location1.addItem(axe);
 
-        Torch torch = new Torch();
-        gameMapA.addItem(torch);
+        Torch torch = new Torch(WeaponType.TORCH, StatusType.BURNING);
+        location2.addItem(torch);
 
-        Bow bow = new Bow();
-        gameMapB.addItem(bow);
+        Bow bow = new Bow(WeaponType.BOW, null);
+        location3.addItem(bow);
+
+        player.addItemToInventory(bow);
     }
 }

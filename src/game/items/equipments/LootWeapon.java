@@ -19,30 +19,25 @@ import java.util.Random;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 2.0.1
  * @since 2025-09-24
  */
-public abstract class LootWeapon extends Item implements Weapon, Coatable{
+public abstract class LootWeapon extends Item implements Weapon, Coatable {
 
     /**
-     * Weapon damage.
+     * Defining weapon attributes.
      */
-    protected final int DAMAGE;
+    protected final WeaponType TYPE;
 
     /**
-     * The rate of hitting a target actor.
+     * Defining weapon status.
      */
-    protected final int HIT_RATE;
-
-    /**
-     * The cue word for actor attack.
-     */
-    protected final String VERB;
+    protected final StatusType EFFECT;
 
     /**
      * A random object.
      */
-    public static final Random RAND = new Random();
+    protected static final Random RAND = new Random();
 
     /**
      * Current coating applied to this weapon (if any).
@@ -50,21 +45,19 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable{
     private Coating coating;
 
     /**
-     * The constructor of LoopWeapon class.
+     * The constructor of the LootWeapon class.
      *
-     * @param name        the weapon name
-     * @param displayChar the symbol represents a weapon on the game map
-     * @param portable    weapon portability
-     * @param damage      the weapon damage
-     * @param hitRate     the rate of hitting a target actor
-     * @param verb        the cue word for actor attack
+     * @param name        the name of a weapon
+     * @param displayChar the symbol of the weapon
+     * @param portable    determine if a weapon is portable
+     * @param type        the basic attributes of a weapon
+     * @param effect      the status of a weapon
      */
-    public LootWeapon(String name, char displayChar, boolean portable, int damage, int hitRate,
-                      String verb) {
+    public LootWeapon(String name, char displayChar, boolean portable, WeaponType type,
+                      StatusType effect) {
         super(name, displayChar, portable);
-        this.DAMAGE = damage;
-        this.HIT_RATE = hitRate;
-        this.VERB = verb;
+        this.TYPE = type;
+        this.EFFECT = effect;
     }
 
     /**
@@ -87,19 +80,21 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable{
      */
     @Override
     public final String attack(Actor attacker, Actor target, GameMap map) {
-        if (!(RAND.nextInt(100) <= this.HIT_RATE)) {
+        int maximumBound = 100;
+
+        if (!(RAND.nextInt(maximumBound) <= this.getHitRate())) {
             return attacker + " misses " + target + ".";
         }
 
-        target.hurt(this.DAMAGE);
+        target.hurt(this.getDamage());
         this.hit(attacker, target, map);
 
-        // coating effect if present
-        if (coating != null) {
-            coating.applyOnHit(attacker, target, map);
+        if (this.isCoatable() && this.getCoating() != null) {
+            this.getCoating().applyOnHit(attacker, target, map);
         }
 
-        return String.format("%s %s %s for %d damage", attacker, this.VERB, target, this.DAMAGE);
+        return String.format("%s %s %s for %d damage",
+                attacker, this.getVerb(), target, this.getDamage());
     }
 
     /**
@@ -112,49 +107,68 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable{
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = super.allowableActions(otherActor, location);
-        actions.add(new AttackAction(otherActor, location.toString(), this.VERB, this));
+        actions.add(new AttackAction(otherActor, location.toString(), this.getVerb(), this));
         return actions;
     }
 
     /**
-     * Get the current coating applied to this weapon.
+     * The accessor of the weapon damage.
      *
-     * @return The current {@link Coating}, or {@code null} if none.
+     * @return this weapon damage
      */
+    public int getDamage() {
+        return TYPE.getDAMAGE();
+    }
+
+    /**
+     * The accessor of the chance of hitting target.
+     *
+     * @return this weapon hit rate
+     */
+    public int getHitRate() {
+        return TYPE.getHIT_RATE();
+    }
+
+    /**
+     * The accessor of the word to describe the weapon when hitting the target.
+     *
+     * @return this weapon hitting description
+     */
+    public String getVerb() {
+        return TYPE.getVERB();
+    }
+
+    /* ========================
+       REQ4: Coatable methods
+       ======================== */
+
     @Override
     public Coating getCoating() {
         return coating;
     }
 
-    /**
-     * Apply (or replace) the coating on this weapon.
-     *
-     * @param coating The {@link Coating} to set; may overwrite an existing one.
-     */
     @Override
     public void setCoating(Coating coating) {
-        this.coating = coating;
+        this.coating = coating; // replace existing coating if any
     }
 
-    /**
-     * Remove the current coating from this weapon.
-     */
     @Override
     public void clearCoating() {
         this.coating = null;
     }
 
-    /**
-     * Get the display name including coating info if present.
-     *
-     * @return {@code "<baseName> [<coating>]" } when coated; otherwise {@code toString()}.
-     */
     @Override
     public String coatedName() {
-        if (coating != null) {
-            return this.toString() + " [" + coating.name() + "]";
-        }
-        return this.toString();
+        return (coating == null) ? this.toString() : (this + " [" + coating.name() + "]");
     }
 
+    /**
+     * Whether this weapon supports coating.
+     * Torch should override this to return {@code false}.
+     */
+    @Override
+    public boolean isCoatable() {
+        return true;
+    }
 }
+

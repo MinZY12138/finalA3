@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TeleportAction;
 import game.actions.Teleportable;
-import game.grounds.Fire;
+import game.capabilities.SummonFire;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,8 +23,10 @@ import java.util.List;
  *
  * @author Shee Seng Cheng
  * @version 1.0
+ *
+ * Modified by: Tay Chee Hsian
  */
-public abstract class TeleGround extends Ground implements Teleportable
+public abstract class TeleGround extends Ground implements Teleportable, SummonFire
 {
     /**
      * A list of {@link Location} indicate this can teleport to where.
@@ -97,16 +99,6 @@ public abstract class TeleGround extends Ground implements Teleportable
     public String getSimpleName()
     {
         return this.toString();
-    }
-
-    /**
-     * Use to summon a fire ground type use only in method
-     * {@link TeleGround#burnSurrounding(Location)}
-     * @return {@link Fire} ground type.
-     */
-    protected Fire summonFire()
-    {
-        return new Fire();
     }
 
     /**

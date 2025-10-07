@@ -43,4 +43,16 @@ public interface Coatable {
      * @return A string representing the coated item's name.
      */
     String coatedName();
+
+    /**
+     * Determine whether this item supports coating.
+     * <p>
+     * Default is {@code true}, but some classes (e.g., Torch) can override it to disable coating.
+     * </p>
+     *
+     * @return {@code true} if the item can be coated, otherwise {@code false}.
+     */
+    default boolean isCoatable() {
+        return true;
+    }
 }

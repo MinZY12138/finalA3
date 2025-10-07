@@ -1,61 +1,74 @@
 package game.grounds.spawnable;
 
-
-import edu.monash.fit2099.engine.GameEngineException;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperation;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
-import game.actors.Abilities;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
+import game.actors.abilities.Abilities;
 
-import java.util.Random;
+import java.util.List;
 
-public class Tundra extends Ground {
+/**
+ * <h1>Class represent Tundra </h1>
+ *
+ * <p>
+ *     A type of {@link SpawnGround} that represents a Tundra.
+ *     The Tundra can occasionally spawn a specific {@link Animal} with extra resilience
+ *     against warm conditions. Spawn chance is fixed at 5% per tick if the tile
+ *     is unoccupied.
+ * </p>
+ *
+ * @author Ng Jun Jie
+ * @version 1.0
+ */
+public class Tundra extends SpawnGround {
 
+    private static final int SPAWN_TURN = 1;
+    private static final int SPAWN_CHANCE = 5;
+    private static final int EXTRA_HEALTH = 10;
 
-    private final Spawnable spawnable;
-    private final Random random = new Random();
-
-
-    public Tundra(Spawnable spawnable){
-        super('_', "Tundra");
-        this.spawnable = spawnable;
+    /**
+     * Constructs a Tundra ground tile with a list of spawnable animals.
+     *
+     * @param spawnable a list of {@link Spawnable} animals that can be spawned
+     */
+    public Tundra(List<Spawnable> spawnable){
+        super('_', "Tundra", spawnable);
 
     }
 
     /**
-     * spawn fruit in random adjacent locations
-     * @param location The location of the Ground
+     * Specifies the number of ticks between spawn attempts.
+     *
+     * @return 1 tick
      */
     @Override
-    public void tick(Location location)
+    protected int getAnimalSpawnTurn()
     {
+        return SPAWN_TURN;
+    }
 
-        super.tick(location);
-
-        if (random.nextInt(100) < 5 && !location.containsAnActor()) {
-            Animal animal = spawnable.create();
-            animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 10);
-
-            // mark tundra-spawned animals as cold resistant
-            animal.enableAbility(Abilities.COLD_RESISTANT);
-
-
-            animal.resistanceToWarm = true;
-            try {
-                location.addActor(animal);
-            } catch (GameEngineException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-
-
-
-
-
-        }
+    /**
+     * Specifies the spawn success chance.
+     *
+     * @return 5
+     */
+    @Override
+    protected int getAnimalSpawnChance() {
+        return SPAWN_CHANCE;
+    }
+    /**
+     * Applies modifications to spawned animals.
+     *
+     * @param animal the {@link Animal} to modify
+     */
+    @Override
+    protected void setAnimalAction (Animal animal)
+    {
+        animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
+        animal.resistanceToWarm = true;
+        animal.enableAbility(Abilities.COLD_RESISTANT);
+    }
 
 }
+

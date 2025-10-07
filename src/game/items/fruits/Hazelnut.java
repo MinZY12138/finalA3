@@ -6,9 +6,16 @@ import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
- * A hazelnut class
+ * <h1>Class represent Hazelnut</h1>
+ *
+ * <p>
+ *     Represent a Hazelnut in this system.
+ * </p>
+ *
+ * Extends from {@link Fruit}
+ *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public class Hazelnut extends Fruit implements Consumable
 {
