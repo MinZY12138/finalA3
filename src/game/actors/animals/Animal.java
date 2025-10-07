@@ -12,7 +12,6 @@ import game.behaviours.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 /**
  * <h1>Abstract Class represent Animal</h1>
  *
@@ -25,8 +24,8 @@ import java.util.TreeMap;
  *
  * @author Ng Jun Jie
  * @version 2.0
- * <p>
- * Modify by: Shee Seng Cheng
+ *
+ * Modify by: Shee Seng Cheng, Tay Chee Hsian
  */
 public abstract class Animal extends Actor implements Warmable {
 
@@ -46,6 +45,8 @@ public abstract class Animal extends Actor implements Warmable {
     public boolean resistanceToWarm;
 
     protected Map<Integer, Behaviour> behaviourMap = new TreeMap<>();
+
+    private static final int WARMTH_LOWER_BOUND = 0;
 
     /**
      * Constructor for an animal.
@@ -73,6 +74,9 @@ public abstract class Animal extends Actor implements Warmable {
     public void decreaseWarmthLevel() {
         if (!resistanceToWarm) {
             this.warmthLevel--;
+            if (isCold()) {
+                this.warmthLevel = WARMTH_LOWER_BOUND;
+            }
         }
     }
 
@@ -83,7 +87,7 @@ public abstract class Animal extends Actor implements Warmable {
      */
     @Override
     public boolean isCold() {
-        return warmthLevel <= 0;
+        return warmthLevel <= WARMTH_LOWER_BOUND;
     }
 
     /**
@@ -98,15 +102,15 @@ public abstract class Animal extends Actor implements Warmable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         this.currentMap = map;
 
-        if (!isConscious()) {
-            if (!isCold()) {
+        if (!isConscious() || isCold()) {
+            if (isCold()) {
                 display.println(this + " is unconscious due to warmth level");
             }
 
             this.unconscious(currentMap);
             return new DoNothingAction();
-
         }
+
         decreaseWarmthLevel();
 
         //Loop through all the behaviour in the collections.
@@ -121,7 +125,6 @@ public abstract class Animal extends Actor implements Warmable {
         }
         //When all behaviour has been checked no action then return do nothing action.
         return new DoNothingAction();
-
     }
 
     /**
@@ -157,6 +160,7 @@ public abstract class Animal extends Actor implements Warmable {
             actionList.add(new AttackAction(this, direction,
                     "will hit", otherActor.getIntrinsicWeapon()));
         }
+
         return actionList;
     }
 }
