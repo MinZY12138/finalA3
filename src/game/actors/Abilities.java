@@ -1,4 +1,4 @@
-package game.actors.abilities;
+package game.actors;
 
 /**
  * <h1>Abilities enum</h1>
