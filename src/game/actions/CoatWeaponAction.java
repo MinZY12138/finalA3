@@ -12,16 +12,11 @@ import game.items.coat.Coating;
  *
  * <p>
  * Represents an action that allows an {@link Actor} to apply a {@link Coating}
- * to a {@link Coatable} weapon. The coating can come from either a consumable item
- * (e.g., Yewberry) or an environmental source (e.g., Snow).
- * </p>
- *
- * <p>
- * Extends {@link Action}
+ * to weapons which can be coatable.
  * </p>
  *
  * @author Zhengyuan Min
- * @version 1.0
+ * @version 1.1
  */
 public class CoatWeaponAction extends Action {
 
@@ -31,7 +26,7 @@ public class CoatWeaponAction extends Action {
     private final Coatable weapon;
 
     /**
-     * The coating to be applied on the weapon.
+     * The coating to apply on the weapon.
      */
     private final Coating coating;
 
@@ -42,7 +37,7 @@ public class CoatWeaponAction extends Action {
     private final Item consumedItem;
 
     /**
-     * Constructor for CoatWeaponAction.
+     * Constructor for coating using item in bag.
      * <p>
      * Used when the coating is applied using a consumable item.
      * </p>
@@ -58,7 +53,7 @@ public class CoatWeaponAction extends Action {
     }
 
     /**
-     * Constructor for CoatWeaponAction.
+     * Constructor for coating from ground
      * <p>
      * Used when the coating is applied from a ground source (e.g., Snow).
      * No item will be consumed.
@@ -72,7 +67,8 @@ public class CoatWeaponAction extends Action {
     }
 
     /**
-     * Perform the coating action.
+     * Perform the coating action
+     * remove the item from inventory if used for coating
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.
@@ -87,7 +83,6 @@ public class CoatWeaponAction extends Action {
         if (consumedItem != null) {
             actor.removeItemFromInventory(consumedItem);
         }
-
         return menuDescription(actor);
     }
 
