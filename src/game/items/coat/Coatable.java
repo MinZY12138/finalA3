@@ -9,10 +9,6 @@ package game.items.coat;
  * and return a name that reflects the coating applied.
  * </p>
  *
- * <p>
- * Implemented by weapons such as Axe or Bow in REQ4: Coating.
- * </p>
- *
  * @author Min Zhengyuan
  * @version 2.0
  *
@@ -23,7 +19,7 @@ public interface Coatable {
     /**
      * Get the current coating applied on this item.
      *
-     * @return The {@link Coating} currently applied, or {@code null} if none.
+     * @return The {@link Coating} currently applied, or null
      */
     Coating getCoating();
 
@@ -36,9 +32,6 @@ public interface Coatable {
 
     /**
      * Determine whether this item supports coating.
-     * <p>
-     * Default is {@code true}, but some classes (e.g., Torch) can override it to disable coating.
-     * </p>
      *
      * @return {@code true} if the item can be coated, otherwise {@code false}.
      */
