@@ -61,10 +61,13 @@ public abstract class Animal extends Actor implements Warmable {
         this.warmthLevel = warmthLevel;
         this.resistanceToWarm = false;
 
-        int HIGHER_PRIORITY = 5;
         int LOWER_PRIORITY = 10;
-        behaviourMap.put(HIGHER_PRIORITY, new ConsumeBehaviour());
         behaviourMap.put(LOWER_PRIORITY, new WanderBehaviour());
+    }
+
+    public void addBehaviourToAnimal(Behaviour behaviour, int priority)
+    {
+        this.behaviourMap.put(priority, behaviour);
     }
 
     /**
