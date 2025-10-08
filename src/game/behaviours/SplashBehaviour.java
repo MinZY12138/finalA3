@@ -7,6 +7,18 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 
+/**
+ * <h1>Class represent SplashBehaviour</h1>
+ *
+ * <p>
+ *     Represent a behaviour that splash fire to target actor.
+ *     IFF surrounding content an actor which will return an
+ *     {@link AttackAction}
+ * </p>
+ *
+ * @author Shee Seng Cheng
+ * @version 1.0
+ */
 public class SplashBehaviour implements Behaviour {
 
     /**
@@ -33,6 +45,4 @@ public class SplashBehaviour implements Behaviour {
         }
         return null;
     }
-
-
 }
