@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.actors.abilities.Abilities;
 import game.actors.animals.Warmable;
 import game.weapons.BareFist;
 
