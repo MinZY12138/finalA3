@@ -7,9 +7,12 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.capabilities.SummonFire;
 
 /**
- * Class representing an intrinsic weapon called a FireBlow.
- * This intrinsic weapon deals 30 damage points with a 100% chance
- * to hit the target. And burn the location of the target.
+ * <h1>Class representing an intrinsic weapon called a FireBlow.</h1>
+ * <p>
+ *     This intrinsic weapon deals 30 damage points with a 100% chance\
+ *     to hit the target. And burn the location of the target.
+ * </p>
+ *
  *
  * Extends: {@link IntrinsicWeapon}
  * Implement: {@link SummonFire}
