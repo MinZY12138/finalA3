@@ -18,7 +18,7 @@ public enum StateDragonInfo
     ICE_STATE_CHANCE (55),
     DIRT_STATE_CHANCE (85),
     RANDOM_BOUND (100),
-    DURATION (2);
+    DURATION (3);
 
     /**
      * Attribute to store the info.
