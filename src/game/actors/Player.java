@@ -44,7 +44,7 @@ public class Player extends Actor implements Warmable {
     @Override
     public void decreaseWarmthLevel()
     {
-        this.warmthLevel -= 1;
+        this.warmthLevel --;
     }
 
     /**
@@ -66,7 +66,6 @@ public class Player extends Actor implements Warmable {
             map.removeActor(this);
 
         }
-
 
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)

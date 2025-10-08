@@ -25,7 +25,7 @@ public class Hazelnut extends Fruit implements Consumable
      */
     public Hazelnut()
     {
-        super("hazelnut", 'n', true);
+        super("Hazelnut", 'n', true);
 
     }
 

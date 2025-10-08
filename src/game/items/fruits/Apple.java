@@ -24,7 +24,7 @@ public class Apple extends Fruit implements Consumable
      */
     public Apple()
     {
-        super("apple", 'a', true);
+        super("Apple", 'a', true);
 
     }
 
