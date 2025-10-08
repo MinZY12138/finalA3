@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.Burning;
+import game.capabilities.SummonDirt;
 
 /**
  * <h1>Class represent Fire</h1>
@@ -15,11 +16,12 @@ import game.actors.statuses.Burning;
  * </p>
  *
  * Extends {@link Ground}
+ * Implements {@link SummonDirt}
  *
  * @author Shee Seng Cheng
  * @version 3.0
  */
-public class Fire extends Ground
+public class Fire extends Ground implements SummonDirt
 {
     /**
      * Indicate the fire on the ground for how many turn
@@ -30,6 +32,11 @@ public class Fire extends Ground
      * Indicate the amount can hurt the actor standing on it.
      */
     private static final int BURNING_DMG = 5;
+
+    /**
+     * Indicate time to end
+     */
+    private static final int END = 0;
 
     /**
      * Constructor for Fire.
@@ -53,9 +60,9 @@ public class Fire extends Ground
     @Override
     public void tick(Location location)
     {
-        if (duration == 0)
+        if (duration == END)
         {
-            location.setGround(new Dirt());
+            location.setGround(this.summonDirt());
         }
 
         duration --;

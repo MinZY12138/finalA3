@@ -1,4 +1,4 @@
-package game.actors.statuses.dragon;
+package game.capabilities;
 
 import game.grounds.Dirt;
 
