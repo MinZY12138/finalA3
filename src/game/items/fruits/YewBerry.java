@@ -45,11 +45,12 @@ public class YewBerry extends Fruit implements Consumable {
     }
 
     /**
-     * Return all allowable actions for this item.
-     * <p>
-     * Adds a {@link CoatWeaponAction} for each coatable weapon
-     * in the owner's inventory using {@link YewBerryCoating}.
-     * </p>
+     * Get all actions that the owner can perform with this item.
+     * Add {@link CoatWeaponAction} if the owner has a {@link Coatable} weapon that can be coated.
+     *
+     * @param owner the actor holding this item
+     * @param map   the map where the actor is located
+     * @return a list of actions that can be performed
      */
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {

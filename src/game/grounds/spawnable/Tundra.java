@@ -69,6 +69,5 @@ public class Tundra extends SpawnGround {
         animal.resistanceToWarm = true;
         animal.enableAbility(Abilities.COLD_RESISTANT);
     }
-
 }
 

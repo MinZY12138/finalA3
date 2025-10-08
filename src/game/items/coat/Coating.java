@@ -4,26 +4,31 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
- * <h1>Interface represents Coating</h1>
+ * <h1>Class represents Coating</h1>
  *
  * <p>
- * Represents an effect that can be applied to a {@link game.items.coat.Coatable} weapon.
- * When the coated weapon successfully hits a target, the {@link #applyOnHit(Actor, Actor, GameMap)}
- * method defines what happens (e.g., apply poison or frostbite effects).
- * </p>
- *
- * <p>
- * This interface is implemented by concrete coating types such as
- * {@code YewberryCoating} and {@code SnowCoating} in REQ4: Coating.
+ * Represent an effect that can be applied to a {@link Coatable} weapon.
+ * When the coated weapon hits a target, this class defines what effect happen,
+ * such as poison or frostbite.
  * </p>
  *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 2.0
+ *
+ *
  */
 public abstract class Coating {
 
+    /**
+     * The name of this coating.
+     */
     private final String NAME;
 
+    /**
+     * Constructor for Coating.
+     *
+     * @param name the name of this coating
+     */
     public Coating(String name) {
         this.NAME = name;
     }
@@ -31,14 +36,14 @@ public abstract class Coating {
     /**
      * Get the name of this coating.
      *
-     * @return A string representing the coating's name.
+     * @return the name of the coating
      */
     public String getName() {
         return this.NAME;
     }
 
     /**
-     * Defines the effect that occurs when a coated weapon hits a target.
+     * Apply the coating effect when a coated weapon hits a target.
      *
      * @param attacker The actor performing the attack.
      * @param target   The target actor being hit.

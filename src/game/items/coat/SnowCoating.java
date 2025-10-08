@@ -19,17 +19,17 @@ import game.actors.abilities.Abilities;
  * </ul>
  * </p>
  *
- * <p>
- * Implements {@link Coating}.
- * </p>
- *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 2.0
  */
 public class SnowCoating extends Coating {
 
     private static final int DURATION = 3;
 
+    /**
+     * Constructor for SnowCoating.
+     * Set the name of this coating as "Snow".
+     */
     public SnowCoating() {
         super("Snow");
     }

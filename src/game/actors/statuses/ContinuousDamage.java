@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
- * <h1>Class represents ContinuousWarmthLoss</h1>
+ * <h1>Class represents ContinuousDamage</h1>
  *
  * <p>
  * Represent a continuous status that cause damage to
@@ -29,7 +29,7 @@ public abstract class ContinuousDamage extends ContinuousEffect {
     private final int DAMAGE;
 
     /**
-     * Constructor for ContinuousWarmthLoss.
+     * Constructor for ContinuousDamage.
      *
      * @param target   The actor target affected.
      * @param duration The number of turns this status lasts.
@@ -41,8 +41,7 @@ public abstract class ContinuousDamage extends ContinuousEffect {
     }
 
     /**
-     * Perform warmth reduction each turn and decrease the remaining duration.
-     * Each turn reducing one duration and hurt the ACTOR by the damage.
+     * Perform damage each turn and decrease the remaining duration.
      *
      * @param currEntity The entity currently holding this status.
      * @param location   The location of the entity.
