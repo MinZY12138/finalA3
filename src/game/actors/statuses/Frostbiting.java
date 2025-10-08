@@ -3,7 +3,7 @@ package game.actors.statuses;
 import game.actors.animals.Warmable;
 
 /**
- * <h1>Class represents Frosting</h1>
+ * <h1>Class represents Frostbiting</h1>
  *
  * <p>
  * Represents the frostbite status effect that decreases the warmth level
@@ -16,17 +16,17 @@ import game.actors.animals.Warmable;
  * </p>
  *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 1.1
  */
-public class Frosting extends ContinuousWarmthLoss {
+public class Frostbiting extends ContinuousWarmthLoss {
 
     /**
-     * Constructor for Frosting.
+     * Constructor for Frostbiting.
      *
      * @param target   The Warmable target affected by the frostbite.
      * @param duration The number of turns the frostbite lasts (REQ4: 3).
      */
-    public Frosting(Warmable target, int duration) {
-        super(target, duration, "is frostbitten");
+    public Frostbiting(Warmable target, int duration) {
+        super(target, duration, "is frostbiting");
     }
 }
