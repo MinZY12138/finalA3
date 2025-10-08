@@ -6,8 +6,30 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
 import game.grounds.Dirt;
 
+/**
+ * <h1>Class DirtState</h1>
+ *
+ * <p>
+ *     Represent the dirt state of the dragon in this system.
+ *     Will make the surrounding to became {@link Dirt} when the
+ *     dragon moved.
+ * </p>
+ *
+ * Extends: {@link StateOfDragon}
+ *
+ * @author Ng Jun Jie
+ * @version 2.0
+ * Modify by: Shee Seng Cheng
+ */
 public class DirtState extends StateOfDragon{
+
+    /**
+     * Set the dragon effect when is in this State.
+     * @param dragon the dragon
+     * @param map the map where the dragon was
+     */
     public void setDragonAction(Animal dragon, GameMap map) {
+        super.setDragonAction(dragon, map);
         Location here = map.locationOf(dragon);
         dragon.resistanceToWarm = false;
 

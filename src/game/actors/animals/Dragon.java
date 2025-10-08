@@ -18,10 +18,9 @@ public class Dragon extends Animal {
     public Dragon(){
         super("Dragon", 'Q', 500, 10);
         this.currentState = new DirtState();
-        this.remainingTurns = currentState.setStateDuration();
+        this.remainingTurns = currentState.getStateDuration();
         this.setIntrinsicWeapon(new FireBlow());
         this.enableAbility(Abilities.ATTACK);
-
     }
 
     @Override
@@ -38,10 +37,7 @@ public class Dragon extends Animal {
                         " to " + nextState.getStateName());
             }
             currentState = nextState;
-            remainingTurns = currentState.setStateDuration();
-
-
-
+            remainingTurns = currentState.getStateDuration();
         }
 
         return super.playTurn(actions, lastAction, map, display);

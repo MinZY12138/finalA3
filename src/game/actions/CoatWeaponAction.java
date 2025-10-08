@@ -23,18 +23,18 @@ public class CoatWeaponAction extends Action {
     /**
      * The weapon to be coated.
      */
-    private final Coatable weapon;
+    private final Coatable WEAPON;
 
     /**
      * The coating to apply on the weapon.
      */
-    private final Coating coating;
+    private final Coating COATING;
 
     /**
      * The consumable item that provides the coating.
      * If null, this action does not consume any item.
      */
-    private final Item consumedItem;
+    private final Item CONSUMED_ITEM;
 
     /**
      * Constructor for coating using item in bag.
@@ -47,9 +47,9 @@ public class CoatWeaponAction extends Action {
      * @param consumedItem The consumable item used for coating.
      */
     public CoatWeaponAction(Coatable weapon, Coating coating, Item consumedItem) {
-        this.weapon = weapon;
-        this.coating = coating;
-        this.consumedItem = consumedItem;
+        this.WEAPON = weapon;
+        this.COATING = coating;
+        this.CONSUMED_ITEM = consumedItem;
     }
 
     /**
@@ -77,11 +77,11 @@ public class CoatWeaponAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         // Apply or replace the coating on the weapon
-        weapon.setCoating(coating);
+        WEAPON.setCoating(COATING);
 
         // Remove the consumable item from inventory if provided
-        if (consumedItem != null) {
-            actor.removeItemFromInventory(consumedItem);
+        if (CONSUMED_ITEM != null) {
+            actor.removeItemFromInventory(CONSUMED_ITEM);
         }
         return menuDescription(actor);
     }
@@ -94,7 +94,7 @@ public class CoatWeaponAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " coats " + weapon + " with " + coating.getName();
+        return actor + " coats " + WEAPON + " with " + COATING.getName();
     }
 }
 

@@ -61,10 +61,24 @@ public abstract class Animal extends Actor implements Warmable {
         this.warmthLevel = warmthLevel;
         this.resistanceToWarm = false;
 
+        resetBehaviourMap();
+    }
+
+    /**
+     * Reset to default behaviourMap which was only has wander behaviour.
+     */
+    public void resetBehaviourMap()
+    {
+        behaviourMap.clear();
         int LOWER_PRIORITY = 10;
         behaviourMap.put(LOWER_PRIORITY, new WanderBehaviour());
     }
 
+    /**
+     * Method to add new behaviour into this animal.
+     * @param behaviour the behaviour to be added.
+     * @param priority the priority of this behaviour.
+     */
     public void addBehaviourToAnimal(Behaviour behaviour, int priority)
     {
         this.behaviourMap.put(priority, behaviour);
