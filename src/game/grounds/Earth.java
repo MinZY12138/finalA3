@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
+import game.actors.statuses.dragon.DirtState;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Tundra;
@@ -126,5 +127,10 @@ public class Earth extends World {
         location3.addItem(bow);
 
         player.addItemToInventory(bow);
+
+        // req 5
+        Dragon dragon = new Dragon();
+        dragon.setCurrentState(new DirtState());
+        gameMap1.at(12,9).addActor(dragon);
     }
 }
