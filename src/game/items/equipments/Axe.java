@@ -2,28 +2,53 @@ package game.items.equipments;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.statuses.Bleeding;
+import game.actors.statuses.ContinuousEffect;
 
+/**
+ * <h1>Axe class</h1>
+ * <p>
+ * The {@code Axe} is a {@link LootWeapon}.
+ * When actors use it to attack others, it has a chance to cause target actors to bleeding.
+ * </p>
+ *
+ * @author Tay Chee Hsian
+ * @version 2.0.1
+ * @since 2025-09-24
+ */
 public class Axe extends LootWeapon {
 
-    private static final int HIT_DMG = 15;
+    /**
+     * Chance to make the target bleed.
+     */
+    private static final int CHANCE = 50;
 
-    private static final int HIT_RATE = 75;
-
-    private static final int BLEED_DMG = 10;
-
-    private static final int DURATION = 2;
-
-    public Axe() {
-        super("axe", 'p', true, HIT_DMG, HIT_RATE, "hacks");
+    /**
+     * The constructor of the Axe class.
+     *
+     * @param type   defining damage, hit rate, and verb
+     * @param effect defining bleeding damage and duration
+     */
+    public Axe(WeaponType type, StatusType effect) {
+        super("Axe", 'p', true, type, effect);
     }
 
+    /**
+     * Attack a target actor with the bleeding effect.
+     *
+     * @param attacker represent an actor attack
+     * @param target   represent an actor being attacked
+     * @param map      the game map
+     */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        int chance = 50;
+        int maximumBound = 100;
 
-        if (RAND.nextInt(100) <= chance) {
-            target.addStatus(new Bleeding(target, BLEED_DMG, DURATION));
+        if (RAND.nextInt(maximumBound) <= CHANCE) {
+            ContinuousEffect status = EFFECT.createStatus(target);
+
+            if (status != null) {
+                target.addStatus(status);
+            }
         }
     }
 }

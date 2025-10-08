@@ -8,18 +8,40 @@ import game.actions.AttackAction;
 
 import java.util.List;
 
+/**
+ * <h1>Bow class</h1>
+ * <p>
+ * The {@code Bow} is a {@link LootWeapon}.
+ * It can attack {@link Actor} from a distance.
+ * </p>
+ *
+ * @author Tay Chee Hsian
+ * @version 1.0.0
+ * @since 2025-09-24
+ */
 public class Bow extends LootWeapon {
 
-    private static final int HIT_DMG = 5;
-
-    private static final int HIT_RATE = 25;
-
+    /**
+     * Attack distance.
+     */
     private static final int RADIUS = 3;
 
-    public Bow() {
-        super("bow", 'c', true, HIT_DMG, HIT_RATE, "shoots");
+    /**
+     * The constructor of the Bow class.
+     *
+     * @param type defining damage, hit rate, and verb
+     */
+    public Bow(WeaponType type, StatusType effect) {
+        super("Bow", 'c', true, type, effect);
     }
 
+    /**
+     * Represent the bow what action is allowable.
+     *
+     * @param owner the actor that owns the item
+     * @param map   the map where the actor is performing the action on
+     * @return a list of actions
+     */
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
         ActionList actions = super.allowableActions(owner, map);
@@ -28,11 +50,24 @@ public class Bow extends LootWeapon {
         for (Location location : locations) {
             if (location.containsAnActor()) {
                 actions.add(new AttackAction(location.getActor(), location.toString(),
-                        this.VERB,this));
-                return actions;
+                        this.getVerb(), this));
             }
         }
 
+        return actions;
+    }
+
+    /**
+     * Clear all actions that inherit from the superclass.
+     *
+     * @param otherActor the other actor
+     * @param location   the location of the other actor
+     * @return a list of actions
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actions = super.allowableActions(otherActor, location);
+        actions.clear();
         return actions;
     }
 }

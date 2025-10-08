@@ -7,44 +7,170 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
+import game.items.coat.Coatable;
+import game.items.coat.Coating;
 
 import java.util.Random;
 
-public abstract class LootWeapon extends Item implements Weapon {
+/**
+ * <h1>LootWeapon class</h1>
+ * <p>
+ * The {@code LootWeapon} is an {@link Item} and {@link Weapon} at the same time (i.e. equipment).
+ * </p>
+ *
+ * @author Tay Chee Hsian
+ * @version 3.0
+ * @since 2025-09-24
+ */
+public abstract class LootWeapon extends Item implements Weapon, Coatable {
 
-    protected final int DAMAGE;
+    /**
+     * Defining weapon attributes.
+     */
+    protected final WeaponType TYPE;
 
-    protected final int HIT_RATE;
+    /**
+     * Defining weapon status.
+     */
+    protected final StatusType EFFECT;
 
-    protected final String VERB;
+    /**
+     * A random object.
+     */
+    protected static final Random RAND = new Random();
 
-    public static final Random RAND = new Random();
+    /**
+     * Current coating applied to this weapon (if any).
+     */
+    private Coating coating;
 
-    public LootWeapon(String name, char displayChar, boolean portable, int damage, int hitRate,
-                      String verb) {
+    /**
+     * The constructor of the LootWeapon class.
+     *
+     * @param name        the name of a weapon
+     * @param displayChar the symbol of the weapon
+     * @param portable    determine if a weapon is portable
+     * @param type        the basic attributes of a weapon
+     * @param effect      the status of a weapon
+     */
+    public LootWeapon(String name, char displayChar, boolean portable, WeaponType type,
+                      StatusType effect) {
         super(name, displayChar, portable);
-        this.DAMAGE = damage;
-        this.HIT_RATE = hitRate;
-        this.VERB = verb;
+        this.TYPE = type;
+        this.EFFECT = effect;
     }
 
-    public void hit(Actor attacker, Actor target, GameMap map) {}
+    /**
+     * Attack a target actor with additional effects.
+     *
+     * @param attacker represent an actor attack
+     * @param target   represent an actor being attacked
+     * @param map      the game map
+     */
+    public void hit(Actor attacker, Actor target, GameMap map) {
+    }
 
+    /**
+     * Define a weapon hit rate and show a description of the action.
+     *
+     * @param attacker the actor who performed the attack
+     * @param target   the actor who is the target of the attack
+     * @param map      the map on which the attack was executed
+     * @return a string message
+     */
     @Override
     public final String attack(Actor attacker, Actor target, GameMap map) {
-        if (!(RAND.nextInt(100) <= this.HIT_RATE)) {
+        int maximumBound = 100;
+
+        if (!(RAND.nextInt(maximumBound) <= this.getHitRate())) {
             return attacker + " misses " + target + ".";
         }
 
-        target.hurt(this.DAMAGE);
+        target.hurt(this.getDamage());
         this.hit(attacker, target, map);
-        return String.format("%s %s %s for %d damage", attacker, this.VERB, target, this.DAMAGE);
+
+        if (this.isCoatable() && this.getCoating() != null) {
+            this.getCoating().applyOnHit(attacker, target, map);
+        }
+
+        return String.format("%s %s %s for %d damage",
+                attacker, this.getVerb(), target, this.getDamage());
     }
 
+    /**
+     * Represent a weapon what action is allowable.
+     *
+     * @param otherActor the other actor
+     * @param location   the location of the other actor
+     * @return a list of actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = super.allowableActions(otherActor, location);
-        actions.add(new AttackAction(otherActor, location.toString(), this.VERB, this));
+        actions.add(new AttackAction(otherActor, location.toString(),
+                this.getVerb(), this));
         return actions;
     }
+
+    /**
+     * The accessor of the weapon damage.
+     *
+     * @return this weapon damage
+     */
+    public int getDamage() {
+        return TYPE.getDAMAGE();
+    }
+
+    /**
+     * The accessor of the chance of hitting target.
+     *
+     * @return this weapon hit rate
+     */
+    public int getHitRate() {
+        return TYPE.getHIT_RATE();
+    }
+
+    /**
+     * The accessor of the word to describe the weapon when hitting the target.
+     *
+     * @return this weapon hitting description
+     */
+    public String getVerb() {
+        return TYPE.getVERB();
+    }
+
+    /**
+     * Get the coating currently on this weapon.
+     *
+     * @return the {@link Coating} applied, or null if none
+     */
+    @Override
+    public Coating getCoating() {
+        return coating;
+    }
+
+    /**
+     * Set a coating to this weapon.
+     * Replace any existing coating if present.
+     *
+     * @param coating the {@link Coating} to apply
+     */
+    @Override
+    public void setCoating(Coating coating) {
+        this.coating = coating;
+    }
+
+    /**
+     * Return the string of this weapon.
+     * Show coating name if the weapon has one.
+     *
+     * @return text that represent this weapon
+     */
+    @Override
+    public String toString() {
+        return (coating == null) ?
+                super.toString() :
+                (super.toString() + " [" + coating.getName() + "]");
+    }
 }
+

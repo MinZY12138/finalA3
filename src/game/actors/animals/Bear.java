@@ -7,13 +7,11 @@ package game.actors.animals;
  * </p>
  *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public class Bear extends Animal {
 
-    public Bear(){
+    public Bear() {
         super("Bear", 'b', 100, 50);
-
     }
-
 }

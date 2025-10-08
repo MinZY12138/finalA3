@@ -3,11 +3,18 @@ package game.items.fruits;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-
 /**
- * An apple class
+ /**
+ * <h1>Class represent Apple</h1>
+ *
+ * <p>
+ *     Represent an Apple in this system.
+ * </p>
+ *
+ * Extends from {@link Fruit}
+ *
  * @author Ng Jun Jie
- * @version 1.0
+ * @version 2.0
  */
 public class Apple extends Fruit implements Consumable
 {
@@ -17,7 +24,7 @@ public class Apple extends Fruit implements Consumable
      */
     public Apple()
     {
-        super("apple", 'a', true);
+        super("Apple", 'a', true);
 
     }
 

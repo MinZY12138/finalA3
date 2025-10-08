@@ -12,17 +12,19 @@ import java.util.Random;
  * <h1>Class represent TeleportAction</h1>
  *
  * <p>
- *     Represent an action to telepot. It allowed {@link Actor}
- *     to teleport to a certain destination {@link Location}.
+ * Represent an action to telepot. It allowed {@link Actor}
+ * to teleport to a certain destination {@link Location}.
  * </p>
- *
+ * <p>
  * Extends {@link Action}
  *
  * @author Shee Seng Cheng
- * @version 1.0
+ * @version 1.1
+ * <p>
+ * Modified by: Tay Chee Hsian
  */
-public class TeleportAction extends Action
-{
+public class TeleportAction extends Action {
+
     /**
      * The object to use to teleport.
      */
@@ -40,9 +42,9 @@ public class TeleportAction extends Action
 
     /**
      * Indicate this execution with the current teleportable
-     * object successfull rate.
+     * object successful rate.
      */
-    private final double SUCCESSFULL_RATE;
+    private final double SUCCESSFUL_RATE;
 
     /**
      * Use to get a random number between 0-99 to compare with the
@@ -52,19 +54,19 @@ public class TeleportAction extends Action
 
     /**
      * Constructor for TeleportAction
-     * @param object The object to use to teleport.
-     * @param actor The actor who may perform teleporting.
-     * @param destination The destination to teleport to.
+     *
+     * @param object         The object to use to teleport.
+     * @param actor          The actor who may perform teleporting.
+     * @param destination    The destination to teleport to.
      * @param successfulRate The possibility of this action being
      *                       successfully executed
      */
     public TeleportAction(Teleportable object, Actor actor,
-                          Location destination, double successfulRate)
-    {
+                          Location destination, double successfulRate) {
         this.OBJECT = object;
         this.ACTOR = actor;
         this.DESTINATION = destination;
-        this.SUCCESSFULL_RATE = successfulRate;
+        this.SUCCESSFUL_RATE = successfulRate;
     }
 
     /**
@@ -77,20 +79,17 @@ public class TeleportAction extends Action
      * that can be displayed to the user.
      */
     @Override
-    public String execute(Actor actor, GameMap map)
-    {
+    public String execute(Actor actor, GameMap map) {
         //Default message and destination
         String defaultMessage = actor + " has teleport to a random " +
                 "place due to malfunction of " + this.OBJECT.getSimpleName();
         Location chosenDestination = this.DESTINATION;
 
         //If this execution success modify the default message
-        if ((RANDOM.nextInt(100) <= this.SUCCESSFULL_RATE))
-        {
+        int MAXIMUM_BOUND = 100;
+        if ((RANDOM.nextInt(MAXIMUM_BOUND) <= this.SUCCESSFUL_RATE)) {
             defaultMessage = OBJECT.teleportTo(this.ACTOR, this.DESTINATION);
-        }
-        else
-        {
+        } else {
             //Get a random position within this current map
             chosenDestination = RandomLocation.randomChooseLocation(map);
         }
@@ -107,8 +106,7 @@ public class TeleportAction extends Action
      * @return the action description to be displayed on the menu
      */
     @Override
-    public String menuDescription(Actor actor)
-    {
+    public String menuDescription(Actor actor) {
         return actor + " teleports to " + this.DESTINATION + " using " +
                 this.OBJECT.getSimpleName();
     }
