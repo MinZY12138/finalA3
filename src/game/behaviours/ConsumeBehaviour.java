@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.*;
 import edu.monash.fit2099.engine.items.*;
 import game.actions.ConsumeAction;
 import game.items.fruits.Consumable;
+import game.items.fruits.Food;
 
 /**
  * <h1>Class represent ConsumeBehaviour</h1>
@@ -37,7 +38,7 @@ public class ConsumeBehaviour implements Behaviour {
         Location place = map.locationOf(actor);
 
         for (Item item : place.getItems()){
-            if(Consumable.class.isInstance(item)){
+            if(item.hasAbility(Food.CONSUME)){
 
                 return new ConsumeAction((Consumable) item);
             }

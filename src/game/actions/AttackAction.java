@@ -78,6 +78,7 @@ public class AttackAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " " + this.VERB + " " + this.TARGET_ACTOR + " with " + this.WEAPON;
+        return actor + " " + this.VERB + " " + this.TARGET_ACTOR + " with " + this.WEAPON +
+                " at " + this.DIRECTION;
     }
 }

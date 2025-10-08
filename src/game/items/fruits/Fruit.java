@@ -29,6 +29,8 @@ public abstract class Fruit extends Item implements Consumable
     public Fruit(String name, char displayChar, boolean portable )
     {
         super(name, displayChar, portable);
+        this.enableAbility(Food.CONSUME);
+
 
     }
 

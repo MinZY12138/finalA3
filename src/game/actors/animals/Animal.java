@@ -93,6 +93,10 @@ public abstract class Animal extends Actor implements Warmable {
         return warmthLevel <= WARMTH_LOWER_BOUND;
     }
 
+    public void toConsume(boolean canConsume){
+        this.canConsume = canConsume;
+    }
+
     /**
      * Determines the action for the current turn.
      *
@@ -140,7 +144,8 @@ public abstract class Animal extends Actor implements Warmable {
             return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
         }
 
-        Location location = currentMap.locationOf(this);
+        return string;
+
 
         return super.toString() + " ( warmth level: " + this.warmthLevel + " ) at " + location;
     }
