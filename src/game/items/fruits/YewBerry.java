@@ -58,7 +58,7 @@ public class YewBerry extends Fruit implements Consumable {
         for (Coatable coatable : owner.getItemInventoryAs(Coatable.class)) {
             if (coatable.isCoatable()) {
                 if (coatable.getCoating() == null ||
-                coatable.getCoating().getClass() == YewBerryCoating.class) {
+                ! (coatable.getCoating().getClass() == YewBerryCoating.class)) {
                     actions.add(new CoatWeaponAction(coatable, new YewBerryCoating()));
                 }
             }
