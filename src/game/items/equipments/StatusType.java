@@ -3,7 +3,7 @@ package game.items.equipments;
 import edu.monash.fit2099.engine.actors.Actor;
 import game.actors.statuses.Bleeding;
 import game.actors.statuses.Burning;
-import game.actors.statuses.ContinuousDamage;
+import game.actors.statuses.ContinuousEffect;
 
 /**
  * <h1>Status Type enumeration</h1>
@@ -40,7 +40,7 @@ public enum StatusType {
     /**
      * The status applies to the target actor.
      */
-    private final Class<? extends ContinuousDamage> STATUS;
+    private final Class<? extends ContinuousEffect> STATUS;
 
     /**
      * The constructor of the StatusType enum.
@@ -48,7 +48,7 @@ public enum StatusType {
      * @param damage   the damage caused by the status effect
      * @param duration the duration of the status effect
      */
-    StatusType(Class<? extends ContinuousDamage> status, int damage, int duration) {
+    StatusType(Class<? extends ContinuousEffect> status, int damage, int duration) {
         this.STATUS = status;
         this.DAMAGE = damage;
         this.DURATION = duration;
@@ -79,7 +79,7 @@ public enum StatusType {
      * @return a new status object representing the status effect for the given target or null
      * if the instantiation fails
      */
-    public ContinuousDamage createStatus(Actor target) {
+    public ContinuousEffect createStatus(Actor target) {
         try {
             return STATUS.getConstructor(Actor.class, int.class, int.class)
                     .newInstance(target, this.getDAMAGE(), this.getDURATION());

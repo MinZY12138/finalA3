@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.actors.Actor;
  * </p>
  *
  * <p>
- * Extends {@link ContinuousDamage}.
+ * Extends {@link ContinuousEffect}.
  * </p>
  *
  * <p>
@@ -19,14 +19,9 @@ import edu.monash.fit2099.engine.actors.Actor;
  * </p>
  *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 1.1
  */
 public class Poisoning extends ContinuousDamage {
-
-    /**
-     * Fixed damage dealt to the poisoned actor each turn.
-     */
-    private static final int DAMAGE_PER_TURN = 4;
 
     /**
      * Constructor for Poisoning.
@@ -34,7 +29,7 @@ public class Poisoning extends ContinuousDamage {
      * @param actor    The actor who is poisoned.
      * @param duration The number of turns the poisoning lasts (e.g., 5).
      */
-    public Poisoning(Actor actor, int duration) {
-        super(actor, DAMAGE_PER_TURN, duration, "is poisoned");
+    public Poisoning(Actor actor, int damage, int duration) {
+        super(actor, damage, duration, "is poisoning");
     }
 }

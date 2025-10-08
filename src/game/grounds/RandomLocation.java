@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -35,5 +36,19 @@ public class RandomLocation {
         int randomX = RAND.nextInt(x.min(), x.max() + 1);
         int randomY = RAND.nextInt(y.min(), y.max() + 1);
         return map.at(randomX, randomY);
+    }
+
+    /**
+     * Random choose a location from surrounding based on a given radius.
+     *
+     * @param location surrounding location
+     * @param radius   the range of a location
+     * @return a random location from surrounding
+     */
+    public static Location randomChooseSurrounding(Location location, int radius) {
+        //Get its surrounding
+        List<Location> surrounding = location.getNearbyLocations(radius);
+        //Randomly choose one of its surrounding
+        return surrounding.get(RAND.nextInt(surrounding.size()));
     }
 }

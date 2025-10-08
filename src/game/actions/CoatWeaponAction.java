@@ -87,7 +87,8 @@ public class CoatWeaponAction extends Action {
         if (consumedItem != null) {
             actor.removeItemFromInventory(consumedItem);
         }
-        return actor + " coats " + weapon.coatedName() + " with " + coating.name();
+
+        return menuDescription(actor);
     }
 
     /**
@@ -98,7 +99,7 @@ public class CoatWeaponAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "Coat " + weapon.coatedName() + " with " + coating.name();
+        return actor + " coats " + weapon + " with " + coating.getName();
     }
 }
 

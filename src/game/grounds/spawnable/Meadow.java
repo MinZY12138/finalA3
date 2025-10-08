@@ -2,6 +2,8 @@ package game.grounds.spawnable;
 
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
+import game.behaviours.ConsumeBehaviour;
+
 import java.util.List;
 
 /**
@@ -54,16 +56,10 @@ public class Meadow extends SpawnGround {
         return SPAWN_CHANCE;
     }
 
-    /**
-     * Applies modifications to spawned animals.
-     *
-     * @param animal the {@link Animal} to modify
-     */
     @Override
-    protected void setAnimalAction (Animal animal)
-    {
-        animal.toConsume(true);
+    protected void addBehaviour(Animal animal) {
+        //Game rule consume behaviour are always has the middle priority.
+        int priority = 5;
+        animal.addBehaviourToAnimal(new ConsumeBehaviour(), priority);
     }
-
-
 }

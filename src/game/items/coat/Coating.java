@@ -20,14 +20,22 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Min Zhengyuan
  * @version 1.0
  */
-public interface Coating {
+public abstract class Coating {
+
+    private final String NAME;
+
+    public Coating(String name) {
+        this.NAME = name;
+    }
 
     /**
      * Get the name of this coating.
      *
      * @return A string representing the coating's name.
      */
-    String name();
+    public String getName() {
+        return this.NAME;
+    }
 
     /**
      * Defines the effect that occurs when a coated weapon hits a target.
@@ -36,5 +44,5 @@ public interface Coating {
      * @param target   The target actor being hit.
      * @param map      The game map where the attack occurs.
      */
-    void applyOnHit(Actor attacker, Actor target, GameMap map);
+    public abstract void applyOnHit(Actor attacker, Actor target, GameMap map);
 }

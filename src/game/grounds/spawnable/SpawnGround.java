@@ -63,6 +63,8 @@ public abstract class SpawnGround extends Ground {
      */
     protected void setAnimalAction (Animal animal){}
 
+    protected void addBehaviour(Animal animal){}
+
     /**
      * Called each game tick to possibly spawn an animal.
      *
@@ -78,6 +80,7 @@ public abstract class SpawnGround extends Ground {
         {
             Spawnable pickedAnimal = spawnable.get(random.nextInt(spawnable.size()));
             Animal animal = pickedAnimal.create();
+            this.addBehaviour(animal);
             setAnimalAction(animal);
 
             try{

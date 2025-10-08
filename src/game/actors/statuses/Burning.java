@@ -11,12 +11,14 @@ import edu.monash.fit2099.engine.actors.Actor;
  * object for five turns.
  * </p>
  * <p>
- * Extends {@link ContinuousDamage}
+ * Extends {@link ContinuousEffect}
  *
  * @author Shee Seng Cheng
- * @version 3.0
+ * @version 3.1
  */
 public class Burning extends ContinuousDamage {
+
+
     /**
      * Constructor for Burning.
      *

@@ -19,7 +19,7 @@ import java.util.Random;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 2.0.1
+ * @version 3.0
  * @since 2025-09-24
  */
 public abstract class LootWeapon extends Item implements Weapon, Coatable {
@@ -107,7 +107,8 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = super.allowableActions(otherActor, location);
-        actions.add(new AttackAction(otherActor, location.toString(), this.getVerb(), this));
+        actions.add(new AttackAction(otherActor, location.toString(),
+                this.getVerb(), this));
         return actions;
     }
 
@@ -138,10 +139,6 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
         return TYPE.getVERB();
     }
 
-    /* ========================
-       REQ4: Coatable methods
-       ======================== */
-
     @Override
     public Coating getCoating() {
         return coating;
@@ -153,22 +150,10 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
     }
 
     @Override
-    public void clearCoating() {
-        this.coating = null;
-    }
-
-    @Override
-    public String coatedName() {
-        return (coating == null) ? this.toString() : (this + " [" + coating.name() + "]");
-    }
-
-    /**
-     * Whether this weapon supports coating.
-     * Torch should override this to return {@code false}.
-     */
-    @Override
-    public boolean isCoatable() {
-        return true;
+    public String toString() {
+        return (coating == null) ?
+                super.toString() :
+                (super.toString() + " [" + coating.getName() + "]");
     }
 }
 

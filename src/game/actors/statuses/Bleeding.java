@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.actors.Actor;
  * </p>
  *
  * @author Tay Chee Hsian
- * @version 1.0.0
+ * @version 1.1.0
  * @since 2025-09-23
  */
 public class Bleeding extends ContinuousDamage {

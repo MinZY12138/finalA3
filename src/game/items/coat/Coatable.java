@@ -14,7 +14,9 @@ package game.items.coat;
  * </p>
  *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 2.0
+ *
+ * Modified by: Shee Seng Cheng, Tay Chee Hsian
  */
 public interface Coatable {
 
@@ -31,18 +33,6 @@ public interface Coatable {
      * @param coating The {@link Coating} to be applied.
      */
     void setCoating(Coating coating);
-
-    /**
-     * Remove the current coating from this item.
-     */
-    void clearCoating();
-
-    /**
-     * Get the display name of this item including coating information.
-     *
-     * @return A string representing the coated item's name.
-     */
-    String coatedName();
 
     /**
      * Determine whether this item supports coating.

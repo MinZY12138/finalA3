@@ -20,16 +20,14 @@ import game.actors.statuses.Poisoning;
  * @author Min Zhengyuan
  * @version 1.0
  */
-public class YewberryCoating implements Coating {
+public class YewBerryCoating extends Coating {
 
-    /**
-     * Get the name of this coating.
-     *
-     * @return The string {@code "Yewberry"}.
-     */
-    @Override
-    public String name() {
-        return "Yewberry";
+    private static final int DAMAGE = 4;
+
+    private static final int DURATION = 5;
+
+    public YewBerryCoating(){
+        super("Yew berry");
     }
 
     /**
@@ -45,6 +43,6 @@ public class YewberryCoating implements Coating {
     @Override
     public void applyOnHit(Actor attacker, Actor target, GameMap map) {
         // Attach Poisoning status to target (5 turns, -4 HP each turn)
-        target.addStatus(new Poisoning(target, 5));
+        target.addStatus(new Poisoning(target, DAMAGE, DURATION));
     }
 }

@@ -2,7 +2,7 @@ package game.items.equipments;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.statuses.ContinuousDamage;
+import game.actors.statuses.ContinuousEffect;
 
 /**
  * <h1>Axe class</h1>
@@ -44,7 +44,7 @@ public class Axe extends LootWeapon {
         int maximumBound = 100;
 
         if (RAND.nextInt(maximumBound) <= CHANCE) {
-            ContinuousDamage status = EFFECT.createStatus(target);
+            ContinuousEffect status = EFFECT.createStatus(target);
 
             if (status != null) {
                 target.addStatus(status);
