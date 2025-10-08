@@ -13,12 +13,9 @@ import game.actors.statuses.Poisoning;
  * {@link Poisoning} status lasting 5 turns, dealing 4 HP damage per turn.
  * </p>
  *
- * <p>
- * Implements {@link Coating}.
- * </p>
  *
  * @author Min Zhengyuan
- * @version 1.0
+ * @version 2.0
  */
 public class YewBerryCoating extends Coating {
 
@@ -26,6 +23,10 @@ public class YewBerryCoating extends Coating {
 
     private static final int DURATION = 5;
 
+    /**
+     * Constructor for YewBerryCoating.
+     * Set the name of this coating as "Yew berry".
+     */
     public YewBerryCoating(){
         super("Yew berry");
     }

@@ -21,7 +21,7 @@ import java.util.List;
  * @version 2.0.1
  * @since 2025-09-24
  * <p>
- * Modified by: Shee Seng Cheng
+ * Modified by: Shee Seng Cheng，Min Zhengyuan
  */
 public class Torch extends LootWeapon implements SummonFire {
 
@@ -68,9 +68,6 @@ public class Torch extends LootWeapon implements SummonFire {
 
     /**
      * Torch cannot be coated.
-     * <p>
-     * Overrides the default coating behavior to disable coating capability.
-     * </p>
      *
      * @return {@code false}, since Torch does not support coatings.
      */
