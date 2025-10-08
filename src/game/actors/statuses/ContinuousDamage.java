@@ -1,96 +1,56 @@
 package game.actors.statuses;
 
 import edu.monash.fit2099.engine.GameEntity;
-import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
- * <h1>Class represent ContinuousDamage</h1>
+ * <h1>Class represents ContinuousWarmthLoss</h1>
  *
  * <p>
- *     Represent a continuous status that cause damage to
- *     {@link Actor} in the system. Any actor has this
- *     status will continuously hurt for a specific amount
- *     of damage for a specific duration.
+ * Represent a continuous status that cause damage to
+ * {@link Actor} in the system. Any actor has this
+ * status will continuously hurt for a specific amount
+ * of damage for a specific duration.
  * </p>
+
+ * Extends {@link ContinuousEffect}
  *
- * Extends {@link Status}
+ * @author Min Zhengyuan
+ * @version 2.0
  *
- * @author Shee Seng Cheng
- * @version 1.0
+ * Modified by: Shee Seng Cheng, Tay Chee Hsian, Ng Jun Jie
  */
-public abstract class ContinuousDamage implements Status
-{
-    /**
-     * Indicate this status will run for how many turns
-     */
-    private int duration;
+public abstract class ContinuousDamage extends ContinuousEffect {
 
     /**
-     * The {@link Actor} which has this status.
-     */
-    private final Actor ACTOR;
-
-    /**
-     * The damage cause by status.
+     * The damage caused by this status.
      */
     private final int DAMAGE;
 
     /**
-     * Integer indicate the end of this status.
+     * Constructor for ContinuousWarmthLoss.
+     *
+     * @param target   The actor target affected.
+     * @param duration The number of turns this status lasts.
+     * @param verb     The descriptive verb to show when status is active.
      */
-    private static final int END = 0;
-
-    private final String VERB;
-
-    /**
-     * Constructor for ContinuousDamage
-     * @param actor The {@link Actor} which has this status.
-     * @param damage The damage cause by this status.
-     * @param duration Status will run for how many turns
-     * @param verb Message that show the status.
-     */
-    public ContinuousDamage(Actor actor, int damage, int duration, String verb)
-    {
-        this.ACTOR = actor;
+    public ContinuousDamage(Actor target, int damage, int duration, String verb) {
+        super(target, duration, verb);
         this.DAMAGE = damage;
-        this.duration = duration;
-        this.VERB = verb;
     }
 
     /**
-     * Called once per tick to update the status of the current ACTOR.
+     * Perform warmth reduction each turn and decrease the remaining duration.
      * Each turn reducing one duration and hurt the ACTOR by the damage.
      *
-     * @param currEntity Not use here but it was equal to ACTOR
-     * @param location Not use here.
+     * @param currEntity The entity currently holding this status.
+     * @param location   The location of the entity.
      */
     @Override
-    public void tickStatus(GameEntity currEntity, Location location)
-    {
-        this.ACTOR.hurt(this.DAMAGE);
-        this.duration--;
-    }
-
-    /**
-     * Indicates whether this status is still active.
-     *
-     * @return true if active, false otherwise
-     */
-    @Override
-    public boolean isStatusActive()
-    {
-        return duration != END;
-    }
-
-    /**
-     * String represent this status.
-     * @return {@code String} details of this status.
-     */
-    @Override
-    public String toString()
-    {
-        return this.ACTOR + " " + this.VERB + ".";
+    public void tickStatus(GameEntity currEntity, Location location) {
+        super.tickStatus(currEntity, location);
+        this.ACTOR.hurt(DAMAGE);
     }
 }
+
