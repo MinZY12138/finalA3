@@ -4,24 +4,25 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
-import game.grounds.Dirt;
 
 /**
  * <h1>Class DirtState</h1>
  *
  * <p>
  *     Represent the dirt state of the dragon in this system.
- *     Will make the surrounding to became {@link Dirt} when the
+ *     Will make the surrounding to became Dirt when the
  *     dragon moved.
+ *     More info see {@link SummonDirt}
  * </p>
  *
  * Extends: {@link StateOfDragon}
+ * Implements: {@link SummonDirt}
  *
  * @author Ng Jun Jie
  * @version 2.0
  * Modify by: Shee Seng Cheng
  */
-public class DirtState extends StateOfDragon{
+public class DirtState extends StateOfDragon implements SummonDirt{
 
     /**
      * Set the dragon effect when is in this State.
@@ -31,11 +32,10 @@ public class DirtState extends StateOfDragon{
     public void setDragonAction(Animal dragon, GameMap map) {
         super.setDragonAction(dragon, map);
         Location here = map.locationOf(dragon);
-        dragon.resistanceToWarm = false;
 
         for (Exit exit : here.getExits()) {
             Location surrounding = exit.getDestination();
-            surrounding.setGround(new Dirt());
+            surrounding.setGround(this.summonDirt());
         }
     }
 }
