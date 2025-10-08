@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.statuses.ContinuousDamage;
+import game.actors.statuses.ContinuousEffect;
 import game.capabilities.SummonFire;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Tay Chee Hsian
  * @version 2.0.1
  * @since 2025-09-24
- *
+ * <p>
  * Modified by: Shee Seng Cheng
  */
 public class Torch extends LootWeapon implements SummonFire {
@@ -44,7 +44,7 @@ public class Torch extends LootWeapon implements SummonFire {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        ContinuousDamage status = EFFECT.createStatus(target);
+        ContinuousEffect status = EFFECT.createStatus(target);
 
         if (status != null) {
             target.addStatus(status);
@@ -65,6 +65,7 @@ public class Torch extends LootWeapon implements SummonFire {
             burnLocation(place.getDestination());
         }
     }
+
     /**
      * Torch cannot be coated.
      * <p>
@@ -77,5 +78,4 @@ public class Torch extends LootWeapon implements SummonFire {
     public boolean isCoatable() {
         return false;
     }
-
 }
