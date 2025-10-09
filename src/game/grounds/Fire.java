@@ -71,9 +71,9 @@ public class Fire extends Ground implements SummonDirt
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            int BURNING_STATUS_DURATION = 5;
+            int burningDuration = 5;
             actor.addStatus(new Burning(actor, BURNING_DMG,
-                    BURNING_STATUS_DURATION));
+                    burningDuration));
         }
     }
 }

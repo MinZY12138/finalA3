@@ -44,7 +44,7 @@ public abstract class StateOfDragon implements DragonState
     @Override
     public void setDragonAction(Animal dragon, GameMap map)
     {
-        dragon.resistanceToWarm = false;
+        dragon.resistanceToCold = false;
         dragon.resetBehaviourMap();
     }
 }

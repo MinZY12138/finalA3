@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.animals.Warmable;
 import game.actors.statuses.Frostbiting;
-import game.actors.abilities.Abilities;
+import game.actors.Abilities;
 
 /**
  * <h1>Class represents SnowCoating</h1>

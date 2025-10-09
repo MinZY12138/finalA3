@@ -22,9 +22,9 @@ import java.util.Random;
  */
 public abstract class SpawnGround extends Ground {
 
-    private final List<Spawnable> spawnable;
+    private final List<Spawnable> SPAWNABLE;
     private int turns = 0;
-    private final Random random = new Random();
+    private final Random RAND = new Random();
     private static final int RANDOM_RANGE = 100;
     private static final int FACTOR_NUMBER = 0;
 
@@ -38,7 +38,7 @@ public abstract class SpawnGround extends Ground {
     public SpawnGround(char displayChar, String name, List<Spawnable> spawnable)
     {
         super(displayChar, name);
-        this.spawnable = spawnable;
+        this.SPAWNABLE = spawnable;
     }
 
     /**
@@ -76,9 +76,9 @@ public abstract class SpawnGround extends Ground {
         turns++;
 
         if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
-        && random.nextInt(RANDOM_RANGE) < getAnimalSpawnChance())
+        && RAND.nextInt(RANDOM_RANGE) < getAnimalSpawnChance())
         {
-            Spawnable pickedAnimal = spawnable.get(random.nextInt(spawnable.size()));
+            Spawnable pickedAnimal = SPAWNABLE.get(RAND.nextInt(SPAWNABLE.size()));
             Animal animal = pickedAnimal.create();
             this.addBehaviour(animal);
             setAnimalAction(animal);

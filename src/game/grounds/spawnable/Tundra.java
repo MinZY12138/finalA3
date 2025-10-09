@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperation;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
-import game.actors.abilities.Abilities;
+import game.actors.Abilities;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class Tundra extends SpawnGround {
     protected void setAnimalAction (Animal animal)
     {
         animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
-        animal.resistanceToWarm = true;
+        animal.resistanceToCold = true;
         animal.enableAbility(Abilities.COLD_RESISTANT);
     }
 }

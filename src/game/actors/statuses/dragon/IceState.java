@@ -27,6 +27,6 @@ public class IceState extends StateOfDragon{
      */
     public void setDragonAction(Animal dragon, GameMap map) {
         super.setDragonAction(dragon, map);
-        dragon.resistanceToWarm = true;
+        dragon.resistanceToCold = true;
     }
 }
