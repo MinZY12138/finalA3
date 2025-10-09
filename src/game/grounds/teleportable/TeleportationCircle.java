@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.RandomLocation;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * <h1>Class represent TeleportationCircle</h1>
@@ -24,12 +23,6 @@ import java.util.Random;
  * Modified by: Tay Chee Hsian
  */
 public class TeleportationCircle extends TeleGround {
-
-    /**
-     * Use to get random number. (select a random location)
-     */
-    private static final Random RANDOM = new Random();
-
     /**
      * Constructor for TeleportationCircle
      *
