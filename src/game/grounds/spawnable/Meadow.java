@@ -28,8 +28,8 @@ public class Meadow extends SpawnGround {
      */
     public Meadow(List<Spawnable> spawnable){
         super('w', "Meadow", spawnable);
-        setSpawnChance(SpawnableInfo.MEADOW_SPAWN_CHANCE.getINFO());
-        setSpawnTurn(SpawnableInfo.MEADOW_SPAWN_TURN.getINFO());
+        setSpawnChance(SpawnableGroundInfo.MEADOW.getSPAWN_CHANCE());
+        setSpawnTurn(SpawnableGroundInfo.MEADOW.getSPAWN_TURN());
     }
 
     @Override
