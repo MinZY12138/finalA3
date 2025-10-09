@@ -12,6 +12,9 @@ package game.actors.animals;
 public class Wolf extends Animal{
 
     public Wolf(){
-        super("Wolf", 'e', 100, 25);
+        super(AnimalInfo.WOLF.getNAME(),
+                AnimalInfo.WOLF.getDISPLAY_CHARACTER(),
+                AnimalInfo.WOLF.getHIT_POINT(),
+                AnimalInfo.WOLF.getWARMTH_LEVEL());
     }
 }

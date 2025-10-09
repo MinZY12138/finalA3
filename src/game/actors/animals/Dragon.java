@@ -52,7 +52,10 @@ public class Dragon extends Animal {
      * Constructor for Dragon
      */
     public Dragon() {
-        super("Dragon", 'Q', 500, 10);
+        super(AnimalInfo.DRAGON.getNAME(),
+                AnimalInfo.DRAGON.getDISPLAY_CHARACTER(),
+                AnimalInfo.DRAGON.getHIT_POINT(),
+                AnimalInfo.DRAGON.getWARMTH_LEVEL());
         this.setIntrinsicWeapon(new FireBlow());
         this.enableAbility(Abilities.ATTACK);
     }

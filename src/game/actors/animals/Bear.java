@@ -12,6 +12,9 @@ package game.actors.animals;
 public class Bear extends Animal {
 
     public Bear() {
-        super("Bear", 'b', 100, 50);
+        super(AnimalInfo.BEAR.getNAME(),
+                AnimalInfo.BEAR.getDISPLAY_CHARACTER(),
+                AnimalInfo.BEAR.getHIT_POINT(),
+                AnimalInfo.BEAR.getWARMTH_LEVEL());
     }
 }

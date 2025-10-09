@@ -12,7 +12,10 @@ package game.actors.animals;
 public class Deer extends Animal{
 
     public Deer(){
-        super("Deer", 'd', 50, 10);
+        super(AnimalInfo.DEER.getNAME(),
+                AnimalInfo.DEER.getDISPLAY_CHARACTER(),
+                AnimalInfo.DEER.getHIT_POINT(),
+                AnimalInfo.DEER.getWARMTH_LEVEL());
     }
 
 }
