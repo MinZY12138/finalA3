@@ -20,9 +20,6 @@ import java.util.List;
  */
 public class Cave extends SpawnGround {
 
-    private static final int SPAWN_TURN = 5;
-    private static final int SPAWN_CHANCE = 100;
-
     /**
      * Constructs a Cave ground tile with a list of spawnable animals.
      *
@@ -31,28 +28,7 @@ public class Cave extends SpawnGround {
     public Cave(List<Spawnable> spawnable)
     {
         super('C', "Cave",spawnable);
-
+        setSpawnChance(SpawnableInfo.CAVE_SPAWN_CHANCE.getINFO());
+        setSpawnTurn(SpawnableInfo.CAVE_SPAWN_TURN.getINFO());
     }
-
-    /**
-     * Specifies the number of ticks between spawn attempts.
-     *
-     * @return 5 ticks
-     */
-    @Override
-    protected int getAnimalSpawnTurn()
-    {
-        return SPAWN_TURN;
-    }
-
-    /**
-     * Specifies the spawn success chance.
-     *
-     * @return 100
-     */
-    @Override
-    protected int getAnimalSpawnChance() {
-        return SPAWN_CHANCE;
-    }
-
 }

@@ -22,9 +22,6 @@ import java.util.List;
  * @version 1.0
  */
 public class Tundra extends SpawnGround {
-
-    private static final int SPAWN_TURN = 1;
-    private static final int SPAWN_CHANCE = 5;
     private static final int EXTRA_HEALTH = 10;
 
     /**
@@ -34,29 +31,10 @@ public class Tundra extends SpawnGround {
      */
     public Tundra(List<Spawnable> spawnable){
         super('_', "Tundra", spawnable);
-
+        setSpawnChance(SpawnableInfo.TUNDRA_SPAWN_CHANCE.getINFO());
+        setSpawnTurn(SpawnableInfo.TUNDRA_SPAWN_TURN.getINFO());
     }
 
-    /**
-     * Specifies the number of ticks between spawn attempts.
-     *
-     * @return 1 tick
-     */
-    @Override
-    protected int getAnimalSpawnTurn()
-    {
-        return SPAWN_TURN;
-    }
-
-    /**
-     * Specifies the spawn success chance.
-     *
-     * @return 5
-     */
-    @Override
-    protected int getAnimalSpawnChance() {
-        return SPAWN_CHANCE;
-    }
     /**
      * Applies modifications to spawned animals.
      *
@@ -65,8 +43,8 @@ public class Tundra extends SpawnGround {
     @Override
     protected void setAnimalAction (Animal animal)
     {
-        animal.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
-        animal.resistanceToCold = true;
+        animal.modifyStatsMaximum(BaseAttributes.HEALTH,
+                ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
         animal.enableAbility(Abilities.COLD_RESISTANT);
     }
 }

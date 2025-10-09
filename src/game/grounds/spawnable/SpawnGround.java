@@ -28,6 +28,10 @@ public abstract class SpawnGround extends Ground {
     private static final int RANDOM_RANGE = 100;
     private static final int FACTOR_NUMBER = 0;
 
+    private int spawnTurn;
+
+    private int spawnChance;
+
     /**
      * Constructor for SpawnGround.
      *
@@ -41,19 +45,35 @@ public abstract class SpawnGround extends Ground {
         this.SPAWNABLE = spawnable;
     }
 
+    public void setSpawnTurn (int spawnTurn)
+    {
+        this.spawnTurn = spawnTurn;
+    }
+
+    public void setSpawnChance (int spawnChance)
+    {
+        this.spawnChance = spawnChance;
+    }
+
     /**
-     * Defines after how many ticks animals should attempt to spawn.
+     * Getter get after how many ticks animals should attempt to spawn.
      *
      * @return the number of ticks between spawn attempts
      */
-    protected abstract int getAnimalSpawnTurn();
+    private int getAnimalSpawnTurn()
+    {
+        return this.spawnTurn;
+    }
 
     /**
-     * Defines the percentage chance (0–100) that a spawn attempt succeeds.
+     * Getter get the percentage chance (0–100) that a spawn attempt succeeds.
      *
      * @return the chance of spawning an animal
      */
-    protected abstract int getAnimalSpawnChance();
+    private int getAnimalSpawnChance()
+    {
+        return this.spawnChance;
+    }
 
     /**
      * Hook method that allows subclasses to modify animals before adding them.
