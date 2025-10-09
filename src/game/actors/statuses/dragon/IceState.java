@@ -1,6 +1,7 @@
 package game.actors.statuses.dragon;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.Abilities;
 import game.actors.animals.Animal;
 
 /**
@@ -27,6 +28,6 @@ public class IceState extends StateOfDragon{
      */
     public void setDragonAction(Animal dragon, GameMap map) {
         super.setDragonAction(dragon, map);
-        dragon.resistanceToCold = true;
+        dragon.enableAbility(Abilities.COLD_RESISTANT);
     }
 }

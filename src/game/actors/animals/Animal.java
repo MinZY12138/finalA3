@@ -39,11 +39,6 @@ public abstract class Animal extends Actor implements Warmable {
      */
     private int warmthLevel;
 
-    /**
-     * Check whether the animal resistance to warm
-     */
-    public boolean resistanceToCold;
-
     protected Map<Integer, Behaviour> behaviourMap = new TreeMap<>();
 
     private static final int WARMTH_LOWER_BOUND = 0;
@@ -59,7 +54,6 @@ public abstract class Animal extends Actor implements Warmable {
     public Animal(String name, char displayChar, int hitpoints, int warmthLevel) {
         super(name, displayChar, hitpoints);
         this.warmthLevel = warmthLevel;
-        this.resistanceToCold = false;
 
         resetBehaviourMap();
     }
@@ -89,7 +83,7 @@ public abstract class Animal extends Actor implements Warmable {
      */
     @Override
     public void decreaseWarmthLevel() {
-        if (!resistanceToCold) {
+        if (!this.hasAbility(Abilities.COLD_RESISTANT)) {
             this.warmthLevel--;
             if (isCold()) {
                 this.warmthLevel = WARMTH_LOWER_BOUND;

@@ -1,6 +1,7 @@
 package game.actors.statuses.dragon;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.Abilities;
 import game.actors.animals.Animal;
 
 
@@ -44,7 +45,7 @@ public abstract class StateOfDragon implements DragonState
     @Override
     public void setDragonAction(Animal dragon, GameMap map)
     {
-        dragon.resistanceToCold = false;
+        dragon.disableAbility(Abilities.COLD_RESISTANT);
         dragon.resetBehaviourMap();
     }
 }
