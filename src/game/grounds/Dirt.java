@@ -23,6 +23,6 @@ public class Dirt extends Ground
     public Dirt()
     {
         //Pass its parameter to its parent's constructor.
-        super('+', "Dirt");
+        super(GroundInfo.DIRT.getDISPLAY_CHAR(), GroundInfo.DIRT.getNAME());
     }
 }

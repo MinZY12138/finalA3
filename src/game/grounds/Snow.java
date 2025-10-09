@@ -20,7 +20,8 @@ public class Snow extends Ground {
      * The constructor of the Snow class.
      */
     public Snow() {
-        super('.', "Snow");
+        super(GroundInfo.SNOW.getDISPLAY_CHAR(),
+                GroundInfo.SNOW.getNAME());
     }
 
     /**

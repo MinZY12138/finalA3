@@ -3,6 +3,7 @@ package game.grounds.teleportable;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.GroundInfo;
 
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class TeleDoor extends TeleGround {
      */
     public TeleDoor(List<Location> destination) {
         //Pass its parameter to its parent's constructor
-        super(destination, '#', "Tele-door");
+        super(destination, GroundInfo.TELE_DOOR.getDISPLAY_CHAR(),
+                GroundInfo.TELE_DOOR.getNAME());
     }
 
     /**

@@ -2,6 +2,8 @@ package game.grounds.spawnable;
 
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
+import game.grounds.GroundInfo;
+
 import java.util.List;
 
 /**
@@ -27,7 +29,7 @@ public class Cave extends SpawnGround {
      */
     public Cave(List<Spawnable> spawnable)
     {
-        super('C', "Cave",spawnable);
+        super(GroundInfo.CAVE.getDISPLAY_CHAR(), GroundInfo.CAVE.getNAME(),spawnable);
         setSpawnChance(SpawnableGroundInfo.CAVE.getSPAWN_CHANCE());
         setSpawnTurn(SpawnableGroundInfo.CAVE.getSPAWN_TURN());
     }

@@ -2,6 +2,7 @@ package game.grounds.teleportable;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.GroundInfo;
 import game.grounds.RandomLocation;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public class TeleportationCircle extends TeleGround {
      */
     public TeleportationCircle(List<Location> destination) {
         //Pass its parameter to its parent's constructor.
-        super(destination, 'O', "Teleportation Circle");
+        super(destination, GroundInfo.TELEPORTATION_CIRCLE.getDISPLAY_CHAR(),
+                GroundInfo.TELEPORTATION_CIRCLE.getNAME());
     }
 
     /**

@@ -44,7 +44,7 @@ public class Fire extends Ground implements SummonDirt
     public Fire()
     {
         //Pass parameter of itself to its parent's class
-        super('^', "Fire");
+        super(GroundInfo.FIRE.getDISPLAY_CHAR(), GroundInfo.FIRE.getNAME());
     }
 
     /**

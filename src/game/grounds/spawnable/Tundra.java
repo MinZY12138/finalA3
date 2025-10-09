@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 import game.actors.Abilities;
+import game.grounds.GroundInfo;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Tundra extends SpawnGround {
      * @param spawnable a list of {@link Spawnable} animals that can be spawned
      */
     public Tundra(List<Spawnable> spawnable){
-        super('_', "Tundra", spawnable);
+        super(GroundInfo.TUNDRA.getDISPLAY_CHAR(), GroundInfo.TUNDRA.getNAME(), spawnable);
         setSpawnChance(SpawnableGroundInfo.TUNDRA.getSPAWN_CHANCE());
         setSpawnTurn(SpawnableGroundInfo.TUNDRA.getSPAWN_TURN());
     }

@@ -3,6 +3,7 @@ package game.grounds.spawnable;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 import game.behaviours.ConsumeBehaviour;
+import game.grounds.GroundInfo;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Meadow extends SpawnGround {
      * @param spawnable a list of {@link Spawnable} animals that can be spawned
      */
     public Meadow(List<Spawnable> spawnable){
-        super('w', "Meadow", spawnable);
+        super(GroundInfo.MEADOW.getDISPLAY_CHAR(), GroundInfo.MEADOW.getNAME(), spawnable);
         setSpawnChance(SpawnableGroundInfo.MEADOW.getSPAWN_CHANCE());
         setSpawnTurn(SpawnableGroundInfo.MEADOW.getSPAWN_TURN());
     }
