@@ -45,7 +45,7 @@ public class TeleportCube extends Item implements Teleportable
      */
     public TeleportCube(List<Location> destination)
     {
-        super("Teleport Cube", '□', true);
+        super(ItemInfo.TELE_CUBE.getNAME(), ItemInfo.TELE_CUBE.getCHAR(), ItemInfo.TELE_CUBE.isPORTABLE());
         this.DESTINATION = destination;
     }
 
