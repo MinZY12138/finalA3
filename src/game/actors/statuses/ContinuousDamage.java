@@ -2,7 +2,6 @@ package game.actors.statuses;
 
 import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
@@ -29,8 +28,6 @@ public abstract class ContinuousDamage extends ContinuousEffect {
      */
     private final int DAMAGE;
 
-    private final Display DISPLAY = new Display();
-
     /**
      * Constructor for ContinuousDamage.
      *
@@ -56,6 +53,11 @@ public abstract class ContinuousDamage extends ContinuousEffect {
         DISPLAY.println(this.toString());
     }
 
+    /**
+     * Returns a string representation for continuous damage.
+     *
+     * @return a descriptive message
+     */
     @Override
     public String toString() {
         return String.format("%s for %d damage", super.toString(), this.DAMAGE);
