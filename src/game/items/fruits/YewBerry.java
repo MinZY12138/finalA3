@@ -40,7 +40,7 @@ public class YewBerry extends Fruit {
      */
     @Override
     public String consume(Actor actor) {
-        actor.hurt(actor.getAttribute(BaseAttributes.HEALTH));
+        actor.hurt(actor.getMaximumAttribute(BaseAttributes.HEALTH));
         return ", died ";
     }
 
