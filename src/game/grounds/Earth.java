@@ -152,5 +152,6 @@ public class Earth extends World {
 //        player.addItemToInventory(new YewBerry());
 //        gameMap1.addActor(new Bear(), gameMap1.at(0, 0));
         //-----------------------------------------------------------------------------------------
+
     }
 }
