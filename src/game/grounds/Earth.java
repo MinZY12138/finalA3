@@ -124,11 +124,14 @@ public class Earth extends World {
         Bow bow = new Bow(WeaponType.BOW, null);
         location3.addItem(bow);
 
-        player.addItemToInventory(bow);
-
         // req 5
         Dragon dragon = new Dragon();
         dragon.setCurrentState(new DirtState());
         gameMap1.at(12,9).addActor(dragon);
+
+        // ----------------------------Testing-----------------------------------------------------
+        player.addItemToInventory(bow);
+        gameMap1.addActor(new Bear(), gameMap1.at(1, 2));
+        //-----------------------------------------------------------------------------------------
     }
 }
