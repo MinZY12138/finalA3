@@ -8,3 +8,5 @@
      :MM;    :MM;       MM    M     YMM       MM        MM     ,M   MM   `Mb. 
       VF      VF      .JMML..JML.    YM     .JMML.    .JMMmmmmMMM .JMML. .JMM.
 ```
+
+Contribution Log Link: https://docs.google.com/spreadsheets/d/1oX6jqnUVR0a0dpvEsl9jClG-8xcurkCpfvVJvy_VQuA/edit?usp=sharing
