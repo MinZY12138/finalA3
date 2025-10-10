@@ -22,7 +22,7 @@ import game.items.coat.YewBerryCoating;
  *
  * Modified by: Shee Seng Cheng, Zhengyuan Min
  */
-public class YewBerry extends Fruit implements Consumable {
+public class YewBerry extends Fruit  {
 
     /**
      * Constructor for yew berry

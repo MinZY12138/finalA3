@@ -16,7 +16,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Ng Jun Jie
  * @version 2.0
  */
-public class Apple extends Fruit implements Consumable
+public class Apple extends Fruit
 {
 
     /**

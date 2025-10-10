@@ -1,9 +1,11 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.actors.*;
-import edu.monash.fit2099.engine.actions.*;
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.positions.*;
-import java.util.*;
+import java.util.Random;
+import java.util.ArrayList;
+
 
 /**
  * <h1>Class represent WanderBehaviour</h1>
@@ -28,38 +30,29 @@ public class WanderBehaviour implements Behaviour
     private final Random random = new Random();
 
     /**
-     * Generates a random movement action for the actor.
+     * Returns a MoveAction to wander to a random location, if possible.
+     * If no movement is possible, returns null.
      *
-     * @param actor the actor whose turn it is
-     * @param map   the map the actor is currently on
-     * @return a {@link MoveActorAction} to a random valid exit, or {@code null} if none available
+     * @param actor the Actor enacting the behaviour
+     * @param map the map that actor is currently on
+     * @return an Action, or null if no MoveAction is possible
      */
     @Override
-    public Action generateAction(Actor actor, GameMap map)
-    {
-        Location here = map.locationOf(actor);
+    public Action generateAction(Actor actor, GameMap map) {
+        ArrayList<Action> actions = new ArrayList<>();
 
-        // Collect valid exits
-        List<Exit> possibleExits = new ArrayList<>();
-        for (Exit exit : here.getExits())
-        {
+        for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
-            // Check if the destination can be entered by the actor and has no other actor
-            if (destination.canActorEnter(actor) && !destination.containsAnActor())
-            {
-                possibleExits.add(exit);
+            if (destination.canActorEnter(actor)) {
+                actions.add(exit.getDestination().getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
 
-
-        if (possibleExits.isEmpty())
-        {
+        if (!actions.isEmpty()) {
+            return actions.get(random.nextInt(actions.size()));
+        }
+        else {
             return null;
         }
-
-        // Pick a random exit
-        Exit chosenExit = possibleExits.get(random.nextInt(possibleExits.size()));
-
-        return new MoveActorAction(chosenExit.getDestination(), chosenExit.getName());
     }
 }
