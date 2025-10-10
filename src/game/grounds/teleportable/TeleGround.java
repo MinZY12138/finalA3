@@ -34,6 +34,11 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
     private final List<Location> DESTINATION;
 
     /**
+     * The location where this teleport object at.
+     */
+    private final Location SOURCE;
+
+    /**
      * Indicate the duration of burning the surrounding after teleport.
      */
     private static final int BURN_GROUND_DURATION = 3;
@@ -45,9 +50,11 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
      * @param displayCharacter character to display for this type of terrain
      * @param name             name of this terrain.
      */
-    public TeleGround(List<Location> destination, char displayCharacter, String name) {
+    public TeleGround(List<Location> destination, char displayCharacter, String name,
+                      Location source) {
         super(displayCharacter, name);
         this.DESTINATION = destination;
+        this.SOURCE = source;
     }
 
     /**
@@ -65,6 +72,14 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
      */
     protected List<Location> getDestination() {
         return Collections.unmodifiableList(this.DESTINATION);
+    }
+
+    /**
+     * Getter get the position where this ground at.
+     * @return {@code Location} the location of the ground.
+     */
+    protected Location getSOURCE(){
+        return this.SOURCE;
     }
 
     /**
