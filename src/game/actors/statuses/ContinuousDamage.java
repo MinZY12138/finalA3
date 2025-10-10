@@ -2,6 +2,7 @@ package game.actors.statuses;
 
 import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
@@ -28,6 +29,8 @@ public abstract class ContinuousDamage extends ContinuousEffect {
      */
     private final int DAMAGE;
 
+    private final Display DISPLAY = new Display();
+
     /**
      * Constructor for ContinuousDamage.
      *
@@ -50,6 +53,12 @@ public abstract class ContinuousDamage extends ContinuousEffect {
     public void tickStatus(GameEntity currEntity, Location location) {
         super.tickStatus(currEntity, location);
         this.ACTOR.hurt(DAMAGE);
+        DISPLAY.println(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s for %d damage", super.toString(), this.DAMAGE);
     }
 }
 
