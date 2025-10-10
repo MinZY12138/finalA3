@@ -57,7 +57,7 @@ public class ConsumeAction extends Action
             place.removeItem((Item)item);
         }
 
-        return actor + " consumes " + item + item.consume(actor, map);
+        return actor + " consumes " + item + item.consume(actor);
     }
 
     /**

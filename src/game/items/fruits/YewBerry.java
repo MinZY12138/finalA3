@@ -35,11 +35,10 @@ public class YewBerry extends Fruit  {
      * define the effect of consuming of yew berry
      *
      * @param actor the actor that consume the fruit
-     * @param map   the place where the actor at
      * @return description of the effect
      */
     @Override
-    public String consume(Actor actor, GameMap map) {
+    public String consume(Actor actor) {
         actor.hurt(actor.getAttribute(BaseAttributes.HEALTH));
         return ", died ";
     }

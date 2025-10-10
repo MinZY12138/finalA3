@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
+
 import java.util.List;
 import java.util.Random;
 
@@ -23,9 +24,13 @@ import java.util.Random;
 public abstract class SpawnGround extends Ground {
 
     private final List<Spawnable> SPAWNABLE;
+
     private int turns = 0;
+
     private final Random RAND = new Random();
+
     private static final int RANDOM_RANGE = 100;
+
     private static final int FACTOR_NUMBER = 0;
 
     private int spawnTurn;
@@ -36,22 +41,29 @@ public abstract class SpawnGround extends Ground {
      * Constructor for SpawnGround.
      *
      * @param displayChar the character used to represent this ground
-     * @param name the name of this ground
-     * @param spawnable a list of {@link Spawnable} animals that may be spawned
+     * @param name        the name of this ground
+     * @param spawnable   a list of {@link Spawnable} animals that may be spawned
      */
-    public SpawnGround(char displayChar, String name, List<Spawnable> spawnable)
-    {
+    public SpawnGround(char displayChar, String name, List<Spawnable> spawnable) {
         super(displayChar, name);
         this.SPAWNABLE = spawnable;
     }
 
-    public void setSpawnTurn (int spawnTurn)
-    {
+    /**
+     * The setter of spawn turn.
+     *
+     * @param spawnTurn the number of spawn turn
+     */
+    public void setSpawnTurn(int spawnTurn) {
         this.spawnTurn = spawnTurn;
     }
 
-    public void setSpawnChance (int spawnChance)
-    {
+    /**
+     * The setter of spawn chance.
+     *
+     * @param spawnChance the number of spawn chance
+     */
+    public void setSpawnChance(int spawnChance) {
         this.spawnChance = spawnChance;
     }
 
@@ -60,8 +72,7 @@ public abstract class SpawnGround extends Ground {
      *
      * @return the number of ticks between spawn attempts
      */
-    private int getAnimalSpawnTurn()
-    {
+    private int getAnimalSpawnTurn() {
         return this.spawnTurn;
     }
 
@@ -70,8 +81,7 @@ public abstract class SpawnGround extends Ground {
      *
      * @return the chance of spawning an animal
      */
-    private int getAnimalSpawnChance()
-    {
+    private int getAnimalSpawnChance() {
         return this.spawnChance;
     }
 
@@ -81,9 +91,16 @@ public abstract class SpawnGround extends Ground {
      *
      * @param animal the animal about to be spawned
      */
-    protected void setAnimalAction (Animal animal){}
+    protected void setAnimalAction(Animal animal) {
+    }
 
-    protected void addBehaviour(Animal animal){}
+    /**
+     * Add behaviours on an animal.
+     *
+     * @param animal an animal to add behaviours to
+     */
+    protected void addBehaviour(Animal animal) {
+    }
 
     /**
      * Called each game tick to possibly spawn an animal.
@@ -91,25 +108,21 @@ public abstract class SpawnGround extends Ground {
      * @param location the {@link Location} of this ground
      */
     @Override
-    public void tick(Location location)
-    {
+    public void tick(Location location) {
         turns++;
 
         if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
-        && RAND.nextInt(RANDOM_RANGE) < getAnimalSpawnChance())
-        {
+                && RAND.nextInt(RANDOM_RANGE) < getAnimalSpawnChance()) {
             Spawnable pickedAnimal = SPAWNABLE.get(RAND.nextInt(SPAWNABLE.size()));
             Animal animal = pickedAnimal.create();
             this.addBehaviour(animal);
             setAnimalAction(animal);
 
-            try{
+            try {
                 location.addActor(animal);
             } catch (GameEngineException e) {
                 throw new RuntimeException(e);
             }
-
         }
-
     }
 }
