@@ -21,6 +21,7 @@ import game.capabilities.SummonFire;
  * @version 1.0
  */
 public class FireBlow extends IntrinsicWeapon implements SummonFire {
+    private static final int BURN_GROUND_DURATION = 3;
     /**
      * Constructor for FireBlow.
      */
@@ -42,7 +43,7 @@ public class FireBlow extends IntrinsicWeapon implements SummonFire {
 
         Location burnPlace = map.locationOf(target);
 
-        burnLocation(burnPlace);
+        burnLocation(burnPlace, BURN_GROUND_DURATION);
 
         return super.attack(attacker, target, map);
     }

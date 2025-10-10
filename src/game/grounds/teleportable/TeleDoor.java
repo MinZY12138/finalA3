@@ -47,7 +47,7 @@ public class TeleDoor extends TeleGround {
         List<Exit> surrounding = destination.getExits();
 
         for (Exit location : surrounding) {
-            burnLocation(location.getDestination());
+            burnLocation(location.getDestination(), getDURATION_OF_BURNING());
         }
     }
 }

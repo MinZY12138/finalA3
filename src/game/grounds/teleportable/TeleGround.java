@@ -34,6 +34,11 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
     private final List<Location> DESTINATION;
 
     /**
+     * Indicate the duration of burning the surrounding after teleport.
+     */
+    private static final int DURATION_OF_BURNING = 3;
+
+    /**
      * Constructor for TeleGround
      *
      * @param destination      A list of {@link Location} indicate this can teleport to where.
@@ -98,6 +103,14 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
     @Override
     public String getSimpleName() {
         return this.toString();
+    }
+
+    /**
+     * Getter to get the burning duration.
+     * @return {@code int} duration of burning.
+     */
+    protected int getDURATION_OF_BURNING() {
+        return DURATION_OF_BURNING;
     }
 
     /**

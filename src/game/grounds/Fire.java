@@ -26,7 +26,7 @@ public class Fire extends Ground implements SummonDirt
     /**
      * Indicate the fire on the ground for how many turn
      */
-    private int duration = 3;
+    private int duration;
 
     /**
      * Indicate the amount can hurt the actor standing on it.
@@ -41,10 +41,18 @@ public class Fire extends Ground implements SummonDirt
     /**
      * Constructor for Fire.
      */
-    public Fire()
+    public Fire(int duration)
     {
         //Pass parameter of itself to its parent's class
         super(GroundInfo.FIRE.getDISPLAY_CHAR(), GroundInfo.FIRE.getNAME());
+        setDuration(duration);
+    }
+
+    /**
+     * Setter to set the duration of the fire
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     /**

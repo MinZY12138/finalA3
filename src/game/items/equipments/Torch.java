@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class Torch extends LootWeapon implements SummonFire {
 
+    private static final int BURNING_GROUND_DURATION = 5;
     /**
      * The constructor of the Torch class.
      *
@@ -62,7 +63,7 @@ public class Torch extends LootWeapon implements SummonFire {
         List<Exit> surrounding = location.getExits();
 
         for (Exit place : surrounding) {
-            burnLocation(place.getDestination());
+            burnLocation(place.getDestination(), BURNING_GROUND_DURATION);
         }
     }
 
