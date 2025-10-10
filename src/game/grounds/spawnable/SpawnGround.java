@@ -25,7 +25,7 @@ public abstract class SpawnGround extends Ground {
 
     private final List<Spawnable> SPAWNABLE;
 
-    private int turns;
+    private int turns = 0;
 
     private final Random RAND = new Random();
 
