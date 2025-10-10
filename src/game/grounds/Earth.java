@@ -11,9 +11,7 @@ import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Tundra;
 import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
-import game.grounds.trees.AppleTree;
-import game.grounds.trees.HazelnutTree;
-import game.grounds.trees.YewBerryTree;
+import game.items.fruits.*;
 import game.items.TeleportCube;
 import game.items.equipments.*;
 
@@ -105,12 +103,12 @@ public class Earth extends World {
         gameMap2.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
 
 
-        gameMap2.at(2, 2).setGround(new AppleTree());
-        gameMap1.at(2, 2).setGround(new AppleTree());
-        gameMap2.at(6, 7).setGround(new HazelnutTree());
-        gameMap1.at(6, 7).setGround(new HazelnutTree());
-        gameMap2.at(9, 9).setGround(new YewBerryTree());
-        gameMap1.at(9, 9).setGround(new YewBerryTree());
+        gameMap2.at(2, 2).addItem(new Apple());
+        gameMap1.at(2, 2).addItem(new Apple());
+        gameMap2.at(6, 7).addItem(new Hazelnut());
+        gameMap1.at(6, 7).addItem(new Hazelnut());
+        gameMap2.at(9, 9).addItem(new YewBerry());
+        gameMap1.at(9, 9).addItem(new YewBerry());
 
         // req 3
         Location location1 = RandomLocation.randomChooseLocation(gameMap1);

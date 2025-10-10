@@ -19,7 +19,7 @@ public interface SummonFire {
      *
      * @param location the location where the fire will be created
      */
-    default void burnLocation(Location location) {
-        location.setGround(new Fire());
+    default void burnLocation(Location location, int duration) {
+        location.setGround(new Fire(duration));
     }
 }

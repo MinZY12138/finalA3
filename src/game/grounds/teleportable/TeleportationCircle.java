@@ -47,6 +47,6 @@ public class TeleportationCircle extends TeleGround {
         int radius = 1;
         Location placeToBurn = RandomLocation.randomChooseSurrounding(destination, radius);
         //Burn it
-        burnLocation(placeToBurn);
+        burnLocation(placeToBurn, getDURATION_OF_BURNING());
     }
 }

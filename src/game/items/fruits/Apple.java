@@ -1,7 +1,6 @@
 package game.items.fruits;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  /**
@@ -16,7 +15,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Ng Jun Jie
  * @version 2.0
  */
-public class Apple extends Fruit implements Consumable
+public class Apple extends Fruit
 {
 
     /**
@@ -32,11 +31,10 @@ public class Apple extends Fruit implements Consumable
      * state the effect of the apple.
      *
      * @param consumer the actor consuming the apple
-     * @param map the game map the actor is on
      * @return a string describing the effect
      */
     @Override
-    public String consume(Actor consumer, GameMap map)
+    public String consume(Actor consumer)
     {
         consumer.heal(3);
         return " and heal with 3 hit points ";

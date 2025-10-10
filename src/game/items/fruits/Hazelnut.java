@@ -3,7 +3,6 @@ package game.items.fruits;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperation;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
-import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * <h1>Class represent Hazelnut</h1>
@@ -17,7 +16,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Ng Jun Jie
  * @version 2.0
  */
-public class Hazelnut extends Fruit implements Consumable
+public class Hazelnut extends Fruit
 {
 
     /**
@@ -31,12 +30,12 @@ public class Hazelnut extends Fruit implements Consumable
 
     /**
      * define the effect of consuming of hazelnut
+     *
      * @param consumer the actor that consume the fruit
-     * @param map the place where the actor at
      * @return description of the effect
      */
     @Override
-    public String consume (Actor consumer, GameMap map)
+    public String consume (Actor consumer)
     {
 
         consumer.modifyStatsMaximum(BaseAttributes.HEALTH, ActorAttributeOperation.INCREASE, 1);
