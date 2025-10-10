@@ -12,7 +12,7 @@ package game.grounds.spawnable;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public enum SpawnableGroundInfo
+public enum SpawnGroundInfo
 {
     TUNDRA (1,5),
     MEADOW (7,50),
@@ -26,7 +26,7 @@ public enum SpawnableGroundInfo
      * @param spawnTurn the turn that this ground should spawn an animal
      * @param spawnChance the probability to spawn an animal at that moment.
      */
-    SpawnableGroundInfo(int spawnTurn, int spawnChance)
+    SpawnGroundInfo(int spawnTurn, int spawnChance)
     {
         this.SPAWN_TURN = spawnTurn;
         this.SPAWN_CHANCE = spawnChance;

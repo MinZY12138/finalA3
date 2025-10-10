@@ -30,7 +30,7 @@ public class Cave extends SpawnGround {
     public Cave(List<Spawnable> spawnable)
     {
         super(GroundInfo.CAVE.getDISPLAY_CHAR(), GroundInfo.CAVE.getNAME(),spawnable);
-        setSpawnChance(SpawnableGroundInfo.CAVE.getSPAWN_CHANCE());
-        setSpawnTurn(SpawnableGroundInfo.CAVE.getSPAWN_TURN());
+        setSpawnChance(SpawnGroundInfo.CAVE.getSPAWN_CHANCE());
+        setSpawnTurn(SpawnGroundInfo.CAVE.getSPAWN_TURN());
     }
 }
