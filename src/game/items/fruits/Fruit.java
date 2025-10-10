@@ -35,17 +35,6 @@ public abstract class Fruit extends Item implements Consumable
     }
 
     /**
-     * Defines the effect of consuming the fruit.
-     *
-     * @param actor actor consuming this fruit
-     * @param map the game map
-     * @return result description of consumption
-     */
-    public String consume(Actor actor, GameMap map) {
-        return "";
-    }
-
-    /**
      * provide allowable actions for the fruits
      * @param actor the actor that owns the item
      * @param map the map where the actor is performing the action on
