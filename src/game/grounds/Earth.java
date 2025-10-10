@@ -148,10 +148,5 @@ public class Earth extends World {
         Dragon dragon = new Dragon();
         dragon.setCurrentState(new DirtState());
         gameMap1.at(39,0).addActor(dragon);
-
-        // ----------------------------Testing-----------------------------------------------------
-        player.addItemToInventory(bow);
-        gameMap1.addActor(new Bear(), gameMap1.at(1, 2));
-        //-----------------------------------------------------------------------------------------
     }
 }
