@@ -45,6 +45,17 @@ public abstract class ContinuousWarmthLoss extends ContinuousEffect {
         super.tickStatus(currEntity, location);
         Warmable warmable = (Warmable) this.ACTOR;
         warmable.decreaseWarmthLevel();
+        DISPLAY.println(this.toString());
+    }
+
+    /**
+     * Returns a string representation for continuous warmth loss.
+     *
+     * @return a descriptive string message
+     */
+    @Override
+    public String toString() {
+        return String.format("%s and reduce 1 warmth level", super.toString());
     }
 }
 

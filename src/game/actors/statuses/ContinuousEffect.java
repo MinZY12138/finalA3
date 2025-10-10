@@ -3,6 +3,7 @@ package game.actors.statuses;
 import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
@@ -34,6 +35,11 @@ public abstract class ContinuousEffect implements Status {
      * The status verb, e.g. is burning...
      */
     protected final String VERB;
+
+    /**
+     * The display object to print message.
+     */
+    protected final Display DISPLAY = new Display();
 
     /**
      * Constructor for ContinuousDamage
