@@ -33,6 +33,8 @@ public class Fire extends Ground implements SummonDirt
      */
     private static final int BURNING_DMG = 5;
 
+    private static final int STATUS_BURNING_DURATION = 5;
+
     /**
      * Indicate time to end
      */
@@ -79,9 +81,8 @@ public class Fire extends Ground implements SummonDirt
         {
             //Get the actor who step on it and applying burning status.
             Actor actor = location.getActor();
-            int burningDuration = 5;
             actor.addStatus(new Burning(actor, BURNING_DMG,
-                    burningDuration));
+                    STATUS_BURNING_DURATION));
         }
     }
 }

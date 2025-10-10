@@ -36,7 +36,7 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
     /**
      * Indicate the duration of burning the surrounding after teleport.
      */
-    private static final int DURATION_OF_BURNING = 3;
+    private static final int BURN_GROUND_DURATION = 3;
 
     /**
      * Constructor for TeleGround
@@ -110,7 +110,7 @@ public abstract class TeleGround extends Ground implements Teleportable, SummonF
      * @return {@code int} duration of burning.
      */
     protected int getDURATION_OF_BURNING() {
-        return DURATION_OF_BURNING;
+        return BURN_GROUND_DURATION;
     }
 
     /**
