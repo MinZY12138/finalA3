@@ -66,21 +66,39 @@ public class Earth extends World {
         GameMap gameMap2 = new GameMap("Plains", groundCreator, map2);
         this.addGameMap(gameMap2);
 
+        Location locationDoor1 = gameMap1.at(4,4);
         TeleDoor teleDoor1 = new TeleDoor(
                 List.of(
                         gameMap1.at(10, 4), gameMap2.at(4, 4)
-                )
+                ), locationDoor1
         );
-        gameMap1.at(4, 4).setGround(teleDoor1);
-        gameMap2.at(10, 4).setGround(teleDoor1);
+        locationDoor1.setGround(teleDoor1);
 
+        Location locationDoor2 = gameMap2.at(4,4);
+        TeleDoor teleDoor2 = new TeleDoor(
+                List.of(
+                        gameMap1.at(4, 4), gameMap2.at(10, 4)
+                ), locationDoor2
+        );
+        locationDoor2.setGround(teleDoor2);
+
+        Location locationCricle1 = gameMap1.at(12, 7);
         TeleportationCircle teleCircle1 = new TeleportationCircle(
                 List.of(
-                        gameMap1.at(12, 7), gameMap2.at(18, 7)
-                )
+                        gameMap1.at(18, 7), gameMap2.at(12, 7)
+                ), locationCricle1
         );
-        gameMap1.at(12, 7).setGround(teleCircle1);
-        gameMap2.at(18, 7).setGround(teleCircle1);
+        locationCricle1.setGround(teleCircle1);
+
+        Location locationCircle2 = gameMap2.at(12,7);
+        TeleportationCircle teleCircle2 = new TeleportationCircle(
+                List.of(
+                        gameMap2.at(18,7), gameMap1.at(12,7)
+                ),
+                locationCircle2
+        );
+        locationCircle2.setGround(teleCircle2);
+
 
         TeleportCube cube1 = new TeleportCube(
                 List.of(
@@ -130,5 +148,10 @@ public class Earth extends World {
         Dragon dragon = new Dragon();
         dragon.setCurrentState(new DirtState());
         gameMap1.at(39,0).addActor(dragon);
+
+        // ----------------------------Testing-----------------------------------------------------
+        player.addItemToInventory(bow);
+        gameMap1.addActor(new Bear(), gameMap1.at(1, 2));
+        //-----------------------------------------------------------------------------------------
     }
 }
