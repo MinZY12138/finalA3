@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.animals.Warmable;
 import game.actors.statuses.Frostbiting;
 import game.actors.Abilities;
+import game.grounds.GroundInfo;
 
 /**
  * <h1>Class represents SnowCoating</h1>
@@ -31,7 +32,7 @@ public class SnowCoating extends Coating {
      * Set the name of this coating as "Snow".
      */
     public SnowCoating() {
-        super("Snow");
+        super(GroundInfo.SNOW.getNAME());
     }
 
     /**

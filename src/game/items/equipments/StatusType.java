@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import game.actors.statuses.Bleeding;
 import game.actors.statuses.Burning;
 import game.actors.statuses.ContinuousEffect;
+import game.actors.statuses.Poisoning;
 
 /**
  * <h1>Status Type enumeration</h1>
@@ -25,7 +26,9 @@ public enum StatusType {
     /**
      * Bleeding status effect.
      */
-    BLEEDING(Bleeding.class, 10, 2);
+    BLEEDING(Bleeding.class, 10, 2),
+
+    POISONING(Poisoning.class, 4, 5);
 
     /**
      * The damage caused by the status effect.

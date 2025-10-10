@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
+import game.items.ItemInfo;
 
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class Bow extends LootWeapon {
      * @param type defining damage, hit rate, and verb
      */
     public Bow(WeaponType type, StatusType effect) {
-        super("Bow", 'c', true, type, effect);
+        super(ItemInfo.BOW.getNAME(), ItemInfo.BOW.getCHAR(), ItemInfo.BOW.isPORTABLE(),
+                type, effect);
     }
 
     /**

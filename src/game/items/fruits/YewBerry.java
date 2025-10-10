@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.CoatWeaponAction;
+import game.items.ItemInfo;
 import game.items.coat.Coatable;
 import game.items.coat.YewBerryCoating;
 
@@ -19,16 +20,16 @@ import game.items.coat.YewBerryCoating;
  *
  * @author Ng Jun Jie
  * @version 2.0
- *
+ * <p>
  * Modified by: Shee Seng Cheng, Zhengyuan Min
  */
-public class YewBerry extends Fruit  {
+public class YewBerry extends Fruit {
 
     /**
      * Constructor for yew berry
      */
     public YewBerry() {
-        super("Yew Berry", 'x', true);
+        super(ItemInfo.YEW_BERRY.getNAME(), ItemInfo.YEW_BERRY.getCHAR(), ItemInfo.YEW_BERRY.isPORTABLE());
     }
 
     /**
@@ -58,7 +59,7 @@ public class YewBerry extends Fruit  {
         for (Coatable coatable : owner.getItemInventoryAs(Coatable.class)) {
             if (coatable.isCoatable()) {
                 if (coatable.getCoating() == null ||
-                ! (coatable.getCoating().getClass() == YewBerryCoating.class)) {
+                        !(coatable.getCoating().getClass() == YewBerryCoating.class)) {
                     actions.add(new CoatWeaponAction(coatable, new YewBerryCoating(), this));
                 }
             }

@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.statuses.ContinuousEffect;
 import game.capabilities.SummonFire;
+import game.items.ItemInfo;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class Torch extends LootWeapon implements SummonFire {
 
     private static final int BURNING_GROUND_DURATION = 5;
+
     /**
      * The constructor of the Torch class.
      *
@@ -33,7 +35,8 @@ public class Torch extends LootWeapon implements SummonFire {
      * @param effect defining burning damage and duration
      */
     public Torch(WeaponType type, StatusType effect) {
-        super("Torch", 'y', true, type, effect);
+        super(ItemInfo.TORCH.getNAME(), ItemInfo.TORCH.getCHAR(), ItemInfo.TORCH.isPORTABLE(),
+                type, effect);
     }
 
     /**
