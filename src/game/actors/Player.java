@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
 import edu.monash.fit2099.engine.capabilities.Status;
@@ -56,14 +57,22 @@ public class Player extends Actor implements Warmable {
         return warmthLevel <= 0;
     }
 
+
+
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (!this.isConscious())
+        {
+            display.println(this.unconscious(map));
+            return new DoNothingAction();
+        }
+
         decreaseWarmthLevel();
 
         if (isCold()) {
-            display.println(this + " is unconscious");
-            map.removeActor(this);
-
+            display.println(this + " is unconscious, too cool...");
+            this.unconscious(map);
+            return new DoNothingAction();
         }
 
         // Handle multi-turn Actions

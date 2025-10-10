@@ -32,8 +32,8 @@ public class Tundra extends SpawnGround {
      */
     public Tundra(List<Spawnable> spawnable){
         super(GroundInfo.TUNDRA.getDISPLAY_CHAR(), GroundInfo.TUNDRA.getNAME(), spawnable);
-        setSpawnChance(SpawnableGroundInfo.TUNDRA.getSPAWN_CHANCE());
-        setSpawnTurn(SpawnableGroundInfo.TUNDRA.getSPAWN_TURN());
+        setSpawnChance(SpawnGroundInfo.TUNDRA.getSPAWN_CHANCE());
+        setSpawnTurn(SpawnGroundInfo.TUNDRA.getSPAWN_TURN());
     }
 
     /**
