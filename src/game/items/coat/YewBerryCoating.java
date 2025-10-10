@@ -3,6 +3,8 @@ package game.items.coat;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.statuses.Poisoning;
+import game.items.ItemInfo;
+import game.items.equipments.StatusType;
 
 /**
  * <h1>Class represents YewberryCoating</h1>
@@ -19,16 +21,12 @@ import game.actors.statuses.Poisoning;
  */
 public class YewBerryCoating extends Coating {
 
-    private static final int DAMAGE = 4;
-
-    private static final int DURATION = 5;
-
     /**
      * Constructor for YewBerryCoating.
      * Set the name of this coating as "Yew berry".
      */
     public YewBerryCoating(){
-        super("Yew berry");
+        super(ItemInfo.YEW_BERRY.getNAME());
     }
 
     /**
@@ -44,6 +42,8 @@ public class YewBerryCoating extends Coating {
     @Override
     public void applyOnHit(Actor attacker, Actor target, GameMap map) {
         // Attach Poisoning status to target (5 turns, -4 HP each turn)
-        target.addStatus(new Poisoning(target, DAMAGE, DURATION));
+        target.addStatus(new Poisoning(target,
+                StatusType.POISONING.getDAMAGE(),
+                StatusType.POISONING.getDURATION()));
     }
 }
