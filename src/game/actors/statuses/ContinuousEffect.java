@@ -77,6 +77,6 @@ public abstract class ContinuousEffect implements Status {
      */
     @Override
     public String toString() {
-        return this.ACTOR + " " + this.VERB + ".";
+        return this.ACTOR + " " + this.VERB;
     }
 }
