@@ -30,10 +30,10 @@ public class TeleDoor extends TeleGround {
      * @param destination A list of {@link Location} indicate where it can
      *                    teleport to.
      */
-    public TeleDoor(List<Location> destination) {
+    public TeleDoor(List<Location> destination, Location source) {
         //Pass its parameter to its parent's constructor
         super(destination, GroundInfo.TELE_DOOR.getDISPLAY_CHAR(),
-                GroundInfo.TELE_DOOR.getNAME());
+                GroundInfo.TELE_DOOR.getNAME(), source);
     }
 
     /**

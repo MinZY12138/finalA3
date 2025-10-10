@@ -30,10 +30,10 @@ public class TeleportationCircle extends TeleGround {
      * @param destination A list of {@link Location} indicate
      *                    this can teleport to where.
      */
-    public TeleportationCircle(List<Location> destination) {
+    public TeleportationCircle(List<Location> destination, Location source) {
         //Pass its parameter to its parent's constructor.
         super(destination, GroundInfo.TELEPORTATION_CIRCLE.getDISPLAY_CHAR(),
-                GroundInfo.TELEPORTATION_CIRCLE.getNAME());
+                GroundInfo.TELEPORTATION_CIRCLE.getNAME(), source);
     }
 
     /**
@@ -43,9 +43,8 @@ public class TeleportationCircle extends TeleGround {
      */
     @Override
     protected void burnSurrounding(Location destination) {
-        //Get its surrounding
         int radius = 1;
-        Location placeToBurn = RandomLocation.randomChooseSurrounding(destination, radius);
+        Location placeToBurn = RandomLocation.randomChooseSurrounding(this.getSOURCE(), radius);
         //Burn it
         burnLocation(placeToBurn, getDURATION_OF_BURNING());
     }
