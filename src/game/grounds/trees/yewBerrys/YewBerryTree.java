@@ -1,7 +1,7 @@
-package game.grounds.trees;
+package game.grounds.trees.yewBerrys;
 
 import edu.monash.fit2099.engine.positions.Location;
-import game.items.fruits.YewBerry;
+import game.grounds.trees.ProduceableFruitTree;
 
 /**
  * <h1>Class represent YewBerryTree</h1>
@@ -15,15 +15,16 @@ import game.items.fruits.YewBerry;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public class YewBerryTree extends ProduceableFruitTree
+public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
 {
+    private static final int TURN_TO_PRODUCE_FRUIT = 5;
     /**
      * Constructor for YewBerryTree
      */
     public YewBerryTree()
     {
         //Pass its parameter to its parent's constructor.
-        super('Y', "Yew Berry Tree", 5);
+        super('Y', "Yew Berry Tree", TURN_TO_PRODUCE_FRUIT);
     }
 
     /**
@@ -34,6 +35,6 @@ public class YewBerryTree extends ProduceableFruitTree
     protected void summonFruit(Location location)
     {
         //Drop a YewBerry object on to the location.
-        location.addItem(new YewBerry());
+        location.addItem(this.summonYewBerry());
     }
 }
