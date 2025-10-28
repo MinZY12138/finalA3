@@ -21,7 +21,10 @@ public enum GroundInfo
     TELEPORTATION_CIRCLE('O', "Teleportation Circle"),
     DIRT ('+', "Dirt"),
     FIRE ('^', "Fire"),
-    SNOW ('.', "Snow");
+    SNOW ('.', "Snow"),
+    APPLE_SPROUTS (',', "Apple Sprouts"),
+    APPLE_SAPLING ('t', "Apple Sapling"),
+    YEW_BERRY_SAPLING ('b', "Yew Berry Sapling");
 
 
     private final char DISPLAY_CHAR;
