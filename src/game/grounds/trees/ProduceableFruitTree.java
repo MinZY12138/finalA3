@@ -1,12 +1,10 @@
 package game.grounds.trees;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.RandomLocation;
 
-import java.util.List;
-import java.util.Random;
 
 /**
  * <h1>Class represent ProduceableFruitTree</h1>
@@ -36,21 +34,15 @@ public abstract class ProduceableFruitTree extends Ground
     private final int CONSTANT_RESET;
 
     /**
-     * Use to generate random number
-     * (usage: choice where to summon 8 out of 1 location)
-     */
-    protected static final Random RANDOM = new Random();
-
-    /**
      * Constructor for ProduceableFruitTree
      * @param displayChar character representation of the tree
-     * @param name of the tree (e,g., Apple etc..)
-     * @param constant how many turns will cause this tree to summon a fruit.
+     * @param name of the tree (e,g., Apple etc...)
+     * @param turnsToProduceFruit how many turns will cause this tree to summon a fruit.
      */
-    public ProduceableFruitTree(char displayChar, String name, int constant)
+    public ProduceableFruitTree(char displayChar, String name, int turnsToProduceFruit)
     {
         super(displayChar, name);
-        this.CONSTANT_RESET = constant;
+        this.CONSTANT_RESET = turnsToProduceFruit;
         this.resetNumberOfTurnsToSpawn();
     }
 
@@ -87,8 +79,9 @@ public abstract class ProduceableFruitTree extends Ground
         this.numberOfTurnsToSpawn -= 1;
         if (this.numberOfTurnsToSpawn == 0)
         {
-            //Summon fruit
-            this.summonFruit(this.getRandomSurrounding(location));
+            //Summon fruit in radius of 1 of the current location
+            int radius = 1;
+            this.summonFruit(RandomLocation.randomChooseSurrounding(location, radius));
 
             //Reset the number of turn to spawn.
             this.resetNumberOfTurnsToSpawn();
@@ -108,31 +101,8 @@ public abstract class ProduceableFruitTree extends Ground
     }
 
     /**
-     * Method to get a random location from its surrounding.
-     * @param location the tree location
-     * @return {@code Location} random location
-     */
-    protected Location getRandomSurrounding(Location location)
-    {
-        //Get all the 8 locations
-        List<Exit> surrounding = location.getExits();
-
-        //Get random location
-        Exit desiredSpawnLocation;
-        int index = RANDOM.nextInt(
-                    0, surrounding.size());
-
-        desiredSpawnLocation = surrounding.get(index);
-
-        return desiredSpawnLocation.getDestination();
-    }
-
-    /**
      * Method to summon a fruits on a specific location.
      * @param location the place to drop the fruit to.
      */
     protected abstract void summonFruit(Location location);
-
-
-
 }
