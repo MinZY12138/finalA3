@@ -5,12 +5,17 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
-import game.actors.statuses.dragon.DirtState;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Tundra;
 import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
+import game.grounds.trees.apples.AppleSapling;
+import game.grounds.trees.apples.AppleSprouts;
+import game.grounds.trees.apples.AppleTree;
+import game.grounds.trees.Growthable;
+import game.grounds.trees.yewBerrys.YewBerrySapling;
+import game.grounds.trees.yewBerrys.YewBerryTree;
 import game.items.fruits.*;
 import game.items.TeleportCube;
 import game.items.equipments.*;
@@ -142,16 +147,42 @@ public class Earth extends World {
         Bow bow = new Bow(WeaponType.BOW, null);
         location3.addItem(bow);
 
-        // req 5
-        Dragon dragon = new Dragon();
-        dragon.setCurrentState(new DirtState());
-        gameMap1.at(39,0).addActor(dragon);
+        // Req 1 (AS3)
+        //(Connasences of execution)
+        //----Apple----
+        // Forest
+        AppleTree matureAppleTreeF = new AppleTree();
 
-        // ----------------------------Testing-----------------------------------------------------
-//        player.addItemToInventory(axe);
-//        player.addItemToInventory(new YewBerry());
-//        gameMap1.addActor(new Bear(), gameMap1.at(0, 0));
-        //-----------------------------------------------------------------------------------------
+        Growthable appleSaplingF = new AppleSapling(true);
+        appleSaplingF.setNextStage(matureAppleTreeF);
+
+        Growthable appleSproutsF = new AppleSprouts(false);
+        appleSproutsF.setNextStage(appleSaplingF);
+
+        gameMap1.at(0,0).setGround(appleSproutsF);
+
+        // Plains
+        AppleTree matureAppleTreeP = new AppleTree();
+
+        Growthable appleSproutsP = new AppleSprouts(true);
+        appleSproutsP.setNextStage(matureAppleTreeP);
+        gameMap2.at(0,0).setGround(appleSproutsP);
+        //----YewBerry----
+        //Forest
+        YewBerryTree matureYewBerryF = new YewBerryTree();
+
+        Growthable yewBerrySaplingF = new YewBerrySapling(false);
+        yewBerrySaplingF.setNextStage(matureYewBerryF);
+
+        gameMap1.at(5,0).setGround(yewBerrySaplingF);
+
+        //Plains
+        YewBerryTree matureYewBerryP = new YewBerryTree();
+
+        Growthable yewBerrySaplingP = new YewBerrySapling(true);
+        yewBerrySaplingP.setNextStage(matureYewBerryP);
+
+        gameMap2.at(5,0).setGround(yewBerrySaplingP);
 
     }
 }
