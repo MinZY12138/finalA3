@@ -39,6 +39,4 @@ public class Hazelnut extends Fruit {
 
         return ", increase the max hit points by 1";
     }
-
-
 }

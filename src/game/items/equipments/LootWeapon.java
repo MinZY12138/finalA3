@@ -7,8 +7,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
-import game.items.coat.Coatable;
-import game.items.coat.Coating;
 
 import java.util.Random;
 
@@ -22,7 +20,7 @@ import java.util.Random;
  * @version 3.0
  * @since 2025-09-24
  */
-public abstract class LootWeapon extends Item implements Weapon, Coatable {
+public abstract class LootWeapon extends Item implements Weapon{
 
     /**
      * Defining weapon attributes.
@@ -38,11 +36,6 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
      * A random object.
      */
     protected static final Random RAND = new Random();
-
-    /**
-     * Current coating applied to this weapon (if any).
-     */
-    private Coating coating;
 
     /**
      * The constructor of the LootWeapon class.
@@ -89,10 +82,6 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
         target.hurt(this.getDamage());
         this.hit(attacker, target, map);
 
-        if (this.isCoatable() && this.getCoating() != null) {
-            this.getCoating().applyOnHit(attacker, target, map);
-        }
-
         return String.format("%s %s %s for %d damage",
                 attacker, this.getVerb(), target, this.getDamage());
     }
@@ -137,40 +126,6 @@ public abstract class LootWeapon extends Item implements Weapon, Coatable {
      */
     public String getVerb() {
         return TYPE.getVERB();
-    }
-
-    /**
-     * Get the coating currently on this weapon.
-     *
-     * @return the {@link Coating} applied, or null if none
-     */
-    @Override
-    public Coating getCoating() {
-        return coating;
-    }
-
-    /**
-     * Set a coating to this weapon.
-     * Replace any existing coating if present.
-     *
-     * @param coating the {@link Coating} to apply
-     */
-    @Override
-    public void setCoating(Coating coating) {
-        this.coating = coating;
-    }
-
-    /**
-     * Return the string of this weapon.
-     * Show coating name if the weapon has one.
-     *
-     * @return text that represent this weapon
-     */
-    @Override
-    public String toString() {
-        return (coating == null) ?
-                super.toString() :
-                (super.toString() + " [" + coating.getName() + "]");
     }
 }
 

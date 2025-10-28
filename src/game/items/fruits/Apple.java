@@ -36,6 +36,4 @@ public class Apple extends Fruit {
         consumer.heal(3);
         return " and heal with 3 hit points ";
     }
-
-
 }
