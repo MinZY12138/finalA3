@@ -1,6 +1,7 @@
 package game.grounds.trees.yewBerrys;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.GroundInfo;
 import game.grounds.trees.ProduceableFruitTree;
 
 /**
@@ -24,7 +25,9 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
     public YewBerryTree()
     {
         //Pass its parameter to its parent's constructor.
-        super('Y', "Yew Berry Tree", TURN_TO_PRODUCE_FRUIT);
+        super(GroundInfo.YEW_BERRY_TREE.getDISPLAY_CHAR(),
+                GroundInfo.YEW_BERRY_TREE.getNAME(),
+                TURN_TO_PRODUCE_FRUIT);
     }
 
     /**

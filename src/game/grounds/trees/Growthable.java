@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.Random;
 
-public abstract class Growthable extends ProduceableFruitTree {
+public abstract class Growthable extends ProduceableFruitTree{
 
     private int turnToGrowth;
 
@@ -19,7 +19,7 @@ public abstract class Growthable extends ProduceableFruitTree {
     /**
      * Constructor for Growthable
      * @param displayChar character representation of the tree
-     * @param name of the tree (e,g., Apple etc..)
+     * @param name of the tree (e,g., Apple etc...)
      * @param turnsToProduceFruit how many turns will cause this tree to summon a fruit.
      * @param CAN_PRODUCE indicate this stage of tree can produce fruit or not.
      * @param turnToGrowth indicate how many turn for this stage of tree to growth.
