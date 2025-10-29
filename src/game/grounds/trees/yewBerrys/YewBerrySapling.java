@@ -1,10 +1,8 @@
 package game.grounds.trees.yewBerrys;
 
-import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.GroundInfo;
-import game.grounds.trees.Growthable;
 
-public class YewBerrySapling extends Growthable implements SummonYewBerry
+public class YewBerrySapling extends YewBerryChild
 {
     private static final int TRANSFORM_RATE = 50;
     private static final int TURN_TO_PRODUCE_FRUIT = 2;
@@ -24,16 +22,5 @@ public class YewBerrySapling extends Growthable implements SummonYewBerry
                 CAN_PRODUCE
         );
         setTransformRate(TRANSFORM_RATE);
-    }
-
-    /**
-     * Method to summon a fruits on a specific location.
-     *
-     * @param location the place to drop the fruit to.
-     */
-    @Override
-    protected void summonFruit(Location location)
-    {
-        location.addItem(this.summonYewBerry());
     }
 }

@@ -1,6 +1,7 @@
 package game.grounds.trees.apples;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.GroundInfo;
 import game.grounds.trees.ProduceableFruitTree;
 
 /**
@@ -24,7 +25,9 @@ public class AppleTree extends ProduceableFruitTree implements SummonApple
     public AppleTree()
     {
         //Pass its parameter to its parent's constructor.
-        super('T', "Apple Tree",TURN_TO_PRODUCE_FRUIT);
+        super(GroundInfo.APPLE_TREE.getDISPLAY_CHAR(),
+                GroundInfo.APPLE_TREE.getNAME(),
+                TURN_TO_PRODUCE_FRUIT);
     }
 
     /**

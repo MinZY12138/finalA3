@@ -24,7 +24,9 @@ public enum GroundInfo
     SNOW ('.', "Snow"),
     APPLE_SPROUTS (',', "Apple Sprouts"),
     APPLE_SAPLING ('t', "Apple Sapling"),
-    YEW_BERRY_SAPLING ('b', "Yew Berry Sapling");
+    APPLE_TREE ('T', "Apple Tree"),
+    YEW_BERRY_SAPLING ('b', "Yew Berry Sapling"),
+    YEW_BERRY_TREE ('Y', "Yew Berry Tree");
 
 
     private final char DISPLAY_CHAR;
