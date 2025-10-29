@@ -16,7 +16,8 @@ public enum SpawnGroundInfo
 {
     TUNDRA (1,5),
     MEADOW (7,50),
-    CAVE(5,100);
+    CAVE(5,100),
+    SWAMPS(1, 50);
 
     private final int SPAWN_TURN;
     private final int SPAWN_CHANCE;
