@@ -8,6 +8,8 @@ public interface CreateYewBerryTrees
 
     static YewBerrySapling createYewBerrySapling (boolean canProduce)
     {
-        return new YewBerrySapling(canProduce);
+        YewBerrySapling yewBerrySapling = new YewBerrySapling(canProduce);
+        yewBerrySapling.setNextStage(createMatureYewBerryTree());
+        return yewBerrySapling;
     }
 }
