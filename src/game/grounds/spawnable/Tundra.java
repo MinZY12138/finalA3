@@ -48,5 +48,10 @@ public class Tundra extends SpawnGround {
                 ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
         animal.enableAbility(Abilities.COLD_RESISTANT);
     }
+
+    protected boolean detectActor(){
+        return false;
+
+    }
 }
 

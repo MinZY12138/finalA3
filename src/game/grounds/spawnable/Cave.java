@@ -33,4 +33,10 @@ public class Cave extends SpawnGround {
         setSpawnChance(SpawnGroundInfo.CAVE.getSPAWN_CHANCE());
         setSpawnTurn(SpawnGroundInfo.CAVE.getSPAWN_TURN());
     }
+
+    @Override
+    protected boolean detectActor(){
+        return false;
+
+    }
 }

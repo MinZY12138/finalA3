@@ -39,4 +39,8 @@ public class Meadow extends SpawnGround {
         int priority = 5;
         animal.addBehaviourToAnimal(new ConsumeBehaviour(), priority);
     }
+    protected boolean detectActor(){
+        return false;
+
+    }
 }
