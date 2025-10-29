@@ -102,6 +102,8 @@ public abstract class SpawnGround extends Ground {
     protected void addBehaviour(Animal animal) {
     }
 
+    protected abstract boolean detectActor();
+
     /**
      * Called each game tick to possibly spawn an animal.
      *
@@ -110,6 +112,29 @@ public abstract class SpawnGround extends Ground {
     @Override
     public void tick(Location location) {
         turns++;
+
+
+
+        if(detectActor()){
+            boolean hasNearbyActor = false;
+
+
+            List<Location> surrounding = location.getNearbyLocations(1);
+            for (Location nearby : surrounding) {
+                if (nearby.containsAnActor()) {
+                    hasNearbyActor = true;
+                    break; // stop once we found one
+                }
+            }
+            if (!hasNearbyActor){
+                return;
+
+            }
+        }
+
+
+
+
 
         if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
                 && RAND.nextInt(RANDOM_RANGE) < getAnimalSpawnChance()) {
@@ -120,9 +145,15 @@ public abstract class SpawnGround extends Ground {
 
             try {
                 location.addActor(animal);
+                animal.spawnCapability(location);
             } catch (GameEngineException e) {
                 throw new RuntimeException(e);
             }
         }
+
+
+
+
+
     }
 }

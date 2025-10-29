@@ -7,6 +7,7 @@ import game.actors.Player;
 import game.actors.animals.*;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
+import game.grounds.spawnable.Swamps;
 import game.grounds.spawnable.Tundra;
 import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
@@ -113,13 +114,17 @@ public class Earth extends World {
         Spawnable bear = Bear::new;
         Spawnable deer = Deer::new;
         Spawnable wolf = Wolf::new;
+        Spawnable crocodile = Crocodile::new;
 
         forest.at(8, 9).setGround(new Tundra(List.of(bear)));
-        plains.at(0, 0).setGround(new Tundra(List.of(wolf)));
+        plains.at(0, 0).setGround(new Tundra(List.of(crocodile)));
         forest.at(0, 5).setGround(new Cave(List.of(bear, wolf, deer)));
         plains.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
-        forest.at(0, 9).setGround(new Meadow(List.of(deer)));
+        forest.at(0, 1).setGround(new Meadow(List.of(crocodile)));
         plains.at(0, 9).setGround(new Meadow(List.of(deer, wolf)));
+
+        forest.at(10, 0).setGround(new Swamps(List.of(deer)));
+        plains.at(7, 9).setGround(new Swamps(List.of(crocodile)));
 
 
         plains.at(2, 2).addItem(new Apple());

@@ -15,8 +15,8 @@ public enum AnimalInfo
 {
     BEAR ("Bear", 'b', 100, 50),
     DEER ("Deer", 'd', 50, 10),
-    DRAGON("Dragon", 'Q', 500, 10),
-    WOLF("Wolf", 'e', 100, 25);
+    WOLF("Wolf", 'e', 100, 25),
+    CROCODILE("Crocodile",'<',300, 55);
 
     private final String NAME;
     private final char DISPLAY_CHARACTER;

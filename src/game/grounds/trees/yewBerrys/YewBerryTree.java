@@ -4,6 +4,10 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.GroundInfo;
 import game.grounds.trees.ProduceableFruitTree;
 
+
+import java.util.List;
+import java.util.Random;
+
 /**
  * <h1>Class represent YewBerryTree</h1>
  *
@@ -19,6 +23,7 @@ import game.grounds.trees.ProduceableFruitTree;
 public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
 {
     private static final int TURN_TO_PRODUCE_FRUIT = 5;
+    private boolean detectMode = false;
     /**
      * Constructor for YewBerryTree
      */
@@ -39,5 +44,39 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
     {
         //Drop a YewBerry object on to the location.
         location.addItem(this.summonYewBerry());
+    }
+
+    public void setDetectMode(boolean detectMode) {
+       this.detectMode = detectMode;
+    }
+
+
+    @Override
+    public void tick(Location location) {
+        if (detectMode){
+            boolean actorNearby = false;
+            List<Location> nearby = location.getNearbyLocations(1);
+
+            for (Location place : nearby){
+                if (place.containsAnActor()){
+                    actorNearby = true;
+                    break;
+                }
+            }
+            if (actorNearby) {
+                List<Location> near = location.getNearbyLocations(1);
+                if (!near.isEmpty()) {
+                    Location randomSpot = near.get(new Random().nextInt(near.size()));
+                    if (!randomSpot.containsAnActor()) {
+                        summonFruit(randomSpot);
+                    }
+                }
+
+
+            }
+
+        } else {
+            super.tick(location);
+        }
     }
 }
