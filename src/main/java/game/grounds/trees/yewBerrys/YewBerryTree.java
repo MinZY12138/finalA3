@@ -27,8 +27,11 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
      * Indicate the turn to produce a fruit.
      */
     private static final int TURN_TO_PRODUCE_FRUIT = 5;
+
     private static final int DETECT_RADIUS = 1;
+
     private boolean detectMode = false;
+
     /**
      * Constructor for YewBerryTree
      */
@@ -60,7 +63,6 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
     public void setDetectMode(boolean detectMode) {
        this.detectMode = detectMode;
     }
-
 
     /**
      * Periodic update method called every game tick.
