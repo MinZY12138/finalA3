@@ -34,6 +34,11 @@ public class Cave extends SpawnGround {
         setSpawnTurn(SpawnGroundInfo.CAVE.getSPAWN_TURN());
     }
 
+    /**
+     * Indicates that Cave not require a nearby actor to trigger spawning
+     *
+     * @return {@code false} since Cave not depend on nearby actors
+     */
     @Override
     protected boolean detectActor(){
         return false;
