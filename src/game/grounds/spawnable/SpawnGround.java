@@ -13,9 +13,9 @@ import java.util.Random;
  * <h1>Abstract Class SpawnGround</h1>
  *
  * <p>
- * Represents a type of {@link Ground} capable of spawning {@link Animal}.
- * Subclasses define the spawn rate and conditions by implementing the abstract methods
- * {@link #getAnimalSpawnTurn()} and {@link #getAnimalSpawnChance()}.
+ *      Represents a type of {@link Ground} capable of spawning {@link Animal}.
+ *      Subclasses define the spawn rate and conditions by implementing the abstract methods
+ *      {@link #getAnimalSpawnTurn()} and {@link #getAnimalSpawnChance()}.
  * </p>
  *
  * @author Ng Jun Jie
@@ -36,6 +36,8 @@ public abstract class SpawnGround extends Ground {
     private int spawnTurn;
 
     private int spawnChance;
+
+    private static final int NEARBY_RADIUS = 1;
 
     /**
      * Constructor for SpawnGround.
@@ -86,7 +88,7 @@ public abstract class SpawnGround extends Ground {
     }
 
     /**
-     * Hook method that allows subclasses to modify animals before adding them.
+     * Setter that allows subclasses to modify animals before adding them.
      * Default implementation does nothing.
      *
      * @param animal the animal about to be spawned
@@ -103,6 +105,13 @@ public abstract class SpawnGround extends Ground {
     }
 
     /**
+     * A marker to determines whether this ground requires an actor nearby before spawning.
+     *
+     * @return {@code true} if actor proximity is required; otherwise {@code false}
+     */
+    protected abstract boolean detectActor();
+
+    /**
      * Called each game tick to possibly spawn an animal.
      *
      * @param location the {@link Location} of this ground
@@ -110,6 +119,24 @@ public abstract class SpawnGround extends Ground {
     @Override
     public void tick(Location location) {
         turns++;
+
+        if(detectActor()){
+            boolean hasNearbyActor = false;
+
+
+            List<Location> surrounding = location.getNearbyLocations(NEARBY_RADIUS);
+            for (Location nearby : surrounding) {
+                if (nearby.containsAnActor()) {
+                    hasNearbyActor = true;
+                    break; // stop once we found one
+                }
+            }
+            if (!hasNearbyActor){
+                return;
+
+            }
+        }
+
 
         if (turns % getAnimalSpawnTurn() == FACTOR_NUMBER && !location.containsAnActor()
                 && RAND.nextInt(RANDOM_RANGE) < getAnimalSpawnChance()) {
@@ -120,9 +147,15 @@ public abstract class SpawnGround extends Ground {
 
             try {
                 location.addActor(animal);
+                animal.spawnCapability(location);
             } catch (GameEngineException e) {
                 throw new RuntimeException(e);
             }
         }
+
+
+
+
+
     }
 }

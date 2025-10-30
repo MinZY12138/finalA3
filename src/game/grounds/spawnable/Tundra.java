@@ -48,5 +48,15 @@ public class Tundra extends SpawnGround {
                 ActorAttributeOperation.INCREASE, EXTRA_HEALTH);
         animal.enableAbility(Abilities.COLD_RESISTANT);
     }
+
+    /**
+     * Indicates that Tundra not require a nearby actor to trigger spawning
+     *
+     * @return {@code false} since Tundra not depend on nearby actors
+     */
+    protected boolean detectActor(){
+        return false;
+
+    }
 }
 
