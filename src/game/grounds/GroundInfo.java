@@ -17,7 +17,7 @@ public enum GroundInfo
     CAVE ('C', "Cave"),
     MEADOW('w', "Meadow"),
     TUNDRA('_', "Tundra"),
-    SWAMPS('~',"SWAMPS"),
+    SWAMP('~',"SWAMPS"),
     TELE_DOOR('#', "Tele-door"),
     TELEPORTATION_CIRCLE('O', "Teleportation Circle"),
     DIRT ('+', "Dirt"),
