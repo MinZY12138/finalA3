@@ -10,11 +10,11 @@ import game.grounds.RandomLocation;
  * <h1>Class represent ProduceableFruitTree</h1>
  *
  * <p>
- *     Represent a produceable fruit tree in this system.
- *     With associate attributes and method for managing
- *     its information and functionality.
+ * Represent a produceable fruit tree in this system.
+ * With associate attributes and method for managing
+ * its information and functionality.
  * </p>
- *
+ * <p>
  * Extends from {@link Ground}
  *
  * @author Shee Seng Cheng
@@ -22,6 +22,11 @@ import game.grounds.RandomLocation;
  */
 public abstract class ProduceableFruitTree extends Ground
 {
+    /**
+     * Lower bound value
+     */
+    protected static final int LOWER_BOUND = 0;
+
     /**
      * Storing the remaining time left for summon another fruit
      * to its surrounding.
@@ -35,8 +40,9 @@ public abstract class ProduceableFruitTree extends Ground
 
     /**
      * Constructor for ProduceableFruitTree
-     * @param displayChar character representation of the tree
-     * @param name of the tree (e,g., Apple etc...)
+     *
+     * @param displayChar         character representation of the tree
+     * @param name                of the tree (e,g., Apple etc...)
      * @param turnsToProduceFruit how many turns will cause this tree to summon a fruit.
      */
     public ProduceableFruitTree(char displayChar, String name, int turnsToProduceFruit)
@@ -76,8 +82,9 @@ public abstract class ProduceableFruitTree extends Ground
     @Override
     public void tick(Location location)
     {
-        this.numberOfTurnsToSpawn -= 1;
-        if (this.numberOfTurnsToSpawn == 0)
+        this.numberOfTurnsToSpawn--;
+
+        if (this.numberOfTurnsToSpawn == LOWER_BOUND)
         {
             //Summon fruit in radius of 1 of the current location
             int radius = 1;
@@ -102,6 +109,7 @@ public abstract class ProduceableFruitTree extends Ground
 
     /**
      * Method to summon a fruits on a specific location.
+     *
      * @param location the place to drop the fruit to.
      */
     protected abstract void summonFruit(Location location);

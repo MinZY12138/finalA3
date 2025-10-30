@@ -8,9 +8,9 @@ import game.grounds.trees.ProduceableFruitTree;
  * <h1>Class represent AppleTree</h1>
  *
  * <p>
- *     Represent an Apple tree in this system.
+ * Represent an Apple tree in this system.
  * </p>
- *
+ * <p>
  * Extends from {@link ProduceableFruitTree}
  *
  * @author Shee Seng Cheng
@@ -18,7 +18,11 @@ import game.grounds.trees.ProduceableFruitTree;
  */
 public class AppleTree extends ProduceableFruitTree implements SummonApple
 {
+    /**
+     * Indicate how many turn for this tree to produce a fruit
+     */
     private static final int TURN_TO_PRODUCE_FRUIT = 3;
+
     /**
      * Constructor for AppleTree
      */
@@ -32,6 +36,7 @@ public class AppleTree extends ProduceableFruitTree implements SummonApple
 
     /**
      * Method to summon a fruits on a specific location.
+     *
      * @param location the place to drop the fruit to.
      */
     @Override

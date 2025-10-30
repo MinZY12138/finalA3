@@ -4,25 +4,63 @@ import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.Random;
 
-public abstract class Growthable extends ProduceableFruitTree{
-
+/**
+ * <h1>Class represent Growthable</h1>
+ *
+ * <p>
+ * Represent the growth system of tree.
+ * </p>
+ * <p>
+ * Extends from {@link ProduceableFruitTree}
+ *
+ * @author Shee Seng Cheng
+ * @version 1.0
+ */
+public abstract class Growthable extends ProduceableFruitTree
+{
+    /**
+     * Tree growth time.
+     */
     private int turnToGrowth;
 
+    /**
+     * Determines this tree can produce fruits.
+     */
     private final boolean CAN_PRODUCE;
 
+    /**
+     * Next stage of tree.
+     */
     private ProduceableFruitTree nextStage;
+
+    /**
+     * Rate of tree growth.
+     */
     private int transformRate;
+
+    /**
+     * Value reset.
+     */
     private final int CONSTANT_RESET;
+
+    /**
+     * Random object to control random events.
+     */
     private static final Random RAND = new Random();
+
+    /**
+     * Full successfully rate
+     */
     private static final int MAXIMUM_TRANSFORM_BOUND = 100;
 
     /**
-     * Constructor for Growthable
-     * @param displayChar character representation of the tree
-     * @param name of the tree (e,g., Apple etc...)
+     * Constructor for Growthable.
+     *
+     * @param displayChar         character representation of the tree
+     * @param name                of the tree (e,g., Apple etc...)
      * @param turnsToProduceFruit how many turns will cause this tree to summon a fruit.
-     * @param CAN_PRODUCE indicate this stage of tree can produce fruit or not.
-     * @param turnToGrowth indicate how many turn for this stage of tree to growth.
+     * @param CAN_PRODUCE         indicate this stage of tree can produce fruit or not.
+     * @param turnToGrowth        indicate how many turn for this stage of tree to growth.
      */
     public Growthable(char displayChar, String name, int turnsToProduceFruit, int turnToGrowth, boolean CAN_PRODUCE)
     {
@@ -47,27 +85,39 @@ public abstract class Growthable extends ProduceableFruitTree{
             super.tick(location);
         }
 
-        if (turnToGrowth == 0){
+        if (turnToGrowth == LOWER_BOUND)
+        {
             int chancesToTransform = RAND.nextInt(MAXIMUM_TRANSFORM_BOUND);
 
 //            System.out.println(this.toString() + " " + chancesToTransform + " " + this.transformRate); //debug purposes
 
-            if (chancesToTransform < transformRate){
+            if (chancesToTransform < transformRate)
+            {
                 location.setGround(nextStage);
-            }
-            else {
+            } else
+            {
                 turnToGrowth += CONSTANT_RESET;
             }
         }
 
-        turnToGrowth --;
+        turnToGrowth--;
     }
 
+    /**
+     * Set up the next stage of the tree.
+     *
+     * @param nextStage next stage of tree
+     */
     public void setNextStage(ProduceableFruitTree nextStage)
     {
         this.nextStage = nextStage;
     }
 
+    /**
+     * Set the rate of the tree transitioning to the next stage.
+     *
+     * @param transformRate rate of tree growth
+     */
     protected void setTransformRate(int transformRate)
     {
         this.transformRate = transformRate;
