@@ -8,9 +8,9 @@ import game.grounds.trees.ProduceableFruitTree;
  * <h1>Class represent YewBerryTree</h1>
  *
  * <p>
- *     Represent YewBerryTree tree in this system.
+ * Represent YewBerryTree tree in this system.
  * </p>
- *
+ * <p>
  * Extends from {@link ProduceableFruitTree}
  *
  * @author Shee Seng Cheng
@@ -18,7 +18,11 @@ import game.grounds.trees.ProduceableFruitTree;
  */
 public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
 {
+    /**
+     * Indicate the turn to produce a fruit.
+     */
     private static final int TURN_TO_PRODUCE_FRUIT = 5;
+
     /**
      * Constructor for YewBerryTree
      */
@@ -32,6 +36,7 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
 
     /**
      * Method to summon a fruits on a specific location.
+     *
      * @param location the place to drop the fruit to.
      */
     @Override

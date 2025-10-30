@@ -82,6 +82,7 @@ public class Player extends Actor implements Warmable {
         display.println("Currently at " + map);
 
         List<Status> statuses = this.statuses();
+
         for (Status status : statuses) {
             display.println(status.toString());
         }
