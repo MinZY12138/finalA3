@@ -8,7 +8,7 @@ import game.grounds.GroundInfo;
 import java.util.List;
 
 /**
- * <h1>Swamps Class</h1>
+ * <h1>Swamp Class</h1>
  *
  * <p>
  *      The {@code Swamps} class extends {@link SpawnGround}
@@ -19,7 +19,7 @@ import java.util.List;
  * @author Ng Jun Jie
  * @version 1.0
  */
-public class Swamps extends SpawnGround {
+public class Swamp extends SpawnGround {
 
     private static final int POISON_DAMAGE = 5;
 
@@ -31,10 +31,10 @@ public class Swamps extends SpawnGround {
      *
      * @param spawnable the list of {@link Spawnable} animals that can be spawned
      */
-    public Swamps(List<Spawnable> spawnable){
-        super(GroundInfo.SWAMPS.getDISPLAY_CHAR(), GroundInfo.SWAMPS.getNAME(), spawnable);
-        setSpawnChance(SpawnGroundInfo.SWAMPS.getSPAWN_CHANCE());
-        setSpawnTurn(SpawnGroundInfo.SWAMPS.getSPAWN_TURN());
+    public Swamp(List<Spawnable> spawnable){
+        super(GroundInfo.SWAMP.getDISPLAY_CHAR(), GroundInfo.SWAMP.getNAME(), spawnable);
+        setSpawnChance(SpawnGroundInfo.SWAMP.getSPAWN_CHANCE());
+        setSpawnTurn(SpawnGroundInfo.SWAMP.getSPAWN_TURN());
     }
 
     /**
