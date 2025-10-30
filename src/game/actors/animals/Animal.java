@@ -101,7 +101,13 @@ public abstract class Animal extends Actor implements Warmable {
         return warmthLevel <= WARMTH_LOWER_BOUND;
     }
 
+    /**
+     * Called when the animal is first spawned on a location
+     *
+     * @param spawnGround the location where this animal spawns
+     */
     public abstract void spawnCapability(Location spawnGround);
+
     /**
      * Determines the action for the current turn.
      *

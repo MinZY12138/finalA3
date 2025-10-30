@@ -17,6 +17,9 @@ import java.util.Random;
  */
 public class Deer extends Animal{
 
+
+    private static final int DETECT_RADIUS = 1;
+
     public Deer(){
         super(AnimalInfo.DEER.getNAME(),
                 AnimalInfo.DEER.getDISPLAY_CHARACTER(),
@@ -24,8 +27,17 @@ public class Deer extends Animal{
                 AnimalInfo.DEER.getWARMTH_LEVEL());
     }
 
+    /**
+     * Defines the deer's special spawn behavior.
+     * <p>
+     *      When spawned, the deer will drop a single {@link Apple}
+     *      at a random nearby empty location within a one-tile radius.
+     * </p>
+     *
+     * @param spawnGround the {@link Location} where the deer spawns
+     */
     public void spawnCapability(Location spawnGround){
-        List<Location> nearby = spawnGround.getNearbyLocations(1);
+        List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
         if (!nearby.isEmpty()) {
             Location randomSpot = nearby.get(new Random().nextInt(nearby.size()));
             if (!randomSpot.containsAnActor()) {

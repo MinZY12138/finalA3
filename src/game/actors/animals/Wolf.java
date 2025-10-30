@@ -19,6 +19,8 @@ import java.util.Random;
  */
 public class Wolf extends Animal{
 
+    private static final int DETECT_RADIUS = 1;
+
     public Wolf(){
         super(AnimalInfo.WOLF.getNAME(),
                 AnimalInfo.WOLF.getDISPLAY_CHARACTER(),
@@ -26,9 +28,18 @@ public class Wolf extends Animal{
                 AnimalInfo.WOLF.getWARMTH_LEVEL());
     }
 
+    /**
+     * Defines the wolf’s environmental influence when spawned.
+     * <p>
+     *      The wolf randomly selects a nearby empty tile (within one-tile radius)
+     *      to grow a mature {@link YewBerryTree}, which has its detect mode enabled.
+     * </p>
+     *
+     * @param spawnGround the {@link Location} where the wolf spawns
+     */
     @Override
     public void spawnCapability(Location spawnGround) {
-        List<Location> nearby = spawnGround.getNearbyLocations(1);
+        List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
         if (!nearby.isEmpty()) {
             Location randomSpot = nearby.get(new Random().nextInt(nearby.size()));
             if (!randomSpot.containsAnActor()) {

@@ -22,6 +22,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Meadow extends SpawnGround {
+
     /**
      * Constructs a Meadow ground tile with a list of spawnable animals.
      *
@@ -33,12 +34,23 @@ public class Meadow extends SpawnGround {
         setSpawnTurn(SpawnGroundInfo.MEADOW.getSPAWN_TURN());
     }
 
+    /**
+     * Adds a {@link ConsumeBehaviour} to the spawned {@link Animal}.
+     *
+     * @param animal the {@link Animal} instance to which the behaviour is added
+     */
     @Override
     protected void addBehaviour(Animal animal) {
         //Game rule consume behaviour are always has the middle priority.
         int priority = 5;
         animal.addBehaviourToAnimal(new ConsumeBehaviour(), priority);
     }
+
+    /**
+     * Indicates that Meadow not require a nearby actor to trigger spawning
+     *
+     * @return {@code false} since Meadow not depend on nearby actors
+     */
     protected boolean detectActor(){
         return false;
 
