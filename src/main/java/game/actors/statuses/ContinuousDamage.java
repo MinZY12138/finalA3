@@ -50,7 +50,18 @@ public abstract class ContinuousDamage extends ContinuousEffect {
     public void tickStatus(GameEntity currEntity, Location location) {
         super.tickStatus(currEntity, location);
         this.ACTOR.hurt(DAMAGE);
-        DISPLAY.println(this.toString());
+
+        if(!this.ACTOR.isConscious()){
+            if(location.containsAnActor())
+            {
+                DISPLAY.println(super.toString() + " then unconscious");
+                this.ACTOR.unconscious(location.map());
+            }
+        }
+        else
+        {
+            DISPLAY.println(this.toString());
+        }
     }
 
     /**
