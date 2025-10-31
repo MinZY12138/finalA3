@@ -14,7 +14,13 @@ public enum ItemInfo {
 
     TORCH("Torch", 'y', true),
 
-    BOW("Bow", 'c', true);
+    BOW("Bow", 'c', true),
+
+    GREEN_DIAMOND("Green Diamond", 'G', false),
+
+    BLUE_DIAMOND("Blue Diamond", 'B', false),
+
+    RED_DIAMOND("Red Diamond", 'R', false);
 
     private final String NAME;
 
