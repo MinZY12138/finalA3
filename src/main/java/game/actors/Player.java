@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
-import game.weapons.BareFist;
+import game.items.currency.WalletFunction;
 
 import java.util.List;
 
@@ -21,7 +21,8 @@ import java.util.List;
  * {@code @modifiedBy}  Ng Jun Jie, Shee Seng Cheng
  * @version 2.0
  */
-public class Player extends Actor implements Warmable {
+public class Player extends Actor implements Warmable, WalletInjector, BareFistInjector {
+
     private int warmthLevel;
 
     /**
@@ -34,17 +35,17 @@ public class Player extends Actor implements Warmable {
     public Player(String name, char displayChar, int hitPoints, int warmthLevel) {
         super(name, displayChar, hitPoints);
         this.warmthLevel = warmthLevel;
-        this.setIntrinsicWeapon(new BareFist());
+        this.setIntrinsicWeapon(getNewBareFist());
         this.enableAbility(Abilities.ATTACK);
+        this.addItemToInventory(getNewWallet());
     }
 
     /**
      * Decreases the warmth level by 1.
      */
     @Override
-    public void decreaseWarmthLevel()
-    {
-        this.warmthLevel --;
+    public void decreaseWarmthLevel() {
+        this.warmthLevel--;
     }
 
     /**
@@ -53,16 +54,13 @@ public class Player extends Actor implements Warmable {
      * @return true if warmthLevel <= 0, false otherwise
      */
     @Override
-    public boolean isCold(){
+    public boolean isCold() {
         return warmthLevel <= 0;
     }
 
-
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (!this.isConscious())
-        {
+        if (!this.isConscious()) {
             display.println(this.unconscious(map));
             return new DoNothingAction();
         }
@@ -94,6 +92,17 @@ public class Player extends Actor implements Warmable {
         return menu.showMenu(this, display);
     }
 
+    private String getBalance() {
+        String returnString = "";
+        List<WalletFunction> wallet = this.getItemInventoryAs(WalletFunction.class);
+
+        //Always get the first wallet occurrence
+        if (!wallet.isEmpty()) {
+            returnString += wallet.get(0).showBalance();
+        }
+        return returnString;
+    }
+
     /**
      * Method to get a String of details of the current player status.
      *
@@ -105,11 +114,13 @@ public class Player extends Actor implements Warmable {
                                 Player: %s
                                 Health: (%s/%s)
                                 Warmth Level : %s
+                                Wallet: %s
                                 """,
                         name,
                         getAttribute(BaseAttributes.HEALTH),
                         getMaximumAttribute(BaseAttributes.HEALTH),
-                        warmthLevel
+                        warmthLevel,
+                        getBalance()
                 );
     }
 }

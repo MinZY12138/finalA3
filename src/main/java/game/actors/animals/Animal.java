@@ -158,7 +158,7 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public String toString() {
         if (currentMap == null) {
-            return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+            return super.toString() + " ( warmth level: " + this.warmthLevel + " )";
         }
 
         Location location = currentMap.locationOf(this);
@@ -182,7 +182,7 @@ public abstract class Animal extends Actor implements Warmable {
         if (otherActor.hasAbility(Abilities.ATTACK)) {
             //Game rule actor can be attack by other actor using weapon.
             actionList.add(new AttackAction(this, direction,
-                    "will hit", otherActor.getIntrinsicWeapon()));
+                    "attacks", otherActor.getIntrinsicWeapon()));
         }
 
         return actionList;
