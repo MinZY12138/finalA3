@@ -42,6 +42,11 @@ public class AttackAction extends Action {
     private final Weapon WEAPON;
 
     /**
+     * Get the first index of the list.
+     */
+    private static final int FIRST = 0;
+
+    /**
      * The constructor of the AttackAction class.
      *
      * @param targetActor the actor is being attacked
@@ -75,7 +80,7 @@ public class AttackAction extends Action {
             //Always get the first wallet occurrence
             List<WalletFunction> wallet = actor.getItemInventoryAs(WalletFunction.class);
             if (!wallet.isEmpty()){
-                description += "\n" + wallet.get(0).collect(actor, reward);
+                description += "\n" + wallet.get(FIRST).collect(actor, reward);
             }
 
         }
