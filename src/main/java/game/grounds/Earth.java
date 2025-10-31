@@ -163,5 +163,9 @@ public class Earth extends World {
         //Plains
         plains.at(5,0).setGround(YewBerryChild.createYewBerrySapling(true));
 
+//        player.addItemToInventory(axe);
+//        forest.at(0, 1).addActor(new Deer());
+//        forest.at(0, 0).addActor(new Deer());
+//        forest.at(1, 0).addActor(new Deer());
     }
 }

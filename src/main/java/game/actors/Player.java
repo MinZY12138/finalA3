@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
+import game.items.currency.Wallet;
 import game.weapons.BareFist;
 
 import java.util.List;
@@ -22,7 +23,10 @@ import java.util.List;
  * @version 2.0
  */
 public class Player extends Actor implements Warmable {
+
     private int warmthLevel;
+
+    private final Wallet WALLET = new Wallet();
 
     /**
      * Constructor.
@@ -57,7 +61,9 @@ public class Player extends Actor implements Warmable {
         return warmthLevel <= 0;
     }
 
-
+    public Wallet getWALLET() {
+        return WALLET;
+    }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -105,11 +111,13 @@ public class Player extends Actor implements Warmable {
                                 Player: %s
                                 Health: (%s/%s)
                                 Warmth Level : %s
+                                Wallet: %s
                                 """,
                         name,
                         getAttribute(BaseAttributes.HEALTH),
                         getMaximumAttribute(BaseAttributes.HEALTH),
-                        warmthLevel
+                        warmthLevel,
+                        getWALLET().showBalance()
                 );
     }
 }
