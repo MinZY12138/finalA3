@@ -3,8 +3,6 @@ package game.actors.animals;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.fruits.YewBerry;
 
-import java.util.Random;
-
 /**
  * A concrete Bear type
  *
@@ -38,9 +36,9 @@ public class Bear extends Animal {
      */
     @Override
     public void spawnCapability(Location spawnGround) {
-        Random rand = new Random();
+
         for (Location nearby : spawnGround.getNearbyLocations(DETECT_RADIUS)) {
-            if (rand.nextDouble() < DROP_CHANCE) {
+            if (RAND.nextDouble() < DROP_CHANCE) {
                 nearby.addItem(new YewBerry());
             }
         }

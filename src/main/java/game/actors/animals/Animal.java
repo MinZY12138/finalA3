@@ -10,6 +10,7 @@ import game.actors.Abilities;
 import game.behaviours.*;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -33,6 +34,11 @@ public abstract class Animal extends Actor implements Warmable {
      * The map where the animal currently located.
      */
     private GameMap currentMap;
+
+    /**
+     * Instead of having Random instance in each child class we put it into parent class
+     */
+    protected final Random RAND = new Random();
 
     /**
      * The warmth level of the animal
