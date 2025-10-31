@@ -24,8 +24,8 @@ public enum ItemInfo {
     GREEN_DIAMOND("Green Diamond", 'G', false),
     BLUE_DIAMOND("Blue Diamond", 'B', false),
     RED_DIAMOND("Red Diamond", 'R', false),
-    WALLET("Wallet", '$', false);
-
+    WALLET("Wallet", '$', false),
+    DIMENSIONAL_BOTTLE("Dimensional bottle", 'u', true);
     /**
      * The name of the item.
      */
