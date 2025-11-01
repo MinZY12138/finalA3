@@ -8,6 +8,9 @@ package game.weapons;
  */
 public class BareFist extends ModifyIntrinsicWeapon {
     public BareFist() {
-        super(25, "punches", 50, "bare fist");
+        super(WeaponInfo.BARE_FIST.getDamage(),
+                WeaponInfo.BARE_FIST.getVerb(),
+                WeaponInfo.BARE_FIST.getHitChance(),
+                WeaponInfo.BARE_FIST.getName());
     }
 }
