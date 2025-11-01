@@ -11,6 +11,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
 import game.items.currency.WalletFunction;
+import game.items.currency.WalletInjector;
+import game.weapons.BareFistInjector;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ import java.util.List;
  * {@code @modifiedBy}  Ng Jun Jie, Shee Seng Cheng
  * @version 2.0
  */
-public class Player extends Actor implements Warmable, WalletInjector, BareFistInjector {
+public class Player extends Actor implements Warmable {
 
     private int warmthLevel;
 
@@ -35,9 +37,9 @@ public class Player extends Actor implements Warmable, WalletInjector, BareFistI
     public Player(String name, char displayChar, int hitPoints, int warmthLevel) {
         super(name, displayChar, hitPoints);
         this.warmthLevel = warmthLevel;
-        this.setIntrinsicWeapon(getNewBareFist());
+        this.setIntrinsicWeapon(BareFistInjector.getNewBareFist());
         this.enableAbility(Abilities.ATTACK);
-        this.addItemToInventory(getNewWallet());
+        this.addItemToInventory(WalletInjector.getNewWallet());
     }
 
     /**
