@@ -1,5 +1,7 @@
 package game.items;
 
+import game.items.equipments.armors.DiamondArmor;
+
 public enum ItemInfo {
 
     TELE_CUBE("Teleport Cube", '□', true),
@@ -14,7 +16,15 @@ public enum ItemInfo {
 
     TORCH("Torch", 'y', true),
 
-    BOW("Bow", 'c', true);
+    BOW("Bow", 'c', true),
+
+    DIAMOND_ARMOR ("Diamond Armor", '◈', false),
+
+    IRON_ARMOR ("Iron Armor", '⬥', false),
+
+    LEATHER_ARMOR ("Leather Armor", '◊', false),
+
+    ARMOR_HOLDER ("Armor Holder", '甲', false );
 
     private final String NAME;
 
