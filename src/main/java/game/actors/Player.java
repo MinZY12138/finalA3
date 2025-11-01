@@ -5,11 +5,12 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseAttributes;
-import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
+import game.items.equipments.armors.ArmorHolderInjector;
+import game.items.equipments.armors.Wearing;
 import game.weapons.BareFist;
 
 import java.util.List;
@@ -21,7 +22,8 @@ import java.util.List;
  * {@code @modifiedBy}  Ng Jun Jie, Shee Seng Cheng
  * @version 2.0
  */
-public class Player extends Actor implements Warmable {
+public class Player extends Actor implements Warmable
+{
     private int warmthLevel;
 
     /**
@@ -31,11 +33,13 @@ public class Player extends Actor implements Warmable {
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Player(String name, char displayChar, int hitPoints, int warmthLevel) {
+    public Player(String name, char displayChar, int hitPoints, int warmthLevel)
+    {
         super(name, displayChar, hitPoints);
         this.warmthLevel = warmthLevel;
-        this.setIntrinsicWeapon(new BareFist());
-        this.enableAbility(Abilities.ATTACK);
+        setIntrinsicWeapon(new BareFist());
+        enableAbility(Abilities.ATTACK);
+        addItemToInventory(ArmorHolderInjector.createArmorHolder(this));
     }
 
     /**
@@ -44,7 +48,10 @@ public class Player extends Actor implements Warmable {
     @Override
     public void decreaseWarmthLevel()
     {
-        this.warmthLevel --;
+        if (!hasAbility(Abilities.COLD_RESISTANT))
+        {
+            this.warmthLevel--;
+        }
     }
 
     /**
@@ -53,14 +60,14 @@ public class Player extends Actor implements Warmable {
      * @return true if warmthLevel <= 0, false otherwise
      */
     @Override
-    public boolean isCold(){
+    public boolean isCold()
+    {
         return warmthLevel <= 0;
     }
 
-
-
     @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
+    {
         if (!this.isConscious())
         {
             display.println(this.unconscious(map));
@@ -69,7 +76,8 @@ public class Player extends Actor implements Warmable {
 
         decreaseWarmthLevel();
 
-        if (isCold()) {
+        if (isCold())
+        {
             display.println(this + " is unconscious, too cool...");
             this.unconscious(map);
             return new DoNothingAction();
@@ -80,13 +88,6 @@ public class Player extends Actor implements Warmable {
             return lastAction.getNextAction();
 
         display.println("Currently at " + map);
-
-        List<Status> statuses = this.statuses();
-
-        for (Status status : statuses) {
-            display.println(status.toString());
-        }
-
         display.println(this.showStatus());
 
         // return/print the console menu
@@ -94,22 +95,37 @@ public class Player extends Actor implements Warmable {
         return menu.showMenu(this, display);
     }
 
+
     /**
      * Method to get a String of details of the current player status.
      *
      * @return {@code String} details of this player.
      */
-    public String showStatus() {
+    public String showStatus()
+    {
+        String armorInfo = "No armor yet";
+        List<Wearing> armorHolder = getItemInventoryAs(Wearing.class);
+
+        if (!armorHolder.isEmpty())
+        {
+            int firstElement = 0;
+            armorInfo = armorHolder.get(firstElement).getArmorInfo();
+        }
+
         return String.
                 format("""
                                 Player: %s
                                 Health: (%s/%s)
                                 Warmth Level : %s
+                                Wallet:
+                                Armor Info : %s
                                 """,
                         name,
                         getAttribute(BaseAttributes.HEALTH),
                         getMaximumAttribute(BaseAttributes.HEALTH),
-                        warmthLevel
+                        warmthLevel,
+
+                        armorInfo
                 );
     }
 }

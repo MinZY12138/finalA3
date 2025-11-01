@@ -10,7 +10,7 @@ import java.util.List;
 
 import static game.actors.Abilities.BLOCK_ATTACK;
 
-public abstract class Armor extends Item implements Wearable, WearActionInjector
+public abstract class Armor extends Item implements Wearable
 {
 
     private final int DEFENSE;
@@ -52,7 +52,8 @@ public abstract class Armor extends Item implements Wearable, WearActionInjector
             if (!armorHolder.isEmpty())
             {
                 int firstElement = 0;
-                actionList.add(createWearAction(this, armorHolder.get(firstElement), target));
+                actionList.add(WearActionInjector.createWearAction(
+                        this, armorHolder.get(firstElement), target));
             }
         }
 

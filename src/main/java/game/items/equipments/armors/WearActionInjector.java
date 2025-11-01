@@ -5,7 +5,7 @@ import game.actions.WearAction;
 
 public interface WearActionInjector {
 
-    default WearAction createWearAction(Wearable armor, Wearing armorHolder, Actor target){
+    static WearAction createWearAction(Wearable armor, Wearing armorHolder, Actor target){
         return new WearAction(armor, armorHolder, target);
     }
 }
