@@ -30,6 +30,7 @@ public class Earth extends World {
     public void constructWorld() throws Exception {
         DefaultGroundCreator groundCreator = new DefaultGroundCreator();
         groundCreator.registerGround('.', Snow::new);
+        groundCreator.registerGround('/', Glass::new);
 
         List<String> map = Arrays.asList(
                 "........................................",
@@ -55,6 +56,16 @@ public class Earth extends World {
                 "........................................",
                 "........................................",
                 "........................................"
+        );
+
+        List<String> shopLayout = Arrays.asList(
+                "///////",
+                "/...../",
+                "/...../",
+                "/...../",
+                "/...../",
+                "/...../",
+                "///////"
         );
 
 
