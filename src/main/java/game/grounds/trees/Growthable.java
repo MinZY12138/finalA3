@@ -80,16 +80,9 @@ public abstract class Growthable extends ProduceableFruitTree
     @Override
     public void tick(Location location)
     {
-        if (CAN_PRODUCE)
-        {
-            super.tick(location);
-        }
-
         if (turnToGrowth == LOWER_BOUND)
         {
             int chancesToTransform = RAND.nextInt(MAXIMUM_TRANSFORM_BOUND);
-
-//            System.out.println(this.toString() + " " + chancesToTransform + " " + this.transformRate); //debug purposes
 
             if (chancesToTransform < transformRate)
             {
@@ -97,9 +90,15 @@ public abstract class Growthable extends ProduceableFruitTree
             } else
             {
                 turnToGrowth += CONSTANT_RESET;
+                if(CAN_PRODUCE)
+                {
+                    super.tick(location);
+                }
             }
+        } else if (CAN_PRODUCE)
+        {
+            super.tick(location);
         }
-
         turnToGrowth--;
     }
 
@@ -118,7 +117,7 @@ public abstract class Growthable extends ProduceableFruitTree
      *
      * @param transformRate rate of tree growth
      */
-    protected void setTransformRate(int transformRate)
+    public void setTransformRate(int transformRate)
     {
         this.transformRate = transformRate;
     }

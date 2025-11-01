@@ -27,7 +27,7 @@ public class YewBerrySapling extends YewBerryChild
     /**
      * Indicate the after how many turn it growth into next stage.
      */
-    private static final int TURN_TO_GROWTH = 3;
+    private static final int TURN_TO_GROWTH = 2;
 
     /**
      * Constructor for YewBerrySapling.
