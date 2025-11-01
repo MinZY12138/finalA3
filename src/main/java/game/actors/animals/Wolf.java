@@ -6,7 +6,7 @@ import game.grounds.trees.yewBerrys.YewBerryTree;
 
 
 import java.util.List;
-import java.util.Random;
+
 
 /**
  * A concrete Wolf type
@@ -41,10 +41,10 @@ public class Wolf extends Animal{
     public void spawnCapability(Location spawnGround) {
         List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
         if (!nearby.isEmpty()) {
-            Location randomSpot = nearby.get(new Random().nextInt(nearby.size()));
+            Location randomSpot = nearby.get(RAND.nextInt(nearby.size()));
             if (!randomSpot.containsAnActor()) {
                 YewBerryTree tree = YewBerryChild.createMatureYewBerryTree();
-                tree.setDetectMode(true); // mark it as special
+                tree.setDetectMode(true);
                 randomSpot.setGround(tree);
 
             }

@@ -17,6 +17,10 @@ A3 (Req 3) scenario:
   , iron Armor block 5 hits,
   diamond Armor 10 hits and have immune to all status effect, when actor who has wear on it attacked by another actor.
 
+  In addition, when an actor wearing any type of Armor successfully blocks more damage than received (that is, the Armor’s block 
+  value exceeds the incoming damage), the excess block amount will be converted into healing, allowing the actor to recover 
+  hitpoints equal to the remaining block value.
+
   An actor only can have one Armor at a time and it is not destroyable
 
 A4 (Req 4) scenario:

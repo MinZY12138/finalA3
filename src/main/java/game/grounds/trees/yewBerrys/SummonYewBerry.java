@@ -15,11 +15,11 @@ import game.items.fruits.YewBerry;
 public interface SummonYewBerry
 {
     /**
-     * Default method to return a new instance of YewBerry object
+     * Static method to return a new instance of YewBerry object
      *
      * @return a new {@link YewBerry} object.
      */
-    default YewBerry summonYewBerry()
+    static YewBerry summonYewBerry()
     {
         return new YewBerry();
     }

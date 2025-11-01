@@ -14,6 +14,7 @@ import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
+import game.items.equipments.armors.DiamondArmor;
 import game.items.fruits.*;
 import game.items.TeleportCube;
 import game.items.equipments.*;
@@ -164,5 +165,6 @@ public class Earth extends World {
         //Plains
         plains.at(5,0).setGround(YewBerryChild.createYewBerrySapling(true));
 
+        forest.locationOf(player).addItem(new DiamondArmor());
     }
 }
