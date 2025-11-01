@@ -26,11 +26,8 @@ public enum ItemInfo {
     RED_DIAMOND("Red Diamond", 'R', false),
     WALLET("Wallet", '$', false),
     DIAMOND_ARMOR ("Diamond Armor", '◈', false),
-
     IRON_ARMOR ("Iron Armor", '⬥', false),
-
     LEATHER_ARMOR ("Leather Armor", '◊', false),
-
     ARMOR_HOLDER ("Armor Holder", '甲', false );
 
     private final String NAME;
