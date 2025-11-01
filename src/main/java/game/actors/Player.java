@@ -24,10 +24,14 @@ import java.util.List;
  */
 public class Player extends Actor implements Warmable
 {
+
+    /**
+     * Player's warmth level.
+     */
     private int warmthLevel;
 
     /**
-     * Constructor.
+     * Constructor of the Player class.
      *
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
@@ -65,6 +69,16 @@ public class Player extends Actor implements Warmable
         return warmthLevel <= 0;
     }
 
+    /**
+     * Managing player state in each turn in the game.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do
+     *                   interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return an action
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
     {
