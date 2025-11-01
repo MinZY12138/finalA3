@@ -41,16 +41,7 @@ public final class RandomPriceApi {
     }
 
     /**
-     * Generates a random {@link Price} using the supplied diamond bounds. Each tier is queried
-     * separately so the caller can control which tiers are available for a particular item.
-     *
-     * @param minGreen minimum green diamonds that may be charged (inclusive)
-     * @param maxGreen maximum green diamonds that may be charged (inclusive)
-     * @param minBlue  minimum blue diamonds that may be charged (inclusive)
-     * @param maxBlue  maximum blue diamonds that may be charged (inclusive)
-     * @param minRed   minimum red diamonds that may be charged (inclusive)
-     * @param maxRed   maximum red diamonds that may be charged (inclusive)
-     * @return a price populated with the randomly selected diamond counts
+     *return a price populated with the randomly selected diamond counts
      */
     public Price randomPrice(int minGreen, int maxGreen, int minBlue, int maxBlue, int minRed, int maxRed) {
         Price.Builder builder = Price.builder();
@@ -65,10 +56,13 @@ public final class RandomPriceApi {
             return;
         }
 
-        int lowerBound = Math.max(1, min);
+        int lowerBound = Math.max(0, min);
         int upperBound = Math.max(lowerBound, max);
         int quantity = fetchRandomSafely(lowerBound, upperBound);
-        builder.add(type, quantity);
+
+        if (quantity > 0) {
+            builder.add(type, quantity);
+        }
     }
 
     private int fetchRandomSafely(int min, int max) {
