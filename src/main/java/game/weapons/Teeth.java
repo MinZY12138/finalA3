@@ -9,7 +9,10 @@ package game.weapons;
  */
 public class Teeth extends ModifyIntrinsicWeapon {
     public Teeth() {
-        super(80, "bite", 75, "teeth");
+        super(WeaponInfo.TEETH.getDamage(),
+                WeaponInfo.TEETH.getVerb(),
+                WeaponInfo.TEETH.getHitChance(),
+                WeaponInfo.TEETH.getName());
     }
 
 }

@@ -1,9 +1,8 @@
-package game;
+package game.items.equipments.armors;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Abilities;
-import game.items.equipments.armors.Wearing;
 
 import java.util.List;
 

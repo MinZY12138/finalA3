@@ -10,8 +10,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
 import game.items.currency.WalletFunction;
+import game.items.currency.WalletInjector;
 import game.items.equipments.armors.ArmorHolderInjector;
 import game.items.equipments.armors.Wearing;
+import game.weapons.BareFistInjector;
 
 import java.util.List;
 
