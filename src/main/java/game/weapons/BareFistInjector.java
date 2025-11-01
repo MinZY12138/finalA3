@@ -1,6 +1,5 @@
 package game.weapons;
 
-import edu.monash.fit2099.demo.forest.BareFist;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 /**
