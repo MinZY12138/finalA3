@@ -37,11 +37,16 @@ public interface HandleArmorBlock
         if (target.hasAbility(Abilities.BLOCK_ATTACK))
         {
             List<Wearing> armor0 = target.getItemInventoryAs(Wearing.class);
-            Wearing armor = armor0.getFirst();
+
+            int firstElement = 0;
+            Wearing armor = armor0.get(firstElement);
+
             int healing = armor.getBlockArmor();
             int remaining = healing - damage;
 
-            if (remaining < 0 && !target.isConscious())
+            int lowerBound = 0;
+
+            if (remaining < lowerBound && !target.isConscious())
             {
                 target.unconscious(map);
                 returnString = "\n" + armor.getSimpleArmorInfo() + " failed to protect " + target;

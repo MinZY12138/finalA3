@@ -24,10 +24,7 @@ public enum ItemInfo {
     GREEN_DIAMOND("Green Diamond", 'G', false),
     BLUE_DIAMOND("Blue Diamond", 'B', false),
     RED_DIAMOND("Red Diamond", 'R', false),
-    WALLET("Wallet", '$', false);
-
-    BOW("Bow", 'c', true),
-
+    WALLET("Wallet", '$', false),
     DIAMOND_ARMOR ("Diamond Armor", '◈', false),
 
     IRON_ARMOR ("Iron Armor", '⬥', false),

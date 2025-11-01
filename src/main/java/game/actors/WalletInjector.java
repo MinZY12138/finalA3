@@ -3,7 +3,7 @@ package game.actors;
 import game.items.currency.Wallet;
 
 public interface WalletInjector {
-    default Wallet getNewWallet(){
+    static Wallet getNewWallet(){
         return new Wallet();
     }
 }

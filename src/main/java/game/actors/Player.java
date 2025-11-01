@@ -9,9 +9,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actors.animals.Warmable;
+import game.items.currency.WalletFunction;
 import game.items.equipments.armors.ArmorHolderInjector;
 import game.items.equipments.armors.Wearing;
-import game.weapons.BareFist;
 
 import java.util.List;
 
@@ -41,9 +41,10 @@ public class Player extends Actor implements Warmable
     {
         super(name, displayChar, hitPoints);
         this.warmthLevel = warmthLevel;
-        setIntrinsicWeapon(new BareFist());
+        setIntrinsicWeapon(BareFistInjector.getNewBareFist());
         enableAbility(Abilities.ATTACK);
         addItemToInventory(ArmorHolderInjector.createArmorHolder(this));
+        addItemToInventory(WalletInjector.getNewWallet());
     }
 
     /**
@@ -115,9 +116,22 @@ public class Player extends Actor implements Warmable
 
         //Always get the first wallet occurrence
         if (!wallet.isEmpty()) {
-            returnString += wallet.get(0).showBalance();
+            int firstElement = 0;
+            returnString += wallet.get(firstElement).showBalance();
         }
         return returnString;
+    }
+
+    private String getArmorInfo(){
+        String armorInfo = "No armor yet";
+        List<Wearing> armorHolder = getItemInventoryAs(Wearing.class);
+
+        if (!armorHolder.isEmpty())
+        {
+            int firstElement = 0;
+            armorInfo = armorHolder.get(firstElement).getArmorInfo();
+        }
+        return armorInfo;
     }
 
     /**
@@ -127,28 +141,20 @@ public class Player extends Actor implements Warmable
      */
     public String showStatus()
     {
-        String armorInfo = "No armor yet";
-        List<Wearing> armorHolder = getItemInventoryAs(Wearing.class);
-
-        if (!armorHolder.isEmpty())
-        {
-            int firstElement = 0;
-            armorInfo = armorHolder.get(firstElement).getArmorInfo();
-        }
-
         return String.
                 format("""
                                 Player: %s
                                 Health: (%s/%s)
                                 Warmth Level : %s
-                                Wallet:
+                                Wallet: %s
                                 Armor Info : %s
                                 """,
                         name,
                         getAttribute(BaseAttributes.HEALTH),
                         getMaximumAttribute(BaseAttributes.HEALTH),
                         warmthLevel,
-                        getBalance()
+                        getBalance(),
+                        getArmorInfo()
                 );
     }
 }
