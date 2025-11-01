@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
+import game.actors.Seller;
+import game.grounds.Glass;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Swamp;
@@ -14,8 +16,15 @@ import game.grounds.teleportable.TeleportationCircle;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
 import game.items.fruits.*;
+import game.items.DimensionalBottle;
+import game.items.ItemInfo;
+import game.items.currency.BlueDiamond;
+import game.items.currency.GreenDiamond;
+import game.items.currency.RedDiamond;
 import game.items.TeleportCube;
 import game.items.equipments.*;
+import game.mysteriostore.Price;
+import game.mysteriostore.Merchandise;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,6 +88,10 @@ public class Earth extends World {
         GameMap plains = new GameMap("Plains", groundCreator, map2);
         this.addGameMap(plains);
 
+        GameMap armory = new GameMap("Armory", groundCreator, shopLayout);
+        this.addGameMap(armory);
+
+
         Location locationDoor1 = forest.at(4,4);
         TeleDoor teleDoor1 = new TeleDoor(
                 List.of(
@@ -119,7 +132,26 @@ public class Earth extends World {
                 )
         );
 
+        Location storeDoorLocation = forest.at(6, 6);
+        TeleDoor storeDoor = new TeleDoor(
+                List.of(
+                        armory.at(1, 1)
+                ),
+                storeDoorLocation
+        );
+        storeDoorLocation.setGround(storeDoor);
+
+        Location exitDoorLocation = armory.at(1, 1);
+        TeleDoor storeExit = new TeleDoor(
+                List.of(
+                        forest.at(6, 6)
+                ),
+                exitDoorLocation
+        );
+        exitDoorLocation.setGround(storeExit);
+
         player.addItemToInventory(cube1);
+        player.addItemToInventory(new DimensionalBottle());
 
         // req 2
         Spawnable bear = Bear::new;
