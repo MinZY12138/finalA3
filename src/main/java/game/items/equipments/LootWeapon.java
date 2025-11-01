@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.HandleArmorBlock;
 import game.actions.AttackAction;
 
 import java.util.Random;
@@ -20,7 +21,8 @@ import java.util.Random;
  * @version 3.0
  * @since 2025-09-24
  */
-public abstract class LootWeapon extends Item implements Weapon{
+public abstract class LootWeapon extends Item implements Weapon
+{
 
     /**
      * Defining weapon attributes.
@@ -47,7 +49,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      * @param effect      the status of a weapon
      */
     public LootWeapon(String name, char displayChar, boolean portable, WeaponType type,
-                      StatusType effect) {
+                      StatusType effect)
+    {
         super(name, displayChar, portable);
         this.TYPE = type;
         this.EFFECT = effect;
@@ -60,7 +63,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      * @param target   represent an actor being attacked
      * @param map      the game map
      */
-    public void hit(Actor attacker, Actor target, GameMap map) {
+    public void hit(Actor attacker, Actor target, GameMap map)
+    {
     }
 
     /**
@@ -72,18 +76,23 @@ public abstract class LootWeapon extends Item implements Weapon{
      * @return a string message
      */
     @Override
-    public final String attack(Actor attacker, Actor target, GameMap map) {
+    public final String attack(Actor attacker, Actor target, GameMap map)
+    {
         int maximumBound = 100;
 
-        if (!(RAND.nextInt(maximumBound) <= this.getHitRate())) {
+        if (!(RAND.nextInt(maximumBound) <= this.getHitRate()))
+        {
             return attacker + " misses " + target + ".";
         }
 
         target.hurt(this.getDamage());
         this.hit(attacker, target, map);
 
-        return String.format("%s %s %s for %d damage",
-                attacker, this.getVerb(), target, this.getDamage());
+        String handleBlockInfo =
+                HandleArmorBlock.handleArmorBlock(target, this.getDamage(), map);
+
+        return String.format("%s %s %s for %d damage%s",
+                attacker, this.getVerb(), target, this.getDamage(), handleBlockInfo);
     }
 
     /**
@@ -94,7 +103,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      * @return a list of actions
      */
     @Override
-    public ActionList allowableActions(Actor otherActor, Location location) {
+    public ActionList allowableActions(Actor otherActor, Location location)
+    {
         ActionList actions = super.allowableActions(otherActor, location);
         actions.add(new AttackAction(otherActor, location.toString(),
                 this.getVerb(), this));
@@ -106,7 +116,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      *
      * @return this weapon damage
      */
-    public int getDamage() {
+    public int getDamage()
+    {
         return TYPE.getDAMAGE();
     }
 
@@ -115,7 +126,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      *
      * @return this weapon hit rate
      */
-    public int getHitRate() {
+    public int getHitRate()
+    {
         return TYPE.getHIT_RATE();
     }
 
@@ -124,7 +136,8 @@ public abstract class LootWeapon extends Item implements Weapon{
      *
      * @return this weapon hitting description
      */
-    public String getVerb() {
+    public String getVerb()
+    {
         return TYPE.getVERB();
     }
 }

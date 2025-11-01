@@ -13,15 +13,16 @@ import edu.monash.fit2099.engine.positions.Location;
  * status will continuously hurt for a specific amount
  * of damage for a specific duration.
  * </p>
-
+ * <p>
  * Extends {@link ContinuousEffect}
  *
  * @author Min Zhengyuan
  * @version 2.0
- *
+ * <p>
  * Modified by: Shee Seng Cheng, Tay Chee Hsian, Ng Jun Jie
  */
-public abstract class ContinuousDamage extends ContinuousEffect {
+public abstract class ContinuousDamage extends ContinuousEffect
+{
 
     /**
      * The damage caused by this status.
@@ -35,7 +36,8 @@ public abstract class ContinuousDamage extends ContinuousEffect {
      * @param duration The number of turns this status lasts.
      * @param verb     The descriptive verb to show when status is active.
      */
-    public ContinuousDamage(Actor target, int damage, int duration, String verb) {
+    public ContinuousDamage(Actor target, int damage, int duration, String verb)
+    {
         super(target, duration, verb);
         this.DAMAGE = damage;
     }
@@ -47,20 +49,25 @@ public abstract class ContinuousDamage extends ContinuousEffect {
      * @param location   The location of the entity.
      */
     @Override
-    public void tickStatus(GameEntity currEntity, Location location) {
+    public void tickStatus(GameEntity currEntity, Location location)
+    {
         super.tickStatus(currEntity, location);
-        this.ACTOR.hurt(DAMAGE);
 
-        if(!this.ACTOR.isConscious()){
-            if(location.containsAnActor())
-            {
-                DISPLAY.println(super.toString() + " then unconscious");
-                this.ACTOR.unconscious(location.map());
-            }
-        }
-        else
+        if (isStatusActive())
         {
-            DISPLAY.println(this.toString());
+            this.ACTOR.hurt(DAMAGE);
+
+            if (!this.ACTOR.isConscious())
+            {
+                if (location.containsAnActor())
+                {
+                    DISPLAY.println(super.toString() + " then unconscious");
+                    this.ACTOR.unconscious(location.map());
+                }
+            } else
+            {
+                DISPLAY.println(this.toString());
+            }
         }
     }
 
@@ -70,7 +77,8 @@ public abstract class ContinuousDamage extends ContinuousEffect {
      * @return a descriptive message
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return String.format("%s for %d damage", super.toString(), this.DAMAGE);
     }
 }

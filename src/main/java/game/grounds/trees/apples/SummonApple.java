@@ -15,11 +15,11 @@ import game.items.fruits.Apple;
 public interface SummonApple
 {
     /**
-     * Default method to return a new instance of Apple object
+     * Static method to return a new instance of Apple object
      *
      * @return a new {@link Apple} object.
      */
-    default Apple summonApple()
+    static Apple summonApple()
     {
         return new Apple();
     }

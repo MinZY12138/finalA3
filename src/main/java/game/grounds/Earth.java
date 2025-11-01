@@ -162,6 +162,5 @@ public class Earth extends World {
 
         //Plains
         plains.at(5,0).setGround(YewBerryChild.createYewBerrySapling(true));
-
     }
 }
