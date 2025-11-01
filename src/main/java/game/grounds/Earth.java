@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
-import game.actors.statuses.StatusType;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Swamp;
@@ -14,13 +13,9 @@ import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
-import game.items.equipments.armors.DiamondArmor;
-import game.items.equipments.weapons.Axe;
-import game.items.equipments.weapons.Bow;
-import game.items.equipments.weapons.Torch;
-import game.items.equipments.weapons.WeaponType;
 import game.items.fruits.*;
 import game.items.TeleportCube;
+import game.items.equipments.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -179,6 +174,5 @@ public class Earth extends World {
         //Plains
         plains.at(5,0).setGround(YewBerryChild.createYewBerrySapling(true));
 
-        forest.locationOf(player).addItem(new DiamondArmor());
     }
 }
