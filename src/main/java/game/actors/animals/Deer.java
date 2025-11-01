@@ -45,7 +45,6 @@ public class Deer extends Animal{
                 randomSpot.addItem(SummonApple.summonApple());
             }
         }
-
     }
 
 }
