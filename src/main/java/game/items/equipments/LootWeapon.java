@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.HandleArmorBlock;
 import game.actions.AttackAction;
+import game.actors.statuses.StatusType;
 
 import java.util.Random;
 
