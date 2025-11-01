@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.RandomLocation;
 
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -78,6 +79,16 @@ public abstract class ProduceableFruitTree extends Ground
     public boolean canActorEnter(Actor actor)
     {
         return false;
+    }
+
+
+    /**
+     * Setter to enables or disables detection-based spawning.
+     *
+     * @param detectMode true to enable actor detection mode, false for normal mode
+     */
+    public void setDetectMode(boolean detectMode) {
+        this.detectMode = detectMode;
     }
 
 

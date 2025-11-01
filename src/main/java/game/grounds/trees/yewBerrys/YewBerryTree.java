@@ -18,14 +18,12 @@ import game.grounds.trees.ProduceableFruitTree;
  * @version 2.0
  * Modified by: Ng Jun Jie
  */
-public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
+public class YewBerryTree extends ProduceableFruitTree
 {
     /**
      * Indicate the turn to produce a fruit.
      */
     private static final int TURN_TO_PRODUCE_FRUIT = 5;
-
-
 
     /**
      * Constructor for YewBerryTree
@@ -47,8 +45,6 @@ public class YewBerryTree extends ProduceableFruitTree implements SummonYewBerry
     protected void summonFruit(Location location)
     {
         //Drop a YewBerry object on to the location.
-        location.addItem(this.summonYewBerry());
+        location.addItem(SummonYewBerry.summonYewBerry());
     }
-
-
 }
