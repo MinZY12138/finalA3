@@ -15,9 +15,12 @@ import game.grounds.teleportable.TeleportationCircle;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
 import game.items.equipments.armors.DiamondArmor;
+import game.items.equipments.weapons.Axe;
+import game.items.equipments.weapons.Bow;
+import game.items.equipments.weapons.Torch;
+import game.items.equipments.weapons.WeaponType;
 import game.items.fruits.*;
 import game.items.TeleportCube;
-import game.items.equipments.*;
 
 import java.util.Arrays;
 import java.util.List;

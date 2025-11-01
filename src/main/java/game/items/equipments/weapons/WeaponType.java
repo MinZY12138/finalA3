@@ -1,4 +1,4 @@
-package game.items.equipments;
+package game.items.equipments.weapons;
 
 /**
  * <h1>Weapon Type enumeration class</h1>
