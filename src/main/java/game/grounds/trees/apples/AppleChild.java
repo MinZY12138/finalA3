@@ -15,7 +15,7 @@ import game.grounds.trees.Growthable;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public abstract class AppleChild extends Growthable implements SummonApple, CreateAppleTrees
+public abstract class AppleChild extends Growthable
 {
     /**
      * The percentage that success to transform into next stage (int).
@@ -45,7 +45,7 @@ public abstract class AppleChild extends Growthable implements SummonApple, Crea
     @Override
     protected void summonFruit(Location location)
     {
-        location.addItem(this.summonApple());
+        location.addItem(SummonApple.summonApple());
     }
 
     /**

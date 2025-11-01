@@ -16,7 +16,7 @@ import game.grounds.trees.ProduceableFruitTree;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public class AppleTree extends ProduceableFruitTree implements SummonApple
+public class AppleTree extends ProduceableFruitTree
 {
     /**
      * Indicate how many turn for this tree to produce a fruit
@@ -43,6 +43,6 @@ public class AppleTree extends ProduceableFruitTree implements SummonApple
     protected void summonFruit(Location location)
     {
         //Drop an Apple object on to the location.
-        location.addItem(this.summonApple());
+        location.addItem(SummonApple.summonApple());
     }
 }

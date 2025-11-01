@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.capabilities.Status;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.Abilities;
 
 /**
  * <h1>Class represent ContinuousEffect</h1>
@@ -72,6 +73,10 @@ public abstract class ContinuousEffect implements Status {
      */
     @Override
     public boolean isStatusActive() {
+        if (ACTOR.hasAbility(Abilities.IMMUNE_STATUSES)){
+            return false;
+        }
+
         int endStatus = 0;
         return duration != endStatus;
     }

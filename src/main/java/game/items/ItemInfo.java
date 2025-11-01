@@ -24,11 +24,15 @@ public enum ItemInfo {
     GREEN_DIAMOND("Green Diamond", 'G', false),
     BLUE_DIAMOND("Blue Diamond", 'B', false),
     RED_DIAMOND("Red Diamond", 'R', false),
-    WALLET("Wallet", '$', false);
+    WALLET("Wallet", '$', false),
+    DIAMOND_ARMOR ("Diamond Armor", '◈', false),
 
-    /**
-     * The name of the item.
-     */
+    IRON_ARMOR ("Iron Armor", '⬥', false),
+
+    LEATHER_ARMOR ("Leather Armor", '◊', false),
+
+    ARMOR_HOLDER ("Armor Holder", '甲', false );
+
     private final String NAME;
 
     /**

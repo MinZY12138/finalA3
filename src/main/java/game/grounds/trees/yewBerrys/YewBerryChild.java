@@ -15,7 +15,7 @@ import game.grounds.trees.Growthable;
  * @author Shee Seng Cheng
  * @version 1.0
  */
-public abstract class YewBerryChild extends Growthable implements SummonYewBerry, CreateYewBerryTrees
+public abstract class YewBerryChild extends Growthable
 {
     /**
      * Constructor for YewBerryChild
@@ -39,7 +39,7 @@ public abstract class YewBerryChild extends Growthable implements SummonYewBerry
     @Override
     protected void summonFruit(Location location)
     {
-        location.addItem(this.summonYewBerry());
+        location.addItem(SummonYewBerry.summonYewBerry());
     }
 
     /**

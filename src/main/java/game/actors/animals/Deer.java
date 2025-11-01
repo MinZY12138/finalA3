@@ -1,6 +1,7 @@
 package game.actors.animals;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.trees.apples.SummonApple;
 import game.items.fruits.Apple;
 
 import java.util.List;
@@ -41,10 +42,9 @@ public class Deer extends Animal{
         if (!nearby.isEmpty()) {
             Location randomSpot = nearby.get(RAND.nextInt(nearby.size()));
             if (!randomSpot.containsAnActor()) {
-                randomSpot.addItem(new Apple());
+                randomSpot.addItem(SummonApple.summonApple());
             }
         }
-
     }
 
 }
