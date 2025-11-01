@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.items.fruits.Apple;
 
 import java.util.List;
-import java.util.Random;
+
 
 /**
  * A concrete Dear type
@@ -39,7 +39,7 @@ public class Deer extends Animal{
     public void spawnCapability(Location spawnGround){
         List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
         if (!nearby.isEmpty()) {
-            Location randomSpot = nearby.get(new Random().nextInt(nearby.size()));
+            Location randomSpot = nearby.get(RAND.nextInt(nearby.size()));
             if (!randomSpot.containsAnActor()) {
                 randomSpot.addItem(new Apple());
             }

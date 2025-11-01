@@ -10,6 +10,7 @@ import game.actors.Abilities;
 import game.behaviours.*;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -33,6 +34,11 @@ public abstract class Animal extends Actor implements Warmable {
      * The map where the animal currently located.
      */
     private GameMap currentMap;
+
+    /**
+     * Instead of having Random instance in each child class we put it into parent class
+     */
+    protected final Random RAND = new Random();
 
     /**
      * The warmth level of the animal
@@ -152,7 +158,7 @@ public abstract class Animal extends Actor implements Warmable {
      */
     public String toString() {
         if (currentMap == null) {
-            return super.toString() + " ( warmth level: " + this.warmthLevel + " ) ";
+            return super.toString() + " ( warmth level: " + this.warmthLevel + " )";
         }
 
         Location location = currentMap.locationOf(this);
@@ -176,7 +182,7 @@ public abstract class Animal extends Actor implements Warmable {
         if (otherActor.hasAbility(Abilities.ATTACK)) {
             //Game rule actor can be attack by other actor using weapon.
             actionList.add(new AttackAction(this, direction,
-                    "will hit", otherActor.getIntrinsicWeapon()));
+                    "attacks", otherActor.getIntrinsicWeapon()));
         }
 
         return actionList;

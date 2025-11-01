@@ -109,6 +109,16 @@ public class Player extends Actor implements Warmable
         return menu.showMenu(this, display);
     }
 
+    private String getBalance() {
+        String returnString = "";
+        List<WalletFunction> wallet = this.getItemInventoryAs(WalletFunction.class);
+
+        //Always get the first wallet occurrence
+        if (!wallet.isEmpty()) {
+            returnString += wallet.get(0).showBalance();
+        }
+        return returnString;
+    }
 
     /**
      * Method to get a String of details of the current player status.
@@ -138,8 +148,7 @@ public class Player extends Actor implements Warmable
                         getAttribute(BaseAttributes.HEALTH),
                         getMaximumAttribute(BaseAttributes.HEALTH),
                         warmthLevel,
-
-                        armorInfo
+                        getBalance()
                 );
     }
 }

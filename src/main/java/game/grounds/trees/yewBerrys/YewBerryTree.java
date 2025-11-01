@@ -5,9 +5,6 @@ import game.grounds.GroundInfo;
 import game.grounds.trees.ProduceableFruitTree;
 
 
-import java.util.List;
-import java.util.Random;
-
 /**
  * <h1>Class represent YewBerryTree</h1>
  *

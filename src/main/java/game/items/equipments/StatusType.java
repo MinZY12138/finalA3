@@ -28,6 +28,9 @@ public enum StatusType {
      */
     BLEEDING(Bleeding.class, 10, 2),
 
+    /**
+     * Poisoning status effect
+     */
     POISONING(Poisoning.class, 4, 5);
 
     /**

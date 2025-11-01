@@ -81,6 +81,17 @@ public abstract class ProduceableFruitTree extends Ground
         return false;
     }
 
+
+    /**
+     * Setter to enables or disables detection-based spawning.
+     *
+     * @param detectMode true to enable actor detection mode, false for normal mode
+     */
+    public void setDetectMode(boolean detectMode) {
+        this.detectMode = detectMode;
+    }
+
+
     /**
      * Setter to enables or disables detection-based spawning.
      *
@@ -95,6 +106,8 @@ public abstract class ProduceableFruitTree extends Ground
      * Ground can also experience the joy of time.
      * Each tick will decrement the number of turn to spawn
      * once reaches 0 it will spawn a fruit to its random surrounding.
+     * If detection mode is active, the tree checks for nearby actors before spawning fruits
+     * Otherwise, it behaves like a normal {@link ProduceableFruitTree}.
      *
      * @param location The location of the Ground
      */

@@ -4,6 +4,10 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.items.currency.Diamond;
+import game.items.currency.WalletFunction;
+
+import java.util.List;
 
 /**
  * <h1>Attack Action class</h1>
@@ -38,6 +42,11 @@ public class AttackAction extends Action {
     private final Weapon WEAPON;
 
     /**
+     * Get the first index of the list.
+     */
+    private static final int FIRST = 0;
+
+    /**
      * The constructor of the AttackAction class.
      *
      * @param targetActor the actor is being attacked
@@ -65,8 +74,16 @@ public class AttackAction extends Action {
 
         if (!TARGET_ACTOR.isConscious()) {
             description += "\n" + TARGET_ACTOR.unconscious(actor, map);
-        }
+            Diamond reward = Diamond.getRandomDiamond();
+            description += "\n" + actor + " get a " + reward;
 
+            //Always get the first wallet occurrence
+            List<WalletFunction> wallet = actor.getItemInventoryAs(WalletFunction.class);
+            if (!wallet.isEmpty()){
+                description += "\n" + wallet.get(FIRST).collect(actor, reward);
+            }
+
+        }
         return description;
     }
 
