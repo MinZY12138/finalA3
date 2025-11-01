@@ -4,7 +4,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.statuses.ContinuousEffect;
+import game.actors.statuses.ContinuousDamage;
+import game.actors.statuses.StatusType;
 import game.capabilities.SummonFire;
 import game.items.ItemInfo;
 
@@ -48,7 +49,7 @@ public class Torch extends LootWeapon implements SummonFire {
      */
     @Override
     public void hit(Actor attacker, Actor target, GameMap map) {
-        ContinuousEffect status = EFFECT.createStatus(target);
+        ContinuousDamage status = EFFECT.createStatus(target);
 
         if (status != null) {
             target.addStatus(status);
