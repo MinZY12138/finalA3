@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.DimensionalGround;
 import game.grounds.RandomLocation;
 import game.items.DimensionalBottle;
 
@@ -29,7 +30,7 @@ public class BreakBottleAction extends Action {
     /**
      * The ground that the store's door will appear.
      */
-    private final DimensionalGround TARGET_LOCATION;
+    private final DimensionalGround DIMENSIONAL_GROUND;
 
     /**
      * The distance of throwing the dimensional bottle.
@@ -44,7 +45,7 @@ public class BreakBottleAction extends Action {
      */
     public BreakBottleAction(DimensionalBottle bottle, DimensionalGround targetLocation) {
         this.BOTTLE = bottle;
-        this.TARGET_LOCATION = targetLocation;
+        this.DIMENSIONAL_GROUND = targetLocation;
     }
 
     /**
@@ -58,8 +59,12 @@ public class BreakBottleAction extends Action {
     public String execute(Actor actor, GameMap map) {
         Location location = RandomLocation.randomChooseSurrounding(map.locationOf(actor),
                 THROW_DISTANCE);
-        location.removeItem(BOTTLE);
-        location.setGround(TARGET_LOCATION);
+
+        location.setGround(DIMENSIONAL_GROUND);
+
+        actor.removeItemFromInventory(BOTTLE);
+
+        DIMENSIONAL_GROUND.setSourceLocation(location);
         return actor + " shattered a Dimensional Bottle";
     }
 
