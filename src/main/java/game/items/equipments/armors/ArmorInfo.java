@@ -12,8 +12,8 @@ package game.items.equipments.armors;
  */
 public enum ArmorInfo
 {
-    DIAMOND_DEFENSE(10),
-    IRON_DEFENSE(5),
+    DIAMOND_ARMOR(10),
+    IRON_ARMOR(5),
     LEATHER_ARMOR(2);
 
     /**
