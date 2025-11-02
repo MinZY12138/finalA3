@@ -68,11 +68,10 @@ public class Wallet extends Item implements WalletFunction {
      * @param diamond the diamond tier to be removed
      */
     public void deduct(Diamond diamond) {
-        wallet.merge(diamond.getClass(), -INCREMENT, (oldAmount, newAmount) ->
-        {
-            int updatedAmount = oldAmount + newAmount;
-            return Math.max(LOWER_BOUND, updatedAmount);
-        });
+        Class<? extends Diamond> diamondType = diamond.getClass();
+        int currentBalance = wallet.getOrDefault(diamondType, LOWER_BOUND);
+        int updatedBalance = Math.max(LOWER_BOUND, currentBalance - INCREMENT);
+        wallet.put(diamondType, updatedBalance);
     }
 
     /**
