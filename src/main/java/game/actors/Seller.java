@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BuyAction;
 import game.items.currency.WalletFunction;
-import game.mysteriostore.ArmourListing;
 import game.mysteriostore.Merchandise;
 
 
@@ -17,15 +16,14 @@ import java.util.List;
 /**
  * <h1>Seller</h1>
  * <p>
- * Represents a stationary NPC that offers merchandise to visiting actors. Each
- * item can be sold at a different price and the seller ensures that the buyer
+ * Abstract base class for stationary NPCs that offer merchandise to visiting actors.
+ * Each item can be sold at a different price and the seller ensures that the buyer
  * is charged in diamonds.
  * </p>
  */
-public class Seller extends Actor {
+public abstract class Seller extends Actor {
 
     private final List<Merchandise> catalogue;
-    private final List<ArmourListing> armourListings;
 
     /**
      * Constructs a seller with the provided catalogue.
@@ -34,25 +32,9 @@ public class Seller extends Actor {
      * @param display   display character
      * @param catalogue list of merchandise offered
      */
-    public Seller(String name, char display, List<Merchandise> catalogue) {
-        this(name, display, catalogue, List.of());
-    }
-
-    /**
-     * Constructs a seller with the provided catalogue and armour listings.
-     *
-     * @param name           seller name
-     * @param display        display character
-     * @param catalogue      list of merchandise offered
-     * @param armourListings list of armour listings to auto-equip on purchase
-     */
-    public Seller(String name,
-                  char display,
-                  List<Merchandise> catalogue,
-                  List<ArmourListing> armourListings) {
+    protected Seller(String name, char display, List<Merchandise> catalogue) {
         super(name, display, 1);
         this.catalogue = List.copyOf(catalogue);
-        this.armourListings = List.copyOf(armourListings);
     }
 
     @Override
@@ -74,10 +56,7 @@ public class Seller extends Actor {
         }
 
 
-        for (ArmourListing listing : armourListings) {
-            actions.add(listing.createAction(this));
-        }
-
         return actions;
     }
 }
+
