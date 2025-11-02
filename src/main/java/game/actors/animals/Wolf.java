@@ -39,15 +39,17 @@ public class Wolf extends Animal{
      */
     @Override
     public void spawnCapability(Location spawnGround) {
+
         List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
-        if (!nearby.isEmpty()) {
-            Location randomSpot = nearby.get(RAND.nextInt(nearby.size()));
-            if (!randomSpot.containsAnActor()) {
+        for (Location location : nearby ){
+            if (!location.containsAnActor()){
                 YewBerryTree tree = YewBerryChild.createMatureYewBerryTree();
                 tree.setDetectMode(true);
-                randomSpot.setGround(tree);
-
+                location.setGround(tree);
+                break;
             }
+
         }
+
     }
 }
