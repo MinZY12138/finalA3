@@ -3,6 +3,7 @@ package game.grounds.spawnable;
 import game.actors.animals.Animal;
 import game.actors.animals.Spawnable;
 import game.actors.statuses.Poisoning;
+import game.actors.statuses.StatusType;
 import game.grounds.GroundInfo;
 
 import java.util.List;
@@ -20,11 +21,6 @@ import java.util.List;
  * @version 1.0
  */
 public class Swamp extends SpawnGround {
-
-    private static final int POISON_DAMAGE = 5;
-
-    private static final int POISON_DURATION = 10;
-
 
     /**
      * Constructor for {@code Swamps}.
@@ -56,7 +52,8 @@ public class Swamp extends SpawnGround {
     @Override
     protected void setAnimalAction(Animal animal) {
         // Apply poison effect: 5 damage per turn for 10 turns
-        animal.addStatus(new Poisoning(animal, POISON_DAMAGE, POISON_DURATION));
+        animal.addStatus(StatusType.POISONING2.createStatus(animal));
+
 
     }
 

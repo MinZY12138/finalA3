@@ -31,7 +31,7 @@ public class DiamondArmor extends Armor
                 ItemInfo.DIAMOND_ARMOR.getNAME(),
                 ItemInfo.DIAMOND_ARMOR.getCHAR(),
                 ItemInfo.DIAMOND_ARMOR.isPORTABLE(),
-                ArmorInfo.DIAMOND_DEFENSE.getDEFENSE()
+                ArmorInfo.DIAMOND_ARMOR.getDEFENSE()
         );
     }
 
