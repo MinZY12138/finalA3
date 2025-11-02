@@ -10,9 +10,9 @@ import game.items.DimensionalBottle;
 /**
  * <h1>BreakBottleAction Class</h1>
  * <p>
- *     The {@code BreakBottleAction} is an {@link Action} that {@link Actor} can throw
- *     {@link DimensionalBottle} on the ground. The ground will turn to
- *     {@link DimensionalGround} after throw it.
+ * The {@code BreakBottleAction} is an {@link Action} that {@link Actor} can throw
+ * {@link DimensionalBottle} on the ground. The ground will turn to
+ * {@link DimensionalGround} after throw it.
  * </p>
  *
  * @author Tay Chee Hsian
@@ -39,7 +39,7 @@ public class BreakBottleAction extends Action {
     /**
      * Constructor of the BreakBottleAction class.
      *
-     * @param bottle the dimensional bottle to be thrown
+     * @param bottle         the dimensional bottle to be thrown
      * @param targetLocation the ground that the store's door will appear
      */
     public BreakBottleAction(DimensionalBottle bottle, DimensionalGround targetLocation) {
@@ -49,8 +49,9 @@ public class BreakBottleAction extends Action {
 
     /**
      * This method will handle the logic of throwing dimensional bottle.
+     *
      * @param actor The actor performing the action.
-     * @param map The map the actor is on.
+     * @param map   The map the actor is on.
      * @return a string message represents actors throw the dimensional bottle
      */
     @Override

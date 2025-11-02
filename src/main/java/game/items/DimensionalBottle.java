@@ -8,9 +8,9 @@ import game.actions.BreakBottleAction;
 /**
  * <h1>DimensionalBottle Class</h1>
  * <p>
- *     The {@code DimensionalBottle} is an {@link Item} that actors can throw it on the ground.
- *     The ground will turn to the {@link DimensionalGround} and then produce a door leading to
- *     a mystery store after three turns.
+ * The {@code DimensionalBottle} is an {@link Item} that actors can throw it on the ground.
+ * The ground will turn to the {@link DimensionalGround} and then produce a door leading to
+ * a mystery store after three turns.
  * </p>
  *
  * @author Tay Chee Hsian
