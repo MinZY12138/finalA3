@@ -28,7 +28,8 @@ public enum ItemInfo {
     DIAMOND_ARMOR ("Diamond Armor", '◈', false),
     IRON_ARMOR ("Iron Armor", '⬥', false),
     LEATHER_ARMOR ("Leather Armor", '◊', false),
-    ARMOR_HOLDER ("Armor Holder", '甲', false );
+    ARMOR_HOLDER ("Armor Holder", '甲', false),
+    DIMENSIONAL_BOTTLE("Dimensional Bottle", 'U', true);
 
     private final String NAME;
 
