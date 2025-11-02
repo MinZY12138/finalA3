@@ -19,6 +19,7 @@ final class MysterioStoreInterior {
     private final Location entrance;
     private final Seller seller;
     private final Location sellerSpot;
+    private boolean sessionOpen;
 
 
     MysterioStoreInterior(DimensionalStoreType type,
@@ -51,10 +52,6 @@ final class MysterioStoreInterior {
         return entrance;
     }
 
-    ExitGround exitGround() {
-        return exitGround;
-    }
-
     private void ensureSellerPresent() {
         if (!map.contains(seller)) {
             try {
@@ -71,5 +68,25 @@ final class MysterioStoreInterior {
 
     Seller seller() {
         return seller;
+    }
+
+    synchronized MysterioStoreSession openSession(Location portalLocation) {
+        Objects.requireNonNull(portalLocation, "Portal location is required");
+        if (sessionOpen) {
+            throw new IllegalStateException("A session for " + type + " store is already active.");
+        }
+
+        ensureSellerPresent();
+        MysterioStoreSession session = new MysterioStoreSession(this, portalLocation);
+        exitGround.setActiveSession(session);
+        sessionOpen = true;
+        return session;
+    }
+
+    synchronized void sessionClosed(MysterioStoreSession session) {
+        if (sessionOpen && session != null) {
+            exitGround.clearActiveSession(session);
+            sessionOpen = false;
+        }
     }
 }

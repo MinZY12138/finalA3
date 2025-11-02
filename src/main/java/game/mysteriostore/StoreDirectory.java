@@ -16,7 +16,7 @@ import java.util.Objects;
 public final class StoreDirectory {
 
     private static final Map<DimensionalStoreType, MysterioStore> TEMPLATES = new EnumMap<>(DimensionalStoreType.class);
-    private static final Map<DimensionalStoreType, MysterioStore> STORES = new EnumMap<>(DimensionalStoreType.class);
+    private static final Map<DimensionalStoreType, MysterioStoreInterior> STORES = new EnumMap<>(DimensionalStoreType.class);
 
     static {
         registerTemplate(new ArmouryStore());
@@ -78,7 +78,15 @@ public final class StoreDirectory {
         STORES.put(type, store);
     }
 
-    private static void registerTemplate(CuriosityStore template) {
+    private static void registerTemplate(MysterioStore template) {
         TEMPLATES.put(template.getType(), template);
+    }
+
+    public static MysterioStoreInterior getInterior(DimensionalStoreType type) {
+        MysterioStoreInterior store = STORES.get(type);
+        if (store == null) {
+            throw new IllegalStateException("No store registered for type " + type + ".");
+        }
+        return store;
     }
 }

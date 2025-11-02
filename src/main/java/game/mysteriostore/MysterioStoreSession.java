@@ -21,7 +21,7 @@ public final class MysterioStoreSession {
     private final Map<Actor, Location> visitors;
     private boolean open;
 
-    MysterioStoreSession(MysterioStore store, Location portalLocation) {
+    MysterioStoreSession(MysterioStoreInterior store, Location portalLocation) {
         this.store = Objects.requireNonNull(store);
         this.portalLocation = Objects.requireNonNull(portalLocation);
         this.visitors = new LinkedHashMap<>();
