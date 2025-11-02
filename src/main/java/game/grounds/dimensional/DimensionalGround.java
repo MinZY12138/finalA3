@@ -2,7 +2,12 @@ package game.grounds.dimensional;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import game.actions.EnterMysterioStoreAction;
 import game.grounds.GroundInfo;
+import game.mysteriostore.MysterioStoreDirectory;
+import game.mysteriostore.MysterioStoreSession;
 
 import java.util.Objects;
 
@@ -16,16 +21,15 @@ public class DimensionalGround extends Ground implements DimensionalSite {
 
     private final Ground consumedGround;
     private final DimensionalStoreType storeType;
-    private final StoreLifecycle lifecycle;
 
     private int ticks;
     private boolean storeManifested;
+    private MysterioStoreSession activeSession;
 
-    public DimensionalGround(Ground consumedGround, DimensionalStoreType storeType, StoreLifecycle lifecycle) {
+    public DimensionalGround(Ground consumedGround, DimensionalStoreType storeType) {
         super(GroundInfo.DIMENSIONAL_GROUND.getDISPLAY_CHAR(), GroundInfo.DIMENSIONAL_GROUND.getNAME());
         this.consumedGround = Objects.requireNonNull(consumedGround);
         this.storeType = Objects.requireNonNull(storeType);
-        this.lifecycle = Objects.requireNonNull(lifecycle);
     }
 
     @Override
@@ -35,10 +39,13 @@ public class DimensionalGround extends Ground implements DimensionalSite {
         if (!storeManifested) {
             if (ticks >= STORE_SPAWN_DELAY) {
                 storeManifested = true;
-                lifecycle.onOpen(this, location);
+                activeSession = MysterioStoreDirectory.open(storeType, location);
             }
         } else if (ticks >= STORE_SPAWN_DELAY + STORE_ACTIVE_DURATION) {
-            lifecycle.onClose(this, location);
+            if (activeSession != null) {
+                activeSession.forceClose();
+                activeSession = null;
+            }
             location.setGround(consumedGround);
         }
     }
@@ -46,6 +53,20 @@ public class DimensionalGround extends Ground implements DimensionalSite {
     @Override
     public DimensionalStoreType getStoreType() {
         return storeType;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actions = super.allowableActions(actor, location, direction);
+
+        if (storeManifested && activeSession != null && activeSession.isOpen() && location.containsAnActor()) {
+            Actor occupant = location.getActor();
+            if (occupant == actor) {
+                actions.add(new EnterMysterioStoreAction(activeSession));
+            }
+        }
+
+        return actions;
     }
 
     public Ground getConsumedGround() {
@@ -66,5 +87,9 @@ public class DimensionalGround extends Ground implements DimensionalSite {
 
     public int getStoreActiveDuration() {
         return STORE_ACTIVE_DURATION;
+    }
+
+    public MysterioStoreSession getActiveSession() {
+        return activeSession;
     }
 }

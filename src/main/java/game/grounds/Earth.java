@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
-import game.actors.Seller;
 import game.grounds.Glass;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
@@ -17,14 +16,9 @@ import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
 import game.items.fruits.*;
 import game.items.DimensionalBottle;
-import game.items.ItemInfo;
-import game.items.currency.BlueDiamond;
-import game.items.currency.GreenDiamond;
-import game.items.currency.RedDiamond;
 import game.items.TeleportCube;
 import game.items.equipments.*;
-import game.mysteriostore.Price;
-import game.mysteriostore.Merchandise;
+import game.mysteriostore.MysterioStoreDirectory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -90,6 +84,16 @@ public class Earth extends World {
 
         GameMap armory = new GameMap("Armory", groundCreator, shopLayout);
         this.addGameMap(armory);
+
+        GameMap alchemy = new GameMap("Alchemy", groundCreator, shopLayout);
+        this.addGameMap(alchemy);
+
+        GameMap curiosity = new GameMap("Curiosity", groundCreator, shopLayout);
+        this.addGameMap(curiosity);
+
+        MysterioStoreDirectory.registerArmouryStore(armory, 3, 5, 3, 1);
+        MysterioStoreDirectory.registerAlchemyStore(alchemy, 3, 5, 3, 1);
+        MysterioStoreDirectory.registerCuriosityStore(curiosity, 3, 5, 3, 1);
 
 
         Location locationDoor1 = forest.at(4,4);

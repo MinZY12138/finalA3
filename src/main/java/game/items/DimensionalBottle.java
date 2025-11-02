@@ -9,12 +9,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.BreakBottleAction;
 import game.grounds.dimensional.DimensionalGround;
 import game.grounds.dimensional.DimensionalSite;
-import game.grounds.dimensional.StoreLifecycle;
 import game.grounds.dimensional.DimensionalStoreType;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -32,7 +29,6 @@ import java.util.Random;
         private static final int DEFAULT_THROW_RADIUS = 3;
 
         private final List<DimensionalStoreType> storeOptions;
-        private final Map<DimensionalStoreType, StoreLifecycle> lifecyclePlans;
         private final int throwRadius;
         private final Random random;
 
@@ -40,34 +36,25 @@ import java.util.Random;
          * Creates a bottle that can spawn any registered store type.
          */
         public DimensionalBottle() {
-            this(createDefaultPlans(), DEFAULT_THROW_RADIUS);
+            this(List.of(DimensionalStoreType.values()), DEFAULT_THROW_RADIUS);
         }
 
         /**
-         * Creates a bottle that can spawn stores from the provided plans.
+         * Creates a bottle that can spawn stores from the provided types.
          *
-         * @param lifecyclePlans lifecycle hooks keyed by store type
+         * @param storeOptions   available store types
          * @param throwRadius    how far the bottle can be thrown
          */
-        public DimensionalBottle(Map<DimensionalStoreType, StoreLifecycle> lifecyclePlans, int throwRadius) {
+        public DimensionalBottle(List<DimensionalStoreType> storeOptions, int throwRadius) {
             super(ItemInfo.DIMENSIONAL_BOTTLE.getNAME(), ItemInfo.DIMENSIONAL_BOTTLE.getCHAR(), ItemInfo.DIMENSIONAL_BOTTLE.isPORTABLE());
-            Objects.requireNonNull(lifecyclePlans, "Lifecycle plans cannot be null.");
-            if (lifecyclePlans.isEmpty()) {
-                throw new IllegalArgumentException("At least one store plan must be provided.");
+            Objects.requireNonNull(storeOptions, "Store options cannot be null.");
+            if (storeOptions.isEmpty()) {
+                throw new IllegalArgumentException("At least one store type must be provided.");
             }
 
-            this.lifecyclePlans = Map.copyOf(lifecyclePlans);
-            this.storeOptions = List.copyOf(lifecyclePlans.keySet());
+            this.storeOptions = List.copyOf(storeOptions);
             this.throwRadius = Math.max(0, throwRadius);
             this.random = new Random();
-        }
-
-        private static Map<DimensionalStoreType, StoreLifecycle> createDefaultPlans() {
-            Map<DimensionalStoreType, StoreLifecycle> defaults = new EnumMap<>(DimensionalStoreType.class);
-            for (DimensionalStoreType type : DimensionalStoreType.values()) {
-                defaults.put(type, StoreLifecycle.NONE);
-            }
-            return defaults;
         }
 
         @Override
@@ -107,11 +94,7 @@ import java.util.Random;
             }
 
             DimensionalStoreType chosenType = pickStoreType();
-            DimensionalGround dimensionalGround = new DimensionalGround(
-                    target.getGround(),
-                    chosenType,
-                    lifecyclePlans.getOrDefault(chosenType, StoreLifecycle.NONE)
-            );
+            DimensionalGround dimensionalGround = new DimensionalGround(target.getGround(), chosenType);
 
             target.setGround(dimensionalGround);
 
@@ -131,14 +114,5 @@ import java.util.Random;
          */
         public int getThrowRadius() {
             return throwRadius;
-        }
-
-        /**
-         * Exposes a defensive copy of the store plans for integration or testing.
-         *
-         * @return the lifecycle plans keyed by store type
-         */
-        public Map<DimensionalStoreType, StoreLifecycle> storePlans() {
-            return Map.copyOf(lifecyclePlans);
         }
     }
