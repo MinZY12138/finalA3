@@ -44,3 +44,11 @@ A3 (Req 5) scenario:
 
   The system only will have 3 different store u can decide what to sell in it but one of the store must sell armor. There won't be
   any other store except this 3 in the system. Hint: U may store the type of the store inside the dimensional ground.
+
+
+
+  UnitTest instructions:
+  FOR ALL requirement:
+    Right click src/test/java then select Run 'Test in'java'' or 
+    Ctrl + Shift + F10 (when navigate into a single test case file)
+    it should display 'Tests passed'
