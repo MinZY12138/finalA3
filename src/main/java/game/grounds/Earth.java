@@ -35,6 +35,7 @@ public class Earth extends World {
     public void constructWorld() throws Exception {
         DefaultGroundCreator groundCreator = new DefaultGroundCreator();
         groundCreator.registerGround('.', Snow::new);
+        groundCreator.registerGround('/', Glass::new);
 
         List<String> map = Arrays.asList(
                 "........................................",
@@ -61,6 +62,42 @@ public class Earth extends World {
                 "........................................",
                 "........................................"
         );
+
+        // 6*25
+        List<String> store1 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
+        );
+        // 6*25
+        List<String> store2 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
+        );
+        // 6*25
+        List<String> store3 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
+        );
+
+        //Req5
+        GameMap mysteriousStore1 = new GameMap("Mysterious Store Armor", groundCreator, store1);
+        GameMap mysteriousStore2 = new GameMap("Mysterious Store Weapon", groundCreator, store2);
+        GameMap mysteriousStore3 = new GameMap("Mysterious Store Fruit", groundCreator, store3);
 
 
         GameMap forest = new GameMap("Forest", groundCreator, map);
