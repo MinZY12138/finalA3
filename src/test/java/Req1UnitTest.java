@@ -259,7 +259,9 @@ public class Req1UnitTest {
         // Forest
 
         /**
-         * Positive test case: YewBerrySapling on Forest should grow into YewBerryTree on the 3-turn check (forced success).
+         * Positive test case:
+         *      YewBerrySapling on Forest should grow into YewBerryTree on
+         *      the 3-turn check (forced success).
          */
         @Test
         public void testForest_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
@@ -269,7 +271,8 @@ public class Req1UnitTest {
         }
 
         /**
-         * Edge test case: Before the 3-turn check (ticks 1-2) the YewBerrySapling must remain a sapling.
+         * Edge test case:
+         *      Before the 3-turn check (ticks 1-2) the YewBerrySapling must remain a sapling.
          */
         @Test
         public void testForest_YewBerrySaplingRemainsBeforeThreeTurnCheck() {
@@ -285,11 +288,13 @@ public class Req1UnitTest {
         }
 
         /**
-         * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a
-         * sapling after the 3-turn check. (not using helper because need custom message for clarity)
+         * Negative test case:
+         *      If the 50% check fails (forced 0%), the sapling should remain a
+         *      sapling after the 3-turn check. (not using helper because need
+         *      custom message for clarity)
          */
         @Test
-        public void testForest_YewBerrySaplingFailsToGrowWhenChanceFails() {
+        public void testForestAndPlains_YewBerrySaplingFailsToGrowWhenChanceFails() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0); // force failure
             mockLocation.setGround(sapling);
@@ -302,7 +307,8 @@ public class Req1UnitTest {
         }
 
         /**
-         * Negative test case: YewBerrySapling on Forest should NOT produce any yew berry.
+         * Negative test case:
+         *      YewBerrySapling on Forest should NOT produce any yew berry.
          */
         @Test
         public void testForest_YewBerrySaplingDoesNotProduceFruit() {
@@ -317,7 +323,8 @@ public class Req1UnitTest {
         // Plains
 
         /**
-         * Positive test case: Plains YewBerrySapling produces yew berry every 2 turns.
+         * Positive test case:
+         *      Plains YewBerrySapling produces yew berry every 2 turns.
          */
         @Test
         public void testPlains_YewBerrySaplingProducesEveryTwoTurns() {
@@ -338,7 +345,8 @@ public class Req1UnitTest {
 
 
         /**
-         * Edge test case: Plains YewBerrySapling should not produce before 2 turns (tick 1 produces nothing).
+         * Edge test case:
+         *      Plains YewBerrySapling should not produce before 2 turns (tick 1 produces nothing).
          */
         @Test
         public void testPlains_YewBerrySaplingNoFruitBeforeTwoTurns() {
@@ -358,7 +366,8 @@ public class Req1UnitTest {
         }
 
         /**
-         * Positive test case: Mature YewBerryTree should produce yew berry every 5 turns (same for both maps).
+         * Positive test case:
+         *      Mature YewBerryTree should produce yew berry every 5 turns (same for both maps).
          */
         @Test
         public void testYewBerryTreeProducesEveryFiveTurns() {
@@ -368,5 +377,44 @@ public class Req1UnitTest {
             }
             countFruitAndAssert(mockLocation, 2, YewBerry.class, 10);
         }
+
+        /**
+         * Negative test case:
+         *      Plains YewBerrySapling should stop producing fruit once it grows into a YewBerryTree.
+         */
+        @Test
+        public void testPlains_YewBerrySaplingStopsProducingAfterGrowth() {
+            YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(true);
+            sapling.setTransformRate(100);
+            mockLocation.setGround(sapling);
+            // Tick until it becomes a tree
+            for (int i = 0; i < 3; i++){
+                sapling.tick(mockLocation);
+            }
+            // Just double check
+            assertInstanceOf(YewBerryTree.class,mockLocation.getGround(),"Yew berry sapling" +
+                    " should turn into tree but no");
+
+            // Clear old invocations
+            clearInvocations(mockLocation);
+
+            // Start with new one (record)
+
+            // Now simulate a few more ticks it should not produce sapling-level fruit anymore
+            for (int i = 0; i < 2; i++) {
+                mockLocation.getGround().tick(mockLocation);
+            }
+
+            // Expect only tree-level production logic, not extra sapling fruit
+            try
+            {
+                verify(mockLocation, never()).addItem(any(YewBerry.class));
+            }
+            catch (AssertionError e){
+                throw new AssertionError("After the transformation YewBerryTree should not" +
+                        " follow the same behaviour as YewBerrySapling");
+            }
+        }
+
     }
 }
