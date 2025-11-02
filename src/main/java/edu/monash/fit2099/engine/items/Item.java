@@ -1,14 +1,12 @@
 package edu.monash.fit2099.engine.items;
 
 import edu.monash.fit2099.engine.GameEntity;
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Printable;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
-import java.util.List;
 
 /**
  * Abstract base class representing a physical object in the game world.
@@ -134,5 +132,4 @@ public abstract class Item extends GameEntity implements Printable {
 		return new ActionList();
 	}
 
-    public abstract List<Action> allowableActions(Actor owner, Location here, String direction);
 }
