@@ -1,9 +1,11 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BreakBottleAction;
+import game.grounds.DimensionalGround;
 
 /**
  * <h1>DimensionalBottle Class</h1>
@@ -32,17 +34,18 @@ public class DimensionalBottle extends Item {
                 ItemInfo.DIMENSIONAL_BOTTLE.getCHAR(),
                 ItemInfo.DIMENSIONAL_BOTTLE.isPORTABLE());
     }
-
     /**
      * This method allows actor can throw the dimensional bottle on the ground.
      *
-     * @param location the location of the ground on which the item lies
+     * @param owner the actor that owns the item
+     * @param map   the map where the actor is performing the action on
      * @return a break bottle action
      */
     @Override
-    public ActionList allowableActions(Location location) {
-        ActionList actions = super.allowableActions(location);
-        actions.add(new BreakBottleAction(this));
+    public ActionList allowableActions(Actor owner, GameMap map)
+    {
+        ActionList actions = super.allowableActions(map.locationOf(owner));
+        actions.add(new BreakBottleAction(this, dimensionalGround));
         return actions;
     }
 
