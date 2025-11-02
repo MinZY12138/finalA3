@@ -1,6 +1,5 @@
 package game.items.equipments.armors;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import game.items.ItemInfo;
 
 /**
@@ -26,7 +25,7 @@ public class IronArmor extends Armor
                 ItemInfo.IRON_ARMOR.getNAME(),
                 ItemInfo.IRON_ARMOR.getCHAR(),
                 ItemInfo.IRON_ARMOR.isPORTABLE(),
-                ArmorInfo.IRON_DEFENSE.getDEFENSE()
+                ArmorInfo.IRON_ARMOR.getDEFENSE()
         );
     }
 }
