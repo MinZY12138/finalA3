@@ -30,7 +30,8 @@ public enum GroundInfo {
     YEW_BERRY_TREE('Y', "Yew Berry Tree"),
     GLASS('/', "Glass"),
     DIMENSIONAL_GROUND('%', "Dimensional Ground"),
-    PORTAL('0',"Portal store");
+    PORTAL('0',"Portal store"),
+    EXIT('E', "Exit store");
     /**
      * The character representation of the ground.
      */
