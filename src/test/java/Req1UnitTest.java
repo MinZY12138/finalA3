@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit tests for Requirement 1: Tree Growth System.
+ * Unit tests for Requirement 1: Tree Growth System and produce fruit.
  */
 public class Req1UnitTest {
 
@@ -90,6 +90,9 @@ public class Req1UnitTest {
                         " count should be " + expectedFruitCount);
     }
 
+    /**
+     * Apple tree test
+     */
     @Nested
     class AppleTreeTest {
         private Location mockLocation;
@@ -251,6 +254,9 @@ public class Req1UnitTest {
             }
     }
 
+    /**
+     * Yew berry tree test
+     */
     @Nested
     class YewBerryTreeTest {
         private Location mockLocation;
