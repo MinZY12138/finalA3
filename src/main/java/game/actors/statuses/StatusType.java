@@ -27,7 +27,12 @@ public enum StatusType {
     /**
      * Poisoning status effect
      */
-    POISONING(Poisoning.class, 10, 3);
+    POISONING1(Poisoning.class, 10, 3),
+
+    /**
+     * Poisoning status effect
+     */
+    POISONING2(Poisoning.class, 5, 10);
 
     /**
      * The damage caused by the status effect.

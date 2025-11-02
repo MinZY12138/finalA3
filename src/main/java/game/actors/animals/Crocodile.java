@@ -59,7 +59,7 @@ public class Crocodile extends Animal {
 
         for (Location nearby : spawnGround.getNearbyLocations(DETECT_RADIUS)) {
             if (nearby.containsAnActor()) {
-                ContinuousDamage status = StatusType.POISONING.createStatus(nearby.getActor());
+                ContinuousDamage status = StatusType.POISONING1.createStatus(nearby.getActor());
                 nearby.getActor().addStatus(status);
             }
         }

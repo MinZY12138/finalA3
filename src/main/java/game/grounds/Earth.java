@@ -122,7 +122,7 @@ public class Earth extends World {
         Spawnable crocodile = Crocodile::new;
 
         forest.at(8, 9).setGround(new Tundra(List.of(bear)));
-        plains.at(0, 0).setGround(new Tundra(List.of(crocodile)));
+        plains.at(0, 4).setGround(new Tundra(List.of(crocodile)));
         forest.at(0, 5).setGround(new Cave(List.of(wolf)));
         plains.at(0, 5).setGround(new Cave(List.of(bear, wolf)));
         forest.at(0, 1).setGround(new Meadow(List.of(crocodile)));
