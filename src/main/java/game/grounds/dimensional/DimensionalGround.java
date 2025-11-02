@@ -3,6 +3,7 @@ package game.grounds.dimensional;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.GroundInfo;
+import game.mysteriostore.DimensionalStoreType;
 
 import java.util.Objects;
 

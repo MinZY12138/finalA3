@@ -10,7 +10,7 @@ import game.actions.BreakBottleAction;
 import game.grounds.dimensional.DimensionalGround;
 import game.grounds.dimensional.DimensionalSite;
 import game.grounds.dimensional.StoreLifecycle;
-import game.grounds.dimensional.DimensionalStoreType;
+import game.mysteriostore.DimensionalStoreType;
 
 import java.util.EnumMap;
 import java.util.List;

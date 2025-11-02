@@ -1,4 +1,4 @@
-package game.grounds.dimensional;
+package game.mysteriostore;
 
 /**
  * Represents the different styles of Mysterio stores that can manifest from a dimensional rift.
