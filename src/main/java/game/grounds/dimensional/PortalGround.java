@@ -5,13 +5,15 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.EnterStoreAction;
+import game.grounds.GroundInfo;
 import game.grounds.dimensional.DimensionalStoreType;
 
 public class PortalGround extends Ground {
     private final DimensionalStoreType type;
 
     public PortalGround(DimensionalStoreType type) {
-        super('O');
+
+        super(GroundInfo.PORTAL.getDISPLAY_CHAR(), GroundInfo.PORTAL.getNAME());
         this.type = type;
     }
 

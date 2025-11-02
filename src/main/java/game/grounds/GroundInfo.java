@@ -29,7 +29,8 @@ public enum GroundInfo {
     YEW_BERRY_SAPLING('b', "Yew Berry Sapling"),
     YEW_BERRY_TREE('Y', "Yew Berry Tree"),
     GLASS('/', "Glass"),
-    DIMENSIONAL_GROUND('%', "Dimensional Ground");
+    DIMENSIONAL_GROUND('%', "Dimensional Ground"),
+    PORTAL('0',"Portal store");
     /**
      * The character representation of the ground.
      */
