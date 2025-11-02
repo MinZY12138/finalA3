@@ -716,21 +716,22 @@ public class Req2UnitTest {
             // Place two nearby actors
             Actor actor1 = new Actor("Villager1", '@', 100) {
                 @Override
-                public edu.monash.fit2099.engine.actions.Action playTurn(
-                        edu.monash.fit2099.engine.actions.ActionList actions,
-                        edu.monash.fit2099.engine.actions.Action lastAction,
+                public Action playTurn(
+                        ActionList actions,
+                        Action lastAction,
                         GameMap map, Display display) {
-                    return new edu.monash.fit2099.engine.actions.DoNothingAction();
+                    return new DoNothingAction();
                 }
             };
 
             Actor actor2 = new Actor("Villager2", '@', 100) {
                 @Override
-                public edu.monash.fit2099.engine.actions.Action playTurn(
-                        edu.monash.fit2099.engine.actions.ActionList actions,
-                        edu.monash.fit2099.engine.actions.Action lastAction,
-                        GameMap map, Display display) {
-                    return new edu.monash.fit2099.engine.actions.DoNothingAction();
+                public Action playTurn(
+                        ActionList actions,
+                        Action lastAction,
+                        GameMap map,
+                        Display display) {
+                    return new DoNothingAction();
                 }
             };
 
