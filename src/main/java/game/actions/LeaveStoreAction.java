@@ -14,7 +14,7 @@ public final class LeaveStoreAction extends Action {
 
     private final MysterioStoreSession session;
 
-    public LeaveStoreAction() {
+    public LeaveStoreAction(MysterioStoreSession session) {
         this.session = Objects.requireNonNull(session);
     }
 
