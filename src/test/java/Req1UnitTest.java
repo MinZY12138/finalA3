@@ -43,7 +43,7 @@ public class Req1UnitTest {
     private GameMap testMap;
 
     @BeforeEach
-    void setUp() throws GameEngineException {
+    public void setUp() throws GameEngineException {
         testMap = createMiniTestMap(); // safely throws GameEngineException if needed
     }
 
@@ -96,7 +96,7 @@ public class Req1UnitTest {
         private Location realLocation;
 
         @BeforeEach
-        void setUp() {
+        public void setUp() {
             mockLocation = mock(Location.class);
             realLocation = testMap.at(1, 1);
         }
@@ -107,7 +107,7 @@ public class Req1UnitTest {
          * Positive test case: sprouts should grow after 3 tick (on 4th).
          */
         @Test
-        void testForest_SproutsGrowthTriggersSetGround() {
+        public void testForest_SproutsGrowthTriggersSetGround() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
             for (int i = 0; i < 4; i++) sprouts.tick(mockLocation);
             verify(mockLocation, times(1)).setGround(any(AppleSapling.class));
@@ -117,7 +117,7 @@ public class Req1UnitTest {
          * Positive test case: sprouts should become Sapling after 3 ticks.
          */
         @Test
-        void testForest_SproutActuallyReplacedBySaplingOnRealLocation() {
+        public void testForest_SproutActuallyReplacedBySaplingOnRealLocation() {
             simulateGrowthAndAssert(realLocation,
                     AppleChild.createAppleSprouts(
                             false, true), 4, AppleSapling.class);
@@ -127,7 +127,7 @@ public class Req1UnitTest {
          * Edge test case: sprouts at exactly 3 tick should remain the same type.
          */
         @Test
-        void testForest_SproutRemainsSproutAtExactlyThreeTicks() {
+        public void testForest_SproutRemainsSproutAtExactlyThreeTicks() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
             realLocation.setGround(sprouts);
             for (int i = 0; i < 3; i++) sprouts.tick(realLocation);
@@ -139,7 +139,7 @@ public class Req1UnitTest {
          * Negative test case: sprouts should stay sprouts for all ticks before growth.
          */
         @Test
-        void testForest_SproutRemainsSproutBeforeGrowth() {
+        public void testForest_SproutRemainsSproutBeforeGrowth() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
             realLocation.setGround(sprouts);
             for (int i = 0; i < 2; i++) {
@@ -154,7 +154,7 @@ public class Req1UnitTest {
          * Positive test case: sapling should grow into a mature AppleTree after 5 ticks (on 6th).
          */
         @Test
-        void testForest_SaplingGrowthToTreeAfterFiveTicks() {
+        public void testForest_SaplingGrowthToTreeAfterFiveTicks() {
             simulateGrowthAndAssert(realLocation, AppleChild.createAppleSapling(true), 6,
                     game.grounds.trees.apples.AppleTree.class);
         }
@@ -163,7 +163,7 @@ public class Req1UnitTest {
          * Edge test case: sapling at exactly 5 ticks should still remain a sapling.
          */
         @Test
-        void testForest_SaplingRemainAtExactlyFiveTicks() {
+        public void testForest_SaplingRemainAtExactlyFiveTicks() {
             AppleSapling sapling = AppleChild.createAppleSapling(true);
             realLocation.setGround(sapling);
             for (int i = 0; i < 5; i++) sapling.tick(realLocation);
@@ -175,7 +175,7 @@ public class Req1UnitTest {
          * Negative test case: sapling should remain sapling before 5 ticks.
          */
         @Test
-        void testForest_SaplingStillSaplingBeforeFiveTicks() {
+        public void testForest_SaplingStillSaplingBeforeFiveTicks() {
             AppleSapling sapling = AppleChild.createAppleSapling(true);
             realLocation.setGround(sapling);
             for (int i = 0; i < 4; i++) {
@@ -190,7 +190,7 @@ public class Req1UnitTest {
          * (Forest: Sapling produces every 2 turns after growth)
          */
         @Test
-        void testForest_AppleSaplingProducesEveryTwoTurns() {
+        public void testForest_AppleSaplingProducesEveryTwoTurns() {
             Location realLocation = testMap.at(1, 1);
             AppleSapling sapling = AppleChild.createAppleSapling(true); // true = forest
             realLocation.setGround(sapling);
@@ -208,7 +208,7 @@ public class Req1UnitTest {
          * Positive test case: Mature Forest AppleTree should produce apples every 3 turns.
          */
         @Test
-        void testForest_AppleTreeProducesEveryThreeTurns() {
+        public void testForest_AppleTreeProducesEveryThreeTurns() {
             Location realLocation = testMap.at(1, 1);
             game.grounds.trees.apples.AppleTree tree = AppleChild.createMatureAppleTree();
             realLocation.setGround(tree);
@@ -228,7 +228,7 @@ public class Req1UnitTest {
          * Plains AppleSprouts should produce apples every turn and skip the sapling stage.
          */
         @Test
-        void testPlains_AppleSproutProducesEveryTurnAndSkipsSapling() {
+        public void testPlains_AppleSproutProducesEveryTurnAndSkipsSapling() {
             // Arrange: Place Plains Sprout on real test map
             Location realLocation = testMap.at(1, 1);
             AppleSprouts plainsSprout = AppleChild.createSkipSaplingAppleSprouts(true);
@@ -257,7 +257,7 @@ public class Req1UnitTest {
         private Location realLocation;
 
         @BeforeEach
-        void setUp() {
+        public void setUp() {
             mockLocation = mock(Location.class);
             realLocation = testMap.at(1, 1);
         }
@@ -269,7 +269,7 @@ public class Req1UnitTest {
          * Positive test case: YewBerrySapling on Forest should grow into YewBerryTree on the 3-turn check (forced success).
          */
         @Test
-        void testForest_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
+        public void testForest_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(100); // force success
             simulateGrowthAndAssert(realLocation, sapling, 3, YewBerryTree.class);
@@ -279,7 +279,7 @@ public class Req1UnitTest {
          * Edge test case: Before the 3-turn check (ticks 1-2) the YewBerrySapling must remain a sapling.
          */
         @Test
-        void testForest_YewBerrySaplingRemainsBeforeThreeTurnCheck() {
+        public void testForest_YewBerrySaplingRemainsBeforeThreeTurnCheck() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(100);
             realLocation.setGround(sapling);
@@ -295,7 +295,7 @@ public class Req1UnitTest {
          * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a sapling after the 3-turn check.
          */
         @Test
-        void testForest_YewBerrySaplingFailsToGrowWhenChanceFails() {
+        public void testForest_YewBerrySaplingFailsToGrowWhenChanceFails() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0); // force failure
             realLocation.setGround(sapling);
@@ -309,7 +309,7 @@ public class Req1UnitTest {
          * Negative test case: YewBerrySapling on Forest should NOT produce any yew berry.
          */
         @Test
-        void testForest_YewBerrySaplingDoesNotProduceFruit() {
+        public void testForest_YewBerrySaplingDoesNotProduceFruit() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0);
             realLocation.setGround(sapling);
@@ -325,7 +325,7 @@ public class Req1UnitTest {
          * Positive test case: Plains YewBerrySapling produces yew berry every 2 turns.
          */
         @Test
-        void testPlains_YewBerrySaplingProducesEveryTwoTurns() {
+        public void testPlains_YewBerrySaplingProducesEveryTwoTurns() {
 
             // Create a plains YewBerrySapling
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(true);
@@ -347,7 +347,7 @@ public class Req1UnitTest {
          * Edge test case: Plains YewBerrySapling should not produce before 2 turns (tick 1 produces nothing).
          */
         @Test
-        void testPlains_YewBerrySaplingNoFruitBeforeTwoTurns() {
+        public void testPlains_YewBerrySaplingNoFruitBeforeTwoTurns() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(true);
             sapling.tick(mockLocation);
             verify(mockLocation, never()).addItem(any(YewBerry.class));
@@ -357,7 +357,7 @@ public class Req1UnitTest {
          * Positive test case: Plains YewBerrySapling growth behavior (3-turn check) - forced success.
          */
         @Test
-        void testPlains_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
+        public void testPlains_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(true);
             sapling.setTransformRate(100); // force growth success
             simulateGrowthAndAssert(realLocation, sapling, 3, YewBerryTree.class);
@@ -367,7 +367,7 @@ public class Req1UnitTest {
          * Positive test case: Mature YewBerryTree should produce yew berry every 5 turns (same for both maps).
          */
         @Test
-        void testYewBerryTreeProducesEveryFiveTurns() {
+        public void testYewBerryTreeProducesEveryFiveTurns() {
             YewBerryTree tree = YewBerryChild.createMatureYewBerryTree();
             realLocation.setGround((tree));
             for (int i = 0; i < 10; i++) tree.tick(realLocation);
