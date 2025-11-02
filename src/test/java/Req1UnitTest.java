@@ -59,7 +59,6 @@ public class Req1UnitTest {
      */
     private void simulateGrowthAndAssert(Location location, ProduceableFruitTree tree, int ticks,
                                          Class<? extends ProduceableFruitTree> expectedClass) {
-        location.setGround(tree);
         for (int i = 0; i < ticks; i++) {
             tree.tick(location);
         }
@@ -108,7 +107,9 @@ public class Req1UnitTest {
         @Test
         public void testForest_SproutsGrowthTriggersSetGround() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
-            for (int i = 0; i < 4; i++) sprouts.tick(mockLocation);
+            for (int i = 0; i < 4; i++) {
+                sprouts.tick(mockLocation);
+            }
             verify(mockLocation, times(1)).setGround(any(AppleSapling.class));
         }
 
@@ -192,8 +193,7 @@ public class Req1UnitTest {
          */
         @Test
         public void testForest_AppleSaplingProducesEveryTwoTurns() {
-            AppleSapling sapling = AppleChild.createAppleSapling(true); // true = forest
-            mockLocation.setGround(sapling);
+            AppleSapling sapling = AppleChild.createAppleSapling(true);
 
             // Simulate 4 ticks should drop apples twice
             for (int i = 0; i < 4; i++) {
@@ -210,7 +210,6 @@ public class Req1UnitTest {
         @Test
         public void testForest_AppleTreeProducesEveryThreeTurns() {
             game.grounds.trees.apples.AppleTree tree = AppleChild.createMatureAppleTree();
-            mockLocation.setGround(tree);
 
             // Simulate 9 ticks should drop apples 3 times
             for (int i = 0; i < 9; i++) {
@@ -286,21 +285,20 @@ public class Req1UnitTest {
         }
 
         /**
-         * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a sapling after the 3-turn check.
+         * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a
+         * sapling after the 3-turn check. (not using helper because need custom message for clarity)
          */
         @Test
         public void testForest_YewBerrySaplingFailsToGrowWhenChanceFails() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0); // force failure
             mockLocation.setGround(sapling);
-            for (int i = 0; i < 3; i++) sapling.tick(mockLocation);
-            try{
-                verify(mockLocation, times(1)).setGround(any(YewBerrySapling.class));
+            for (int i = 0; i < 3; i++) {
+                sapling.tick(mockLocation);
             }
-            catch (AssertionError e){
-                throw new AssertionError ("If the 50% growth check fails, the sapling should remain " +
+            assertInstanceOf(YewBerrySapling.class, mockLocation.getGround(),
+                    "If the 50% growth check fails, the sapling should remain " +
                     "YewBerrySapling after the 3-turn check");
-            }
         }
 
         /**
@@ -310,7 +308,6 @@ public class Req1UnitTest {
         public void testForest_YewBerrySaplingDoesNotProduceFruit() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0);
-            mockLocation.setGround(sapling);
             for (int i = 0; i < 6; i++) {
                 sapling.tick(mockLocation);
             }
@@ -366,7 +363,6 @@ public class Req1UnitTest {
         @Test
         public void testYewBerryTreeProducesEveryFiveTurns() {
             YewBerryTree tree = YewBerryChild.createMatureYewBerryTree();
-            mockLocation.setGround(tree);
             for (int i = 0; i < 10; i++){
                 tree.tick(mockLocation);
             }
