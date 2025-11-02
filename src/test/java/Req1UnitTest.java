@@ -1,9 +1,4 @@
-import edu.monash.fit2099.engine.GameEngineException;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.DefaultGroundCreator;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Snow;
 import game.grounds.trees.ProduceableFruitTree;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.apples.AppleSapling;
@@ -13,12 +8,12 @@ import game.grounds.trees.yewBerrys.YewBerryChild;
 import game.grounds.trees.yewBerrys.YewBerrySapling;
 import game.grounds.trees.yewBerrys.YewBerryTree;
 import game.items.fruits.Apple;
+import game.items.fruits.Fruit;
 import game.items.fruits.YewBerry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,25 +21,31 @@ import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for Requirement 1: Tree Growth System and produce fruit.
+ *
+ * @author Shee Seng Cheng
+ * @version 1.0
  */
 public class Req1UnitTest {
 
-    /**
-     * Creates a simple 3x3 GameMap filled with Snow.
-     * This ensures Location.map() is never null and all RandomLocation calls are safe.
-     */
-    private GameMap createMiniTestMap() throws GameEngineException {
-        DefaultGroundCreator groundCreator = new DefaultGroundCreator();
-        groundCreator.registerGround('.', Snow::new);
-        List<String> mapLayout = Arrays.asList("...", "...", "...");
-        return new GameMap("MiniTestMap", groundCreator, mapLayout);
-    }
-
-    private GameMap testMap;
-
+    private Location mockLocation;
     @BeforeEach
-    public void setUp() throws GameEngineException {
-        testMap = createMiniTestMap(); // safely throws GameEngineException if needed
+    public void setUp() {
+        mockLocation = mock(Location.class);
+
+        // Create storage for whatever is set as ground
+        final ProduceableFruitTree[] storedGround = new ProduceableFruitTree[1];
+
+        // When setGround() is called, save the argument
+        doAnswer(invocation -> {
+            storedGround[0] = invocation.getArgument(0);
+            return null; // because setGround returns void
+        }).when(mockLocation).setGround(any());
+
+        // When getGround() is called, return whatever was last set
+        when(mockLocation.getGround()).thenAnswer(invocation -> storedGround[0]);
+
+        when(mockLocation.getNearbyLocations(anyInt())).thenReturn(List.of(mockLocation));
+
     }
 
     /**
@@ -58,53 +59,47 @@ public class Req1UnitTest {
      */
     private void simulateGrowthAndAssert(Location location, ProduceableFruitTree tree, int ticks,
                                          Class<? extends ProduceableFruitTree> expectedClass) {
-        location.setGround(tree);
         for (int i = 0; i < ticks; i++) {
-            (tree).tick(location);
+            tree.tick(location);
         }
-        assertTrue(expectedClass.isInstance(location.getGround()),
-                "After " + ticks + " ticks, expected " + expectedClass.getSimpleName()
-                        + " but got: " + location.getGround());
+        try {
+            verify(location, times(1)).setGround(
+                    argThat(expectedClass::isInstance));
+        } catch (AssertionError e) {
+            throw new AssertionError("After " + ticks + " ticks, expected " + expectedClass.getSimpleName()
+                    + " but got: " + location.getGround());
+        }
     }
 
     /**
      * Helper function to count the fruit appearance and rise assertion if not same as expected.
      * @param location The location of the tree
      * @param expectedFruitCount expected value
-     * @param fruitTypeName type name to check with
+     * @param fruitType type to check with
      * @param tick how many tick (for message)
      */
-    private void countFruitAndAssert(Location location, int expectedFruitCount, String fruitTypeName, int tick){
+    private void countFruitAndAssert(Location location, int expectedFruitCount, Class<? extends Fruit> fruitType, int tick){
         // Assert It should have produced expectedFruitCount
-        int fruitCount = 0;
-        List<Location> nearby = location.getNearbyLocations(1);
-        for (Location loc : nearby) {
-            for (Item item : loc.getItems()) {
-                if (item.getClass().getSimpleName().equals(fruitTypeName)) {
-                    fruitCount++;
-                }
-            }
+        try
+        {
+            verify(location, times(expectedFruitCount)).addItem(argThat(fruitType::isInstance));
         }
-        assertEquals(expectedFruitCount, fruitCount,
-                "After " + tick  + " tick the " + fruitTypeName +
-                        " count should be " + expectedFruitCount);
+        catch (AssertionError e)
+        {
+            throw new AssertionError(
+                    "After " + tick  + " tick the " + fruitType.getSimpleName() +
+                            " count should be " + expectedFruitCount);
+        }
     }
 
     /**
      * Apple tree test
+     *
+     * @author Shee Seng Cheng
+     * @version 1.0
      */
     @Nested
     class AppleTreeTest {
-        private Location mockLocation;
-        private Location realLocation;
-
-        @BeforeEach
-        public void setUp() {
-            mockLocation = mock(Location.class);
-            realLocation = testMap.at(1, 1);
-        }
-
-
         // Forest
         /**
          * Positive test case: sprouts should grow after 3 tick (on 4th).
@@ -112,7 +107,9 @@ public class Req1UnitTest {
         @Test
         public void testForest_SproutsGrowthTriggersSetGround() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
-            for (int i = 0; i < 4; i++) sprouts.tick(mockLocation);
+            for (int i = 0; i < 4; i++) {
+                sprouts.tick(mockLocation);
+            }
             verify(mockLocation, times(1)).setGround(any(AppleSapling.class));
         }
 
@@ -121,7 +118,7 @@ public class Req1UnitTest {
          */
         @Test
         public void testForest_SproutActuallyReplacedBySaplingOnRealLocation() {
-            simulateGrowthAndAssert(realLocation,
+            simulateGrowthAndAssert(mockLocation,
                     AppleChild.createAppleSprouts(
                             false, true), 4, AppleSapling.class);
         }
@@ -132,9 +129,11 @@ public class Req1UnitTest {
         @Test
         public void testForest_SproutRemainsSproutAtExactlyThreeTicks() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
-            realLocation.setGround(sprouts);
-            for (int i = 0; i < 3; i++) sprouts.tick(realLocation);
-            assertInstanceOf(AppleSprouts.class, realLocation.getGround(),
+            mockLocation.setGround(sprouts);
+            for (int i = 0; i < 3; i++) {
+                sprouts.tick(mockLocation);
+            }
+            assertInstanceOf(AppleSprouts.class, mockLocation.getGround(),
                     "At exactly 3 ticks, the sprout should still remain AppleSprouts");
         }
 
@@ -144,10 +143,10 @@ public class Req1UnitTest {
         @Test
         public void testForest_SproutRemainsSproutBeforeGrowth() {
             AppleSprouts sprouts = AppleChild.createAppleSprouts(false, true);
-            realLocation.setGround(sprouts);
+            mockLocation.setGround(sprouts);
             for (int i = 0; i < 2; i++) {
-                sprouts.tick(realLocation);
-                assertInstanceOf(AppleSprouts.class, realLocation.getGround(),
+                sprouts.tick(mockLocation);
+                assertInstanceOf(AppleSprouts.class, mockLocation.getGround(),
                         "At tick " + (i + 1) + ", " +
                         "sprout should still remain AppleSprouts before 4 ticks but its stage changed");
             }
@@ -158,7 +157,7 @@ public class Req1UnitTest {
          */
         @Test
         public void testForest_SaplingGrowthToTreeAfterFiveTicks() {
-            simulateGrowthAndAssert(realLocation, AppleChild.createAppleSapling(true), 6,
+            simulateGrowthAndAssert(mockLocation, AppleChild.createAppleSapling(true), 6,
                     game.grounds.trees.apples.AppleTree.class);
         }
 
@@ -168,9 +167,9 @@ public class Req1UnitTest {
         @Test
         public void testForest_SaplingRemainAtExactlyFiveTicks() {
             AppleSapling sapling = AppleChild.createAppleSapling(true);
-            realLocation.setGround(sapling);
-            for (int i = 0; i < 5; i++) sapling.tick(realLocation);
-            assertInstanceOf(AppleSapling.class, realLocation.getGround(),
+            mockLocation.setGround(sapling);
+            for (int i = 0; i < 5; i++) sapling.tick(mockLocation);
+            assertInstanceOf(AppleSapling.class, mockLocation.getGround(),
                     "At exactly 5 ticks, the sapling should still remain AppleSapling");
         }
 
@@ -180,10 +179,10 @@ public class Req1UnitTest {
         @Test
         public void testForest_SaplingStillSaplingBeforeFiveTicks() {
             AppleSapling sapling = AppleChild.createAppleSapling(true);
-            realLocation.setGround(sapling);
+            mockLocation.setGround(sapling);
             for (int i = 0; i < 4; i++) {
-                sapling.tick(realLocation);
-                assertInstanceOf(AppleSapling.class, realLocation.getGround(),
+                sapling.tick(mockLocation);
+                assertInstanceOf(AppleSapling.class, mockLocation.getGround(),
                         "At tick " + (i + 1) + ", the sapling should still remain AppleSapling");
             }
         }
@@ -194,17 +193,15 @@ public class Req1UnitTest {
          */
         @Test
         public void testForest_AppleSaplingProducesEveryTwoTurns() {
-            Location realLocation = testMap.at(1, 1);
-            AppleSapling sapling = AppleChild.createAppleSapling(true); // true = forest
-            realLocation.setGround(sapling);
+            AppleSapling sapling = AppleChild.createAppleSapling(true);
 
-            // Simulate 4 ticks → should drop apples twice
+            // Simulate 4 ticks should drop apples twice
             for (int i = 0; i < 4; i++) {
-                sapling.tick(realLocation);
+                sapling.tick(mockLocation);
             }
 
             //Count the apple should equal to 2
-            countFruitAndAssert(realLocation, 2, Apple.class.getSimpleName(), 4);
+            countFruitAndAssert(mockLocation, 2, Apple.class, 4);
         }
 
         /**
@@ -212,17 +209,15 @@ public class Req1UnitTest {
          */
         @Test
         public void testForest_AppleTreeProducesEveryThreeTurns() {
-            Location realLocation = testMap.at(1, 1);
             game.grounds.trees.apples.AppleTree tree = AppleChild.createMatureAppleTree();
-            realLocation.setGround(tree);
 
             // Simulate 9 ticks should drop apples 3 times
             for (int i = 0; i < 9; i++) {
-                tree.tick(realLocation);
+                tree.tick(mockLocation);
             }
 
             // Count apples in nearby tiles
-            countFruitAndAssert(realLocation, 3, Apple.class.getSimpleName(), 9);
+            countFruitAndAssert(mockLocation, 3, Apple.class, 9);
         }
 
         //Plains
@@ -233,42 +228,34 @@ public class Req1UnitTest {
         @Test
         public void testPlains_AppleSproutProducesEveryTurnAndSkipsSapling() {
             // Arrange: Place Plains Sprout on real test map
-            Location realLocation = testMap.at(1, 1);
             AppleSprouts plainsSprout = AppleChild.createSkipSaplingAppleSprouts(true);
-            realLocation.setGround(plainsSprout);
+            mockLocation.setGround(plainsSprout);
 
             // Act: Simulate 4 turns (each tick = 1 turn)
             for (int i = 0; i < 4; i++) {
-                plainsSprout.tick(realLocation);
+                plainsSprout.tick(mockLocation);
             }
 
             // Assert It should become a mature AppleTree (skip sapling stage)
-            assertInstanceOf(AppleTree.class, realLocation.getGround(),
+            assertInstanceOf(AppleTree.class, mockLocation.getGround(),
                     "After 3 ticks, Plains AppleSprout should have become " +
                             "a mature AppleTree (skipping sapling stage).");
-            assertFalse(realLocation.getGround() instanceof game.grounds.trees.apples.AppleSapling,
+            assertFalse(mockLocation.getGround() instanceof game.grounds.trees.apples.AppleSapling,
                     "Plains AppleSprout should skip the AppleSapling stage.");
 
             // Assert It should have produced one apple every turn (3 apples total)
-            countFruitAndAssert(realLocation, 3, Apple.class.getSimpleName(), 4);
+            countFruitAndAssert(mockLocation, 3, Apple.class, 4);
             }
     }
 
     /**
      * Yew berry tree test
+     *
+     * @author Shee Seng Cheng
+     * @version 1.0
      */
     @Nested
     class YewBerryTreeTest {
-        private Location mockLocation;
-        private Location realLocation;
-
-        @BeforeEach
-        public void setUp() {
-            mockLocation = mock(Location.class);
-            realLocation = testMap.at(1, 1);
-        }
-
-
         // Forest
 
         /**
@@ -278,7 +265,7 @@ public class Req1UnitTest {
         public void testForest_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(100); // force success
-            simulateGrowthAndAssert(realLocation, sapling, 3, YewBerryTree.class);
+            simulateGrowthAndAssert(mockLocation, sapling, 3, YewBerryTree.class);
         }
 
         /**
@@ -288,27 +275,30 @@ public class Req1UnitTest {
         public void testForest_YewBerrySaplingRemainsBeforeThreeTurnCheck() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(100);
-            realLocation.setGround(sapling);
+            mockLocation.setGround(sapling);
             for (int i = 0; i < 2; i++) {
-                sapling.tick(realLocation);
-                assertInstanceOf(YewBerrySapling.class, realLocation.getGround(),
+                sapling.tick(mockLocation);
+                assertInstanceOf(YewBerrySapling.class, mockLocation.getGround(),
                         "At tick " + (i + 1) +
                                 ", before the 3-turn check, it should remain a YewBerrySapling");
             }
         }
 
         /**
-         * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a sapling after the 3-turn check.
+         * Negative test case: If the 50% check fails (forced 0%), the sapling should remain a
+         * sapling after the 3-turn check. (not using helper because need custom message for clarity)
          */
         @Test
         public void testForest_YewBerrySaplingFailsToGrowWhenChanceFails() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0); // force failure
-            realLocation.setGround(sapling);
-            for (int i = 0; i < 3; i++) sapling.tick(realLocation);
-            assertInstanceOf(YewBerrySapling.class, realLocation.getGround(),
+            mockLocation.setGround(sapling);
+            for (int i = 0; i < 3; i++) {
+                sapling.tick(mockLocation);
+            }
+            assertInstanceOf(YewBerrySapling.class, mockLocation.getGround(),
                     "If the 50% growth check fails, the sapling should remain " +
-                            "YewBerrySapling after the 3-turn check");
+                    "YewBerrySapling after the 3-turn check");
         }
 
         /**
@@ -318,11 +308,10 @@ public class Req1UnitTest {
         public void testForest_YewBerrySaplingDoesNotProduceFruit() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(false);
             sapling.setTransformRate(0);
-            realLocation.setGround(sapling);
             for (int i = 0; i < 6; i++) {
-                sapling.tick(realLocation);
+                sapling.tick(mockLocation);
             }
-            countFruitAndAssert(realLocation, 0, YewBerry.class.getSimpleName(), 6);
+            verify(mockLocation, never()).addItem(any(YewBerry.class));
         }
 
         // Plains
@@ -338,14 +327,13 @@ public class Req1UnitTest {
 
             // To test it can produce correctly need to force it to be sapling
             sapling.setTransformRate(0);
-            realLocation.setGround(sapling);
 
             // Simulate 4 ticks (should produce fruit twice)
             for (int i = 0; i < 4; i++) {
-                sapling.tick(realLocation);
+                sapling.tick(mockLocation);
             }
 
-            countFruitAndAssert(realLocation, 2, YewBerry.class.getSimpleName(), 4);
+            countFruitAndAssert(mockLocation, 2, YewBerry.class, 4);
         }
 
 
@@ -366,7 +354,7 @@ public class Req1UnitTest {
         public void testPlains_YewBerrySaplingGrowsOnThreeTurnCheck_ForcedSuccess() {
             YewBerrySapling sapling = YewBerryChild.createYewBerrySapling(true);
             sapling.setTransformRate(100); // force growth success
-            simulateGrowthAndAssert(realLocation, sapling, 3, YewBerryTree.class);
+            simulateGrowthAndAssert(mockLocation, sapling, 3, YewBerryTree.class);
         }
 
         /**
@@ -375,9 +363,10 @@ public class Req1UnitTest {
         @Test
         public void testYewBerryTreeProducesEveryFiveTurns() {
             YewBerryTree tree = YewBerryChild.createMatureYewBerryTree();
-            realLocation.setGround((tree));
-            for (int i = 0; i < 10; i++) tree.tick(realLocation);
-            countFruitAndAssert(realLocation, 2, YewBerry.class.getSimpleName(), 10);
+            for (int i = 0; i < 10; i++){
+                tree.tick(mockLocation);
+            }
+            countFruitAndAssert(mockLocation, 2, YewBerry.class, 10);
         }
     }
 }

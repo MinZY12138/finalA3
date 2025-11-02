@@ -19,9 +19,17 @@ import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for Requirement 3: Armor system (Abilities and block/heal)
+ *
+ * @author Shee Seng Cheng
+ * @version 1.0
  */
 public class Req3AbilitiesTestUnitTest
 {
+    /**
+     * Test abilities of armor
+     * @author Shee Seng Cheng
+     * @version 1.0
+     */
     @Nested
     class ArmorAbilitiesTest{
         private Actor actor1, actor2;
