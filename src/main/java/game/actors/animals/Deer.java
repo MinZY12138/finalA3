@@ -1,9 +1,10 @@
 package game.actors.animals;
 
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.RandomLocation;
 import game.grounds.trees.apples.SummonApple;
 import game.items.fruits.Apple;
+
+import java.util.List;
 
 
 /**
@@ -37,9 +38,13 @@ public class Deer extends Animal{
      * @param spawnGround the {@link Location} where the deer spawns
      */
     public void spawnCapability(Location spawnGround){
-
-        RandomLocation.randomChooseSurrounding(spawnGround,DETECT_RADIUS).addItem(SummonApple.summonApple());
-
+        List<Location> nearby = spawnGround.getNearbyLocations(DETECT_RADIUS);
+        if (!nearby.isEmpty()) {
+            Location randomSpot = nearby.get(RAND.nextInt(nearby.size()));
+            if (!randomSpot.containsAnActor()) {
+                randomSpot.addItem(SummonApple.summonApple());
+            }
+        }
     }
 
 }
