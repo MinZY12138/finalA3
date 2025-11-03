@@ -8,8 +8,11 @@ import game.actors.Seller;
 import game.items.currency.WalletFunction;
 import game.mysteriostore.Merchandise;
 import game.mysteriostore.Price;
+import game.items.equipments.armors.Wearable;
+import game.items.equipments.armors.Wearing;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <h1>Buy Action</h1>
@@ -52,13 +55,39 @@ public class BuyAction extends Action {
         Item item = merchandise.createItem();
         String paymentDescription = price.charge(actor, wallet);
         actor.addItemToInventory(item);
+        Optional<String> autoWearMessage = autoWearIfApplicable(actor, item);
 
-        return actor + " buys " + item + " from " + seller + " for " + price.describe() + ".\n"
-                + paymentDescription;
+        String purchaseSummary = actor + " buys " + item + " from " + seller + " for "
+                + price.describe() + ".\n" + paymentDescription;
+
+        return autoWearMessage.map(message -> purchaseSummary + "\n" + message)
+                .orElse(purchaseSummary);
     }
 
     @Override
     public String menuDescription(Actor actor) {
         return "Buy " + merchandise.getName() + " for " + merchandise.getPrice().describe();
+    }
+    private Optional<String> autoWearIfApplicable(Actor actor, Item item) {
+        // The specification requires that any armour bought in a Mysterio store is
+        // equipped immediately. Performing that logic here keeps the purchasing
+        // workflow self-contained: BuyAction already handles payment and inventory
+        // transfer, so it is the one place where we are guaranteed to have access to
+        // the freshly created item, the buyer, and the seller.
+        Optional<Wearable> wearable = item.asCapability(Wearable.class);
+        if (wearable.isEmpty()) {
+            return Optional.empty();
+        }
+
+        List<Wearing> armorHolders = actor.getItemInventoryAs(Wearing.class);
+        if (armorHolders.isEmpty()) {
+            return Optional.empty();
+        }
+
+        int firstHolder = 0;
+        Wearing armorHolder = armorHolders.get(firstHolder);
+        String message = wearable.get().wornBy(actor, armorHolder);
+        actor.removeItemFromInventory(item);
+        return Optional.of(message);
     }
 }
