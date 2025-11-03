@@ -25,12 +25,10 @@ public enum ItemInfo {
     BLUE_DIAMOND("Blue Diamond", 'B', false),
     RED_DIAMOND("Red Diamond", 'R', false),
     WALLET("Wallet", '$', false),
-    DIAMOND_ARMOR ("Diamond Armor", '◈', false),
-    IRON_ARMOR ("Iron Armor", '⬥', false),
-    LEATHER_ARMOR ("Leather Armor", '◊', false),
-    ARMOR_HOLDER ("Armor Holder", '甲', false),
-    DIMENSIONAL_BOTTLE("Dimensional Bottle", 'U', true);
-
+    DIMENSIONAL_BOTTLE("Dimensional bottle", 'u', true);
+    /**
+     * The name of the item.
+     */
     private final String NAME;
 
     /**

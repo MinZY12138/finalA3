@@ -28,10 +28,10 @@ public enum GroundInfo {
     APPLE_TREE('T', "Apple Tree"),
     YEW_BERRY_SAPLING('b', "Yew Berry Sapling"),
     YEW_BERRY_TREE('Y', "Yew Berry Tree"),
-    GLASS ('/', "Glass"),
-    DIMENSIONAL_GROUND ('_', "Dimensional Ground"),
-    DOOR_STORE ('门', "Store Door");
-
+    GLASS('/', "Glass"),
+    DIMENSIONAL_GROUND('%', "Dimensional Ground"),
+    PORTAL('0',"Portal store"),
+    EXIT('E', "Exit store");
     /**
      * The character representation of the ground.
      */
