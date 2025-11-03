@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
 import game.actors.statuses.StatusType;
+import game.actors.AlchemySeller;
+import game.actors.ArmourySeller;
+import game.actors.CuriositySeller;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Swamp;
@@ -26,7 +29,9 @@ import game.items.equipments.weapons.Torch;
 import game.items.equipments.weapons.WeaponType;
 import game.items.fruits.*;
 import game.items.TeleportCube;
+import game.mysteriostore.RandomPriceApi;
 
+import java.net.http.HttpClient;
 import java.util.Arrays;
 import java.util.List;
 
@@ -100,6 +105,18 @@ public class Earth extends World {
         );
 
         //Req5
+
+        String apiKey = System.getenv("API_NINJAS_KEY");
+        if (apiKey == null) {
+            apiKey = "";
+        }
+
+        RandomPriceApi priceApi = new RandomPriceApi(HttpClient.newHttpClient(), apiKey);
+        ArmourySeller armourySeller = new ArmourySeller(priceApi);
+        CuriositySeller curiositySeller = new CuriositySeller(priceApi);
+        AlchemySeller alchemySeller = new AlchemySeller(priceApi);
+
+
         GameMap mysteriousStore1 = new GameMap("Mysterious Store Armor", groundCreator, store1);
         GameMap mysteriousStore2 = new GameMap("Mysterious Store Weapon", groundCreator, store2);
         GameMap mysteriousStore3 = new GameMap("Mysterious Store Fruit", groundCreator, store3);
@@ -111,6 +128,11 @@ public class Earth extends World {
         DoorStore doorStore1 = new DoorStore(mysteriousStore1.at(0,5));
         DoorStore doorStore2 = new DoorStore(mysteriousStore2.at(0,5));
         DoorStore doorStore3 = new DoorStore(mysteriousStore3.at(0,5));
+
+        mysteriousStore1.at(5, 3).addActor(armourySeller);
+        mysteriousStore2.at(5, 3).addActor(curiositySeller);
+        mysteriousStore3.at(5, 3).addActor(alchemySeller);
+
 
         //Just decorate
         mysteriousStore1.at(1,1).addItem(new DiamondArmor());
