@@ -5,19 +5,27 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.Player;
 import game.actors.animals.*;
+import game.actors.statuses.StatusType;
 import game.grounds.spawnable.Cave;
 import game.grounds.spawnable.Meadow;
 import game.grounds.spawnable.Swamp;
 import game.grounds.spawnable.Tundra;
+import game.grounds.teleportable.DoorStore;
 import game.grounds.teleportable.TeleDoor;
 import game.grounds.teleportable.TeleportationCircle;
 import game.grounds.trees.apples.AppleChild;
 import game.grounds.trees.yewBerrys.YewBerryChild;
-import game.items.fruits.*;
 import game.items.DimensionalBottle;
+import game.items.equipments.armors.ArmorHolderInjector;
+import game.items.equipments.armors.DiamondArmor;
+import game.items.equipments.armors.IronArmor;
+import game.items.equipments.armors.LeatherArmor;
+import game.items.equipments.weapons.Axe;
+import game.items.equipments.weapons.Bow;
+import game.items.equipments.weapons.Torch;
+import game.items.equipments.weapons.WeaponType;
+import game.items.fruits.*;
 import game.items.TeleportCube;
-import game.items.equipments.*;
-import game.mysteriostore.StoreDirectory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,15 +68,67 @@ public class Earth extends World {
                 "........................................"
         );
 
-        List<String> shopLayout = Arrays.asList(
-                "///////",
-                "/...../",
-                "/...../",
-                "/...../",
-                "/...../",
-                "/...../",
-                "///////"
+        // 6*25
+        List<String> store1 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
         );
+        // 6*25
+        List<String> store2 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
+        );
+        // 6*25
+        List<String> store3 = Arrays.asList(
+
+                "//////////////...........",
+                "/............/...........",
+                "//////////////...........",
+                ".........................",
+                ".........................",
+                "........................."
+        );
+
+        //Req5
+        GameMap mysteriousStore1 = new GameMap("Mysterious Store Armor", groundCreator, store1);
+        GameMap mysteriousStore2 = new GameMap("Mysterious Store Weapon", groundCreator, store2);
+        GameMap mysteriousStore3 = new GameMap("Mysterious Store Fruit", groundCreator, store3);
+
+        this.addGameMap(mysteriousStore1);
+        this.addGameMap(mysteriousStore2);
+        this.addGameMap(mysteriousStore3);
+
+        DoorStore doorStore1 = new DoorStore(mysteriousStore1.at(0,5));
+        DoorStore doorStore2 = new DoorStore(mysteriousStore2.at(0,5));
+        DoorStore doorStore3 = new DoorStore(mysteriousStore3.at(0,5));
+
+        //Just decorate
+        mysteriousStore1.at(1,1).addItem(new DiamondArmor());
+        mysteriousStore1.at(5,1).addItem(new IronArmor());
+        mysteriousStore1.at(10,1).addItem(new LeatherArmor());
+        mysteriousStore1.at(12, 1).addItem(ArmorHolderInjector.createArmorHolder(null));
+
+        mysteriousStore2.at(1,1).addItem(new Axe(null,null));
+        mysteriousStore2.at(5,1).addItem(new Bow(null, null));
+        mysteriousStore2.at(10, 1).addItem(new Torch(null, null));
+
+        mysteriousStore3.at(5, 1).addItem(new Apple());
+        mysteriousStore3.at(10, 1).addItem(new Hazelnut());
+
+        DimensionalGround dimensionalGround = new DimensionalGround(List.of(
+                doorStore1,doorStore2,doorStore3));
+        DimensionalBottle dimensionalBottle = new DimensionalBottle();
+        dimensionalBottle.setDimensionalGround(dimensionalGround);
 
 
         GameMap forest = new GameMap("Forest", groundCreator, map);
@@ -77,22 +137,11 @@ public class Earth extends World {
         Player player = new Player("Explorer", 'ඞ', 100, 30);
         this.addPlayer(player, forest.at(1, 1));
 
+        player.addItemToInventory(dimensionalBottle);
+
         // req 1
         GameMap plains = new GameMap("Plains", groundCreator, map2);
         this.addGameMap(plains);
-
-        GameMap armory = new GameMap("Armory", groundCreator, shopLayout);
-        GameMap alchemy = new GameMap("Alchemy", groundCreator, shopLayout);
-        GameMap curiosity = new GameMap("Curiosity", groundCreator, shopLayout);
-
-        this.addGameMap(armory);
-        this.addGameMap(alchemy);
-        this.addGameMap(curiosity);
-
-        StoreDirectory.registerArmouryStore(armory, 3, 5, 3, 3);
-        StoreDirectory.registerAlchemyStore(alchemy, 3, 5, 3, 3);
-        StoreDirectory.registerCuriosityStore(curiosity, 3, 5, 3, 3);
-
 
         Location locationDoor1 = forest.at(4,4);
         TeleDoor teleDoor1 = new TeleDoor(
@@ -134,26 +183,7 @@ public class Earth extends World {
                 )
         );
 
-        Location storeDoorLocation = forest.at(6, 6);
-        TeleDoor storeDoor = new TeleDoor(
-                List.of(
-                        armory.at(1, 1)
-                ),
-                storeDoorLocation
-        );
-        storeDoorLocation.setGround(storeDoor);
-
-        Location exitDoorLocation = armory.at(1, 1);
-        TeleDoor storeExit = new TeleDoor(
-                List.of(
-                        forest.at(6, 6)
-                ),
-                exitDoorLocation
-        );
-        exitDoorLocation.setGround(storeExit);
-
         player.addItemToInventory(cube1);
-        player.addItemToInventory(new DimensionalBottle());
 
         // req 2
         Spawnable bear = Bear::new;
@@ -208,5 +238,6 @@ public class Earth extends World {
         //Plains
         plains.at(5,0).setGround(YewBerryChild.createYewBerrySapling(true));
 
+        forest.locationOf(player).addItem(new DiamondArmor());
     }
 }

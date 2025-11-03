@@ -4,47 +4,78 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.grounds.DimensionalGround;
+import game.grounds.RandomLocation;
 import game.items.DimensionalBottle;
 
-import java.util.Objects;
-
 /**
- * <h1>Shatter Dimensional Bottle Action</h1>
- *
+ * <h1>BreakBottleAction Class</h1>
  * <p>
- * Breaks a {@link DimensionalBottle} at a chosen location, consuming the item and transforming
- * the ground beneath into dimensional terrain.
+ * The {@code BreakBottleAction} is an {@link Action} that {@link Actor} can throw
+ * {@link DimensionalBottle} on the ground. The ground will turn to
+ * {@link DimensionalGround} after throw it.
  * </p>
+ *
+ * @author Tay Chee Hsian
+ * @version 1.0.0
+ * @since 2025-11-03
  */
 public class BreakBottleAction extends Action {
 
-    private final DimensionalBottle bottle;
-    private final Location target;
+    /**
+     * The dimensional bottle to be thrown.
+     */
+    private final DimensionalBottle BOTTLE;
 
     /**
-     * Constructs the action targeting the provided location.
-     *
-     * @param bottle the dimensional bottle to shatter
-     * @param target the location where the bottle will break
+     * The ground that the store's door will appear.
      */
-    public BreakBottleAction(DimensionalBottle bottle, Location target) {
-        this.bottle = Objects.requireNonNull(bottle);
-        this.target = Objects.requireNonNull(target);
+    private final DimensionalGround DIMENSIONAL_GROUND;
+
+    /**
+     * The distance of throwing the dimensional bottle.
+     */
+    private static final int THROW_DISTANCE = 1;
+
+    /**
+     * Constructor of the BreakBottleAction class.
+     *
+     * @param bottle         the dimensional bottle to be thrown
+     * @param targetLocation the ground that the store's door will appear
+     */
+    public BreakBottleAction(DimensionalBottle bottle, DimensionalGround targetLocation) {
+        this.BOTTLE = bottle;
+        this.DIMENSIONAL_GROUND = targetLocation;
     }
 
+    /**
+     * This method will handle the logic of throwing dimensional bottle.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a string message represents actors throw the dimensional bottle
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Location actorLocation = map.locationOf(actor);
-        if (actor.getItemInventory().contains(bottle)) {
-            actor.removeItemFromInventory(bottle);
-        } else if (actorLocation.getItems().contains(bottle)) {
-            actorLocation.removeItem(bottle);
-        }
-        return bottle.shatterAt(actor, target);
+        Location location = RandomLocation.randomChooseSurrounding(map.locationOf(actor),
+                THROW_DISTANCE);
+
+        location.setGround(DIMENSIONAL_GROUND);
+
+        actor.removeItemFromInventory(BOTTLE);
+
+        DIMENSIONAL_GROUND.setSourceLocation(location);
+        return actor + " shattered a Dimensional Bottle";
     }
 
+    /**
+     * Description of this action that shows on the menu.
+     *
+     * @param actor The actor performing the action.
+     * @return a short description shows on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " shatters " + bottle + " at " + target;
+        return actor + " throws a Dimensional Bottle";
     }
 }

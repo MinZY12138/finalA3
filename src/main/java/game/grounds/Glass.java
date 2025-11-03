@@ -10,6 +10,9 @@ import edu.monash.fit2099.engine.actors.Actor;
  * store displays. It prevents actors from stepping onto the tile while still
  * letting items be showcased on top of it.
  * </p>
+ *
+ * @author Min Zheng Yuan
+ * @version 1.0
  */
 public class Glass extends Ground {
 

@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.displays.Printable;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
-
 /**
  * Abstract base class representing a physical object in the game world.
  * @author Riordan Alfredo
@@ -131,5 +130,4 @@ public abstract class Item extends GameEntity implements Printable {
 	public ActionList allowableActions(Actor otherActor, Location location){
 		return new ActionList();
 	}
-
 }
